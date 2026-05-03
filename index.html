@@ -9,17 +9,10 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #f5f4f0;
-    --surface: #ffffff;
-    --surface2: #f0efe9;
-    --border: #e2e0d8;
-    --border2: #cccabd;
-    --text: #1a1916;
-    --text2: #6b6960;
-    --text3: #9b998f;
-    --mono: 'DM Mono', monospace;
-    --sans: 'DM Sans', sans-serif;
-
+    --bg: #f5f4f0; --surface: #ffffff; --surface2: #f0efe9;
+    --border: #e2e0d8; --border2: #cccabd;
+    --text: #1a1916; --text2: #6b6960; --text3: #9b998f;
+    --mono: 'DM Mono', monospace; --sans: 'DM Sans', sans-serif;
     --growth-bg: #eaf3fb; --growth-text: #1a4f7a; --growth-bar: #3a8fd4;
     --income-bg: #eaf5ec; --income-text: #1a5c2a; --income-bar: #3aaa5a;
     --absolute-bg: #f0ecfb; --absolute-text: #3d2080; --absolute-bar: #7c52d4;
@@ -30,279 +23,116 @@
     --mlcd-bg: #fdf0e8; --mlcd-text: #7a3010; --mlcd-bar: #d45a1a;
   }
 
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-  }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
-  /* ── HEADER ── */
   .site-header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+    height: 64px; position: sticky; top: 0; z-index: 100;
   }
-  .logo {
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--text);
-  }
+  .logo { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
   .logo span { color: var(--text3); font-weight: 400; }
-  .header-meta {
-    font-size: 12px;
-    color: var(--text3);
-    font-family: var(--mono);
-    text-align: right;
-    line-height: 1.6;
-  }
+  .header-right { font-size: 11px; color: var(--text3); font-family: var(--mono); text-align: right; line-height: 1.6; }
 
-  /* ── MAIN LAYOUT ── */
-  .page {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
+  .page { max-width: 1280px; margin: 0 auto; padding: 2rem; }
 
-  /* ── TOOLBAR ── */
-  .toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1.75rem;
-  }
-  .toolbar-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-right: 4px;
-  }
+  /* toolbar */
+  .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .toolbar-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text3); white-space: nowrap; }
   .filters { display: flex; flex-wrap: wrap; gap: 6px; }
   .pill {
-    font-size: 12px;
-    font-family: var(--sans);
-    font-weight: 500;
-    padding: 5px 14px;
-    border-radius: 99px;
-    border: 1px solid var(--border2);
-    background: var(--surface);
-    color: var(--text2);
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
+    font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 99px;
+    border: 1px solid var(--border2); background: var(--surface); color: var(--text2);
+    cursor: pointer; transition: all 0.15s; white-space: nowrap; font-family: var(--sans);
   }
   .pill:hover { border-color: var(--text3); color: var(--text); }
   .pill.active { background: var(--text); color: #fff; border-color: var(--text); }
 
-  .count-badge {
-    margin-left: auto;
-    font-size: 12px;
-    color: var(--text3);
-    font-family: var(--mono);
-    white-space: nowrap;
+  .sort-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1.75rem; flex-wrap: wrap; }
+  .sort-select {
+    font-size: 12px; font-weight: 500; font-family: var(--sans);
+    padding: 5px 28px 5px 12px; border-radius: 8px; border: 1px solid var(--border2);
+    background: var(--surface); color: var(--text2); cursor: pointer;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239b998f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 10px center;
   }
+  .sort-select:focus { outline: none; border-color: var(--text3); }
+  .count-badge { margin-left: auto; font-size: 12px; color: var(--text3); font-family: var(--mono); white-space: nowrap; }
 
-  /* ── GRID ── */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-    gap: 14px;
-  }
+  /* grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; }
 
-  /* ── CARD ── */
+  /* card */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    display: flex; flex-direction: column; overflow: visible;
     transition: box-shadow 0.2s, transform 0.2s;
   }
-  .card:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-    transform: translateY(-2px);
-  }
+  .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
 
-  .card-top {
-    padding: 1rem 1.2rem 0.85rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .card-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-  }
-  .type-badge {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 99px;
-  }
-  .term-chip {
-    font-size: 11px;
-    font-family: var(--mono);
-    color: var(--text3);
-    background: var(--surface2);
-    padding: 3px 9px;
-    border-radius: 6px;
-  }
-  .underlying {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--text);
-    margin-bottom: 2px;
-    line-height: 1.3;
-  }
-  .issuer-line {
-    font-size: 12px;
-    color: var(--text3);
-  }
+  .card-top { padding: 1rem 1.2rem 0.85rem; border-bottom: 1px solid var(--border); border-radius: 12px 12px 0 0; overflow: hidden; }
+  .card-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .type-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; }
+  .term-chip { font-size: 11px; font-family: var(--mono); color: var(--text3); background: var(--surface2); padding: 3px 9px; border-radius: 6px; }
+  .underlying { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 2px; line-height: 1.3; }
+  .issuer-line { font-size: 12px; color: var(--text3); }
 
-  /* ── METRICS ── */
-  .card-metrics {
-    padding: 0.85rem 1.2rem;
-    display: grid;
-    gap: 8px;
-    border-bottom: 1px solid var(--border);
-  }
+  /* metrics */
+  .card-metrics { padding: 0.85rem 1.2rem; display: grid; gap: 8px; border-bottom: 1px solid var(--border); }
   .metrics-grid-2 { grid-template-columns: 1fr 1fr; }
-  .metrics-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
-
-  .metric {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 8px 10px;
-  }
-  .metric-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 3px;
-  }
-  .metric-value {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.2;
-  }
+  .metric { background: var(--surface2); border-radius: 8px; padding: 8px 10px; position: relative; }
+  .metric-label { font-size: 10px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text3); margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
+  .metric-value { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.2; }
   .metric-value.accent { font-size: 17px; }
-  .metric.span2 { grid-column: span 2; }
 
-  /* ── PROTECTION ── */
-  .card-protection {
-    padding: 0.75rem 1.2rem;
-    border-bottom: 1px solid var(--border);
+  /* tooltip */
+  .info-wrap { position: relative; display: inline-flex; }
+  .info-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 13px; height: 13px; border-radius: 50%; background: var(--border2);
+    color: var(--text3); font-size: 9px; font-weight: 700; cursor: default;
+    flex-shrink: 0; line-height: 1; font-style: normal; font-family: var(--sans);
   }
-  .prot-label-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
+  .info-wrap:hover .tooltip { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .tooltip {
+    position: absolute; bottom: calc(100% + 7px); left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--text); color: #fff; font-size: 10px; line-height: 1.55;
+    padding: 6px 10px; border-radius: 6px; white-space: nowrap; min-width: 180px; max-width: 240px; white-space: normal;
+    pointer-events: none; opacity: 0; transition: opacity 0.15s, transform 0.15s;
+    z-index: 300; font-weight: 400; letter-spacing: 0; text-transform: none; font-family: var(--sans);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
   }
-  .prot-label {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--text3);
-  }
-  .prot-value {
-    font-size: 12px;
-    font-weight: 600;
-    font-family: var(--mono);
-  }
-  .prot-bar-track {
-    height: 5px;
-    background: var(--surface2);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-bottom: 4px;
-  }
-  .prot-bar-fill {
-    height: 100%;
-    border-radius: 99px;
-    transition: width 0.6s ease;
-  }
-  .prot-type {
-    font-size: 10px;
-    color: var(--text3);
-    font-family: var(--mono);
-  }
+  .tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 4px solid transparent; border-top-color: var(--text); }
 
-  /* ── CARD FOOTER ── */
-  .card-footer {
-    padding: 0.7rem 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--surface);
-  }
-  .cusip {
-    font-size: 10px;
-    font-family: var(--mono);
-    color: var(--text3);
-    letter-spacing: 0.02em;
-  }
-  .price-chip {
-    font-size: 11px;
-    font-family: var(--mono);
-    font-weight: 500;
-    color: var(--text2);
-    background: var(--surface2);
-    padding: 3px 8px;
-    border-radius: 6px;
-  }
+  /* protection bar */
+  .card-protection { padding: 0.75rem 1.2rem; border-bottom: 1px solid var(--border); }
+  .bar-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .bar-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text3); }
+  .bar-value { font-size: 12px; font-weight: 600; font-family: var(--mono); }
+  .bar-track { height: 5px; background: var(--surface2); border-radius: 99px; overflow: hidden; margin-bottom: 4px; }
+  .bar-fill { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
+  .bar-sub { font-size: 10px; color: var(--text3); font-family: var(--mono); }
 
-  /* ── DISCLOSURE ── */
-  .disclosure {
-    margin-top: 3rem;
-    padding: 1.5rem;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-  }
-  .disclosure p {
-    font-size: 11px;
-    line-height: 1.7;
-    color: var(--text3);
-  }
+  /* closing bar */
+  .card-closing { padding: 0.75rem 1.2rem; border-bottom: 1px solid var(--border); }
+  .closing-sub { font-size: 10px; color: var(--text3); font-family: var(--mono); display: flex; justify-content: space-between; margin-top: 4px; }
+
+  /* footer */
+  .card-footer { padding: 0.65rem 1.2rem; display: flex; justify-content: flex-end; border-radius: 0 0 12px 12px; overflow: hidden; }
+  .close-chip { font-size: 11px; font-family: var(--mono); font-weight: 500; color: var(--text2); background: var(--surface2); padding: 3px 8px; border-radius: 6px; }
+
+  /* disclosure */
+  .disclosure { margin-top: 3rem; padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; }
+  .disclosure p { font-size: 11px; line-height: 1.7; color: var(--text3); }
   .disclosure strong { color: var(--text2); font-weight: 500; }
 
-  /* ── EMPTY STATE ── */
-  .empty {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 4rem 2rem;
-    color: var(--text3);
-    font-size: 14px;
-  }
+  .empty { grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--text3); font-size: 14px; }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
-    .page { padding: 1rem; }
-    .site-header { padding: 0 1rem; }
-    .grid { grid-template-columns: 1fr; }
-    .count-badge { display: none; }
+    .page { padding: 1rem; } .site-header { padding: 0 1rem; }
+    .grid { grid-template-columns: 1fr; } .count-badge { display: none; }
   }
 </style>
 </head>
@@ -310,10 +140,7 @@
 
 <header class="site-header">
   <div class="logo">Your Firm Name <span>/ Structured Notes</span></div>
-  <div class="header-meta">
-    Morgan Stanley &nbsp;·&nbsp; Closing May 29, 2026<br>
-    For Institutional Use Only
-  </div>
+  <div class="header-right">Structured Notes Calendar<br>For Institutional Use Only</div>
 </header>
 
 <main class="page">
@@ -331,13 +158,25 @@
       <button class="pill" data-filter="PPN">PPN</button>
       <button class="pill" data-filter="MLCD">MLCD</button>
     </div>
+  </div>
+
+  <div class="sort-row">
+    <span class="toolbar-label">Sort by</span>
+    <select class="sort-select" id="sort-select">
+      <option value="close-asc">Close time — soonest first</option>
+      <option value="close-desc">Close time — latest first</option>
+      <option value="term-asc">Term — shortest first</option>
+      <option value="term-desc">Term — longest first</option>
+      <option value="prot-desc">Protection — highest first</option>
+      <option value="prot-asc">Protection — lowest first</option>
+    </select>
     <span class="count-badge" id="count-badge"></span>
   </div>
 
   <div class="grid" id="grid"></div>
 
   <div class="disclosure">
-    <p><strong>For Institutional Use Only.</strong> This material is provided for informational purposes only and does not constitute an offer to sell or a solicitation to buy any security. Structured notes involve significant risks including loss of principal, credit risk of the issuer, illiquidity, and complexity. Soft protection is a barrier; hard protection is a buffer. All payments are subject to the credit risk of Morgan Stanley. Available in $1,000 increments. Please review the applicable prospectus carefully before investing. Past performance is not indicative of future results. Securities offered through Halo Securities LLC, a SEC registered broker/dealer and member of FINRA/SIPC.</p>
+    <p><strong>For Institutional Use Only.</strong> This material is provided for informational purposes only and does not constitute an offer to sell or a solicitation to buy any security. Structured notes involve significant risks including loss of principal, credit risk of the issuer, illiquidity, and complexity. Soft protection is a barrier; hard protection is a buffer. All payments are subject to the credit risk of the issuing institution. Available in $1,000 increments. Please review the applicable prospectus carefully before investing. Past performance is not indicative of future results. Securities offered through Halo Securities LLC, a SEC registered broker/dealer and member of FINRA/SIPC.</p>
   </div>
 
 </main>
@@ -345,317 +184,97 @@
 <script>
 // ─────────────────────────────────────────────────────────────
 // DATA — UPDATE THIS SECTION EACH MONTH
-// Each object = one note. Fields vary by type (see examples).
+//
+// Every note needs:
+//   type, underlying, term ("48 mo" / "60 mo" etc.)
+//   issuer, closeDate ("YYYY-MM-DD"), calendarStart ("YYYY-MM-DD")
+//   protection (number), protectionType ("Soft"|"Hard"|"Full"), price
+//
+// Income notes support a `tooltips` object with keys:
+//   frequency, couponProtection, nonCallPeriod
 // ─────────────────────────────────────────────────────────────
 const NOTES = [
+
   // ── GROWTH ──
-  {
-    type: "Growth",
-    underlying: "NDXT, RUT, SPX",
-    term: "48 mo",
-    participation: "170%",
-    maxReturn: "Uncapped",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FLL5",
-    price: "$100.00"
-  },
-  {
-    type: "Growth",
-    underlying: "RUT, SPX",
-    term: "48 mo",
-    participation: "125%",
-    maxReturn: "Uncapped",
-    protection: 20,
-    protectionType: "Hard",
-    cusip: "61781FLP6",
-    price: "$100.00"
-  },
-  {
-    type: "Growth",
-    underlying: "RUT, SPX",
-    term: "48 mo",
-    participation: "147%",
-    maxReturn: "Uncapped",
-    protection: 25,
-    protectionType: "Soft",
-    cusip: "61781FLM3",
-    price: "$100.00"
-  },
-  {
-    type: "Growth",
-    underlying: "SPXFP",
-    term: "60 mo",
-    participation: "210%",
-    maxReturn: "Uncapped",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FLN1",
-    price: "$100.00"
-  },
-  {
-    type: "Growth",
-    underlying: "DJI, SPX",
-    term: "60 mo",
-    participation: "143%",
-    maxReturn: "Uncapped",
-    protection: 25,
-    protectionType: "Soft",
-    cusip: "61781FJH7",
-    price: "$100.00"
-  },
-  {
-    type: "Growth",
-    underlying: "NDX, RUT, SPX",
-    term: "60 mo",
-    participation: "400%",
-    maxReturn: "80%",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FLK7",
-    price: "$100.00"
-  },
+  { type:"Growth", underlying:"NDXT, RUT, SPX", term:"48 mo", participation:"170%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
+  { type:"Growth", underlying:"RUT, SPX", term:"48 mo", participation:"125%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:20, protectionType:"Hard", price:"$100.00" },
+  { type:"Growth", underlying:"RUT, SPX", term:"48 mo", participation:"147%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:25, protectionType:"Soft", price:"$100.00" },
+  { type:"Growth", underlying:"SPXFP", term:"60 mo", participation:"210%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
+  { type:"Growth", underlying:"DJI, SPX", term:"60 mo", participation:"143%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:25, protectionType:"Soft", price:"$100.00" },
+  { type:"Growth", underlying:"NDX, RUT, SPX", term:"60 mo", participation:"400%", maxReturn:"80%", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
 
   // ── INCOME ──
   {
-    type: "Income",
-    underlying: "NDXT, SPX",
-    term: "15 mo",
-    annualizedYield: "10.75%",
-    frequency: "Quarterly",
-    couponProtection: "25%",
-    nonCallPeriod: "6 mo",
-    protection: 25,
-    protectionType: "Soft",
-    cusip: "61781FMW0",
-    price: "$100.00"
+    type:"Income", underlying:"NDXT, SPX", term:"15 mo",
+    annualizedYield:"10.75%", frequency:"Quarterly", couponProtection:"25%", nonCallPeriod:"6 mo",
+    tooltips:{
+      frequency:"Contingent Coupons paid quarterly — only if underlying stays above the coupon barrier on observation date",
+      couponProtection:"Coupon barrier at 25% below initial level — coupons are not guaranteed",
+      nonCallPeriod:"Note cannot be called by the issuer for the first 6 months after issuance"
+    },
+    issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:25, protectionType:"Soft", price:"$100.00"
   },
   {
-    type: "Income",
-    underlying: "DJI, XLE",
-    term: "18 mo",
-    annualizedYield: "11.25%",
-    frequency: "Quarterly",
-    couponProtection: "25%",
-    nonCallPeriod: "6 mo",
-    protection: 25,
-    protectionType: "Soft",
-    cusip: "61781FMX8",
-    price: "$100.00"
+    type:"Income", underlying:"DJI, XLE", term:"18 mo",
+    annualizedYield:"11.25%", frequency:"Quarterly", couponProtection:"25%", nonCallPeriod:"6 mo",
+    tooltips:{
+      frequency:"Contingent Coupons paid quarterly — only if underlying stays above the coupon barrier on observation date",
+      couponProtection:"Coupon barrier at 25% below initial level — coupons are not guaranteed",
+      nonCallPeriod:"Note cannot be called by the issuer for the first 6 months after issuance"
+    },
+    issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:25, protectionType:"Soft", price:"$100.00"
   },
   {
-    type: "Income",
-    underlying: "DJI, KRE",
-    term: "21 mo",
-    annualizedYield: "11.00%",
-    frequency: "Quarterly w/ Memory",
-    couponProtection: "30%",
-    nonCallPeriod: "6 mo",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FMY6",
-    price: "$100.00"
+    type:"Income", underlying:"DJI, KRE", term:"21 mo",
+    annualizedYield:"11.00%", frequency:"Quarterly w/ Memory", couponProtection:"30%", nonCallPeriod:"6 mo",
+    tooltips:{
+      frequency:"Memory coupon: missed coupons accumulate and are paid in full when barrier is met again on a future observation date",
+      couponProtection:"Coupon barrier at 30% below initial level — memory feature recovers previously missed payments",
+      nonCallPeriod:"Note cannot be called by the issuer for the first 6 months after issuance"
+    },
+    issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
   },
 
   // ── ABSOLUTE ──
-  {
-    type: "Absolute",
-    underlying: "NDXT, RUT",
-    term: "48 mo",
-    upsideParticipation: "138–153%",
-    downsideParticipation: "50%",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FJF1",
-    price: "$100.00"
-  },
-  {
-    type: "Absolute",
-    underlying: "SPX, SX5E",
-    term: "60 mo",
-    upsideParticipation: "191–206%",
-    downsideParticipation: "50%",
-    protection: 20,
-    protectionType: "Hard",
-    cusip: "61781FJJ3",
-    price: "$100.00"
-  },
-  {
-    type: "Absolute",
-    underlying: "SPXFP",
-    term: "60 mo",
-    upsideParticipation: "180–195%",
-    downsideParticipation: "50%",
-    protection: 40,
-    protectionType: "Soft",
-    cusip: "61781FJG9",
-    price: "$100.00"
-  },
-  {
-    type: "Absolute",
-    underlying: "SPXFP",
-    term: "60 mo",
-    upsideParticipation: "57.75–59.75%",
-    downsideParticipation: "100% Absolute Return",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FJS3",
-    price: "$100.00"
-  },
+  { type:"Absolute", underlying:"NDXT, RUT", term:"48 mo", upsideParticipation:"138–153%", downsideParticipation:"50%", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
+  { type:"Absolute", underlying:"SPX, SX5E", term:"60 mo", upsideParticipation:"191–206%", downsideParticipation:"50%", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:20, protectionType:"Hard", price:"$100.00" },
+  { type:"Absolute", underlying:"SPXFP", term:"60 mo", upsideParticipation:"180–195%", downsideParticipation:"50%", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:40, protectionType:"Soft", price:"$100.00" },
+  { type:"Absolute", underlying:"SPXFP", term:"60 mo", upsideParticipation:"57.75–59.75%", downsideParticipation:"100% Abs. Return", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
 
   // ── CATAPULT ──
-  {
-    type: "Catapult",
-    underlying: "RUT, SPX",
-    term: "48 mo",
-    callPremium: "18.25%",
-    upsideParticipation: "150%",
-    firstCallDate: "Jun 8, 2027",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FLT8",
-    price: "$100.00"
-  },
-  {
-    type: "Catapult",
-    underlying: "NDXT, RUT, SPX",
-    term: "48 mo",
-    callPremium: "18.75%",
-    upsideParticipation: "150%",
-    firstCallDate: "Jun 8, 2027",
-    protection: 20,
-    protectionType: "Hard",
-    cusip: "61781FLQ4",
-    price: "$100.00"
-  },
-  {
-    type: "Catapult",
-    underlying: "NDXT, RUT, SPX",
-    term: "48 mo",
-    callPremium: "24.75%",
-    upsideParticipation: "150%",
-    firstCallDate: "Jun 8, 2027",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FLR2",
-    price: "$100.00"
-  },
-  {
-    type: "Catapult",
-    underlying: "RUT, SPX, SX5E",
-    term: "48 mo",
-    callPremium: "31.25%",
-    upsideParticipation: "150%",
-    firstCallDate: "Jun 8, 2027",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FLS0",
-    price: "$100.00"
-  },
+  { type:"Catapult", underlying:"RUT, SPX", term:"48 mo", callPremium:"18.25%", upsideParticipation:"150%", firstCallDate:"Jun 8, 2027", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
+  { type:"Catapult", underlying:"NDXT, RUT, SPX", term:"48 mo", callPremium:"18.75%", upsideParticipation:"150%", firstCallDate:"Jun 8, 2027", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:20, protectionType:"Hard", price:"$100.00" },
+  { type:"Catapult", underlying:"NDXT, RUT, SPX", term:"48 mo", callPremium:"24.75%", upsideParticipation:"150%", firstCallDate:"Jun 8, 2027", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
+  { type:"Catapult", underlying:"RUT, SPX, SX5E", term:"48 mo", callPremium:"31.25%", upsideParticipation:"150%", firstCallDate:"Jun 8, 2027", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
 
   // ── CALL PREMIUM ──
-  {
-    type: "Call Premium",
-    underlying: "DJI, NDX, SPX",
-    term: "48 mo",
-    callPremium: "16.5%",
-    upsideParticipation: "150%",
-    autocall: "Semi-Annually",
-    nonCallPeriod: "12 mo",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FNA7",
-    price: "$100.00"
-  },
-  {
-    type: "Call Premium",
-    underlying: "DJI, RUT, SPX",
-    term: "48 mo",
-    callPremium: "18.25%",
-    upsideParticipation: "150%",
-    autocall: "Semi-Annually",
-    nonCallPeriod: "12 mo",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FMZ3",
-    price: "$100.00"
-  },
+  { type:"Call Premium", underlying:"DJI, NDX, SPX", term:"48 mo", callPremium:"16.5%", upsideParticipation:"150%", autocall:"Semi-Annually", nonCallPeriod:"12 mo", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
+  { type:"Call Premium", underlying:"DJI, RUT, SPX", term:"48 mo", callPremium:"18.25%", upsideParticipation:"150%", autocall:"Semi-Annually", nonCallPeriod:"12 mo", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
 
   // ── DIGITAL PLUS ──
-  {
-    type: "Digital Plus",
-    underlying: "DJI, NDX, RUT",
-    term: "60 mo",
-    digitalReturn: "47.00%",
-    participation: "100%",
-    couponProtection: "30%",
-    protection: 30,
-    protectionType: "Soft",
-    cusip: "61781FJQ7",
-    price: "$100.00"
-  },
+  { type:"Digital Plus", underlying:"DJI, NDX, RUT", term:"60 mo", digitalReturn:"47.00%", participation:"100%", couponProtection:"30%", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00" },
 
-  // ── PPN (Principal Protected Notes) ──
-  {
-    type: "PPN",
-    underlying: "SX5E",
-    term: "48 mo",
-    participation: "107.75%",
-    maxReturn: "Uncapped",
-    protection: 100,
-    protectionType: "Full",
-    cusip: "61781FLB7",
-    price: "$100.00"
-  },
-  {
-    type: "PPN",
-    underlying: "SX5E",
-    term: "60 mo",
-    participation: "123%",
-    maxReturn: "Uncapped",
-    protection: 100,
-    protectionType: "Full",
-    cusip: "61781FLA9",
-    price: "$100.00"
-  },
-  {
-    type: "PPN",
-    underlying: "SPXFP",
-    term: "60 mo",
-    participation: "130.5%",
-    maxReturn: "Uncapped",
-    protection: 100,
-    protectionType: "Full",
-    cusip: "61781FKZ5",
-    price: "$100.00"
-  },
+  // ── PPN ──
+  { type:"PPN", underlying:"SX5E", term:"48 mo", participation:"107.75%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:100, protectionType:"Full", price:"$100.00" },
+  { type:"PPN", underlying:"SX5E", term:"60 mo", participation:"123%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:100, protectionType:"Full", price:"$100.00" },
+  { type:"PPN", underlying:"SPXFP", term:"60 mo", participation:"130.5%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:100, protectionType:"Full", price:"$100.00" },
 
   // ── MLCD ──
-  {
-    type: "MLCD",
-    underlying: "BAUSE5X",
-    term: "48 mo",
-    participation: "375.5%",
-    maxReturn: "Uncapped",
-    protection: 100,
-    protectionType: "Full",
-    cusip: "61779W5A4",
-    price: "$100.00"
-  }
+  { type:"MLCD", underlying:"BAUSE5X", term:"48 mo", participation:"375.5%", maxReturn:"Uncapped", issuer:"Morgan Stanley", closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:100, protectionType:"Full", price:"$100.00" }
 ];
 // ─────────────────────────────────────────────────────────────
 // END OF DATA SECTION
 // ─────────────────────────────────────────────────────────────
 
 const TYPE_STYLES = {
-  "Growth":       { badgeBg: "var(--growth-bg)",   badgeText: "var(--growth-text)",   bar: "var(--growth-bar)" },
-  "Income":       { badgeBg: "var(--income-bg)",   badgeText: "var(--income-text)",   bar: "var(--income-bar)" },
-  "Absolute":     { badgeBg: "var(--absolute-bg)", badgeText: "var(--absolute-text)", bar: "var(--absolute-bar)" },
-  "Catapult":     { badgeBg: "var(--catapult-bg)", badgeText: "var(--catapult-text)", bar: "var(--catapult-bar)" },
-  "Call Premium": { badgeBg: "var(--premium-bg)",  badgeText: "var(--premium-text)",  bar: "var(--premium-bar)" },
-  "Digital Plus": { badgeBg: "var(--digital-bg)",  badgeText: "var(--digital-text)",  bar: "var(--digital-bar)" },
-  "PPN":          { badgeBg: "var(--ppn-bg)",      badgeText: "var(--ppn-text)",      bar: "var(--ppn-bar)" },
-  "MLCD":         { badgeBg: "var(--mlcd-bg)",     badgeText: "var(--mlcd-text)",     bar: "var(--mlcd-bar)" },
+  "Growth":       { badgeBg:"var(--growth-bg)",   badgeText:"var(--growth-text)",   bar:"var(--growth-bar)" },
+  "Income":       { badgeBg:"var(--income-bg)",   badgeText:"var(--income-text)",   bar:"var(--income-bar)" },
+  "Absolute":     { badgeBg:"var(--absolute-bg)", badgeText:"var(--absolute-text)", bar:"var(--absolute-bar)" },
+  "Catapult":     { badgeBg:"var(--catapult-bg)", badgeText:"var(--catapult-text)", bar:"var(--catapult-bar)" },
+  "Call Premium": { badgeBg:"var(--premium-bg)",  badgeText:"var(--premium-text)",  bar:"var(--premium-bar)" },
+  "Digital Plus": { badgeBg:"var(--digital-bg)",  badgeText:"var(--digital-text)",  bar:"var(--digital-bar)" },
+  "PPN":          { badgeBg:"var(--ppn-bg)",      badgeText:"var(--ppn-text)",      bar:"var(--ppn-bar)" },
+  "MLCD":         { badgeBg:"var(--mlcd-bg)",     badgeText:"var(--mlcd-text)",     bar:"var(--mlcd-bar)" },
 };
 
 function barColor(type, protType) {
@@ -664,123 +283,139 @@ function barColor(type, protType) {
   return TYPE_STYLES[type]?.bar || "#888";
 }
 
-function metricHTML(label, value, accent) {
-  return `<div class="metric"><div class="metric-label">${label}</div><div class="metric-value${accent ? ' accent' : ''}">${value}</div></div>`;
+function termMonths(t) { const m = t.match(/(\d+)/); return m ? parseInt(m[1]) : 0; }
+
+function closingProgress(calendarStart, closeDate) {
+  const now = Date.now();
+  const start = new Date(calendarStart + "T00:00:00").getTime();
+  const end   = new Date(closeDate   + "T10:00:00").getTime(); // 10am EDT assumption
+  const daysTotal = Math.max(1, Math.round((end - start) / 86400000));
+  if (now >= end) return { pct:100, daysLeft:0, daysTotal, daysElapsed:daysTotal };
+  if (now <= start) return { pct:0, daysLeft:daysTotal, daysTotal, daysElapsed:0 };
+  const pct = Math.min(99, Math.round(((now - start) / (end - start)) * 100));
+  const daysLeft = Math.max(1, Math.round((end - now) / 86400000));
+  return { pct, daysLeft, daysTotal, daysElapsed: daysTotal - daysLeft };
 }
 
-function metricsForType(n) {
-  switch (n.type) {
+function fmtClose(dateStr) {
+  return new Date(dateStr + "T12:00:00").toLocaleDateString("en-US", { month:"short", day:"numeric", year:"numeric" });
+}
+
+function infoIcon(tip) {
+  if (!tip) return "";
+  const safe = tip.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  return `<span class="info-wrap"><span class="info-icon">i</span><span class="tooltip">${safe}</span></span>`;
+}
+
+function metric(label, value, accent, tip) {
+  return `<div class="metric"><div class="metric-label">${label}${infoIcon(tip)}</div><div class="metric-value${accent?" accent":""}">${value}</div></div>`;
+}
+
+function metricsFor(n) {
+  const tt = n.tooltips || {};
+  switch(n.type) {
     case "Growth":
-      return `<div class="card-metrics metrics-grid-2">
-        ${metricHTML("Participation", n.participation, true)}
-        ${metricHTML("Max return", n.maxReturn || "—")}
-      </div>`;
-
+      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"—")}</div>`;
     case "Income":
-      return `<div class="card-metrics metrics-grid-2">
-        ${metricHTML("Annualized yield", n.annualizedYield, true)}
-        ${metricHTML("Frequency", n.frequency)}
-        ${metricHTML("Coupon protection", n.couponProtection)}
-        ${metricHTML("Non-call period", n.nonCallPeriod)}
-      </div>`;
-
+      return `<div class="card-metrics metrics-grid-2">${metric("Annualized yield",n.annualizedYield,true)}${metric("Frequency",n.frequency,false,tt.frequency)}${metric("Coupon protection",n.couponProtection,false,tt.couponProtection)}${metric("Non-call period",n.nonCallPeriod,false,tt.nonCallPeriod)}</div>`;
     case "Absolute":
-      return `<div class="card-metrics metrics-grid-2">
-        ${metricHTML("Upside participation", n.upsideParticipation, true)}
-        ${metricHTML("Downside participation", n.downsideParticipation)}
-      </div>`;
-
+      return `<div class="card-metrics metrics-grid-2">${metric("Upside participation",n.upsideParticipation,true)}${metric("Downside participation",n.downsideParticipation)}</div>`;
     case "Catapult":
-      return `<div class="card-metrics metrics-grid-2">
-        ${metricHTML("Call premium", n.callPremium, true)}
-        ${metricHTML("Upside participation", n.upsideParticipation)}
-        ${metricHTML("First call date", n.firstCallDate)}
-      </div>`;
-
+      return `<div class="card-metrics metrics-grid-2">${metric("Call premium",n.callPremium,true)}${metric("Upside participation",n.upsideParticipation)}${metric("First call date",n.firstCallDate)}</div>`;
     case "Call Premium":
-      return `<div class="card-metrics metrics-grid-2">
-        ${metricHTML("Call premium", n.callPremium, true)}
-        ${metricHTML("Upside participation", n.upsideParticipation)}
-        ${metricHTML("Autocall", n.autocall)}
-        ${metricHTML("Non-call period", n.nonCallPeriod)}
-      </div>`;
-
+      return `<div class="card-metrics metrics-grid-2">${metric("Call premium",n.callPremium,true)}${metric("Upside participation",n.upsideParticipation)}${metric("Autocall",n.autocall)}${metric("Non-call period",n.nonCallPeriod)}</div>`;
     case "Digital Plus":
-      return `<div class="card-metrics metrics-grid-2">
-        ${metricHTML("Digital return", n.digitalReturn, true)}
-        ${metricHTML("Participation", n.participation)}
-        ${metricHTML("Coupon protection", n.couponProtection)}
-      </div>`;
-
-    case "PPN":
-    case "MLCD":
-      return `<div class="card-metrics metrics-grid-2">
-        ${metricHTML("Participation", n.participation, true)}
-        ${metricHTML("Max return", n.maxReturn || "Uncapped")}
-      </div>`;
-
-    default:
-      return "";
+      return `<div class="card-metrics metrics-grid-2">${metric("Digital return",n.digitalReturn,true)}${metric("Participation",n.participation)}${metric("Coupon protection",n.couponProtection)}</div>`;
+    case "PPN": case "MLCD":
+      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"Uncapped")}</div>`;
+    default: return "";
   }
 }
 
 function renderCard(n) {
-  const style = TYPE_STYLES[n.type] || {};
-  const pct = Math.min(n.protection, 100);
-  const protLabel = n.protection === 100 ? "Full principal protection" : `${n.protection}% ${n.protectionType} protection`;
+  const s = TYPE_STYLES[n.type] || {};
   const bColor = barColor(n.type, n.protectionType);
+  const protPct = Math.min(n.protection, 100);
+  const protLabel = n.protection === 100 ? "Full principal protection" : `${n.protection}% ${n.protectionType} protection`;
+  const { pct: cpct, daysLeft, daysTotal, daysElapsed } = closingProgress(n.calendarStart, n.closeDate);
+  const urgency = daysLeft <= 3 ? "#d4426e" : daysLeft <= 7 ? "#e8830a" : "#6b6960";
+  const daysLeftLabel = daysLeft === 0 ? "Closed" : `${daysLeft} day${daysLeft!==1?"s":""} left`;
 
-  return `
-  <div class="card" data-type="${n.type}">
+  return `<div class="card" data-type="${n.type}">
     <div class="card-top">
       <div class="card-header-row">
-        <span class="type-badge" style="background:${style.badgeBg};color:${style.badgeText};">${n.type}</span>
+        <span class="type-badge" style="background:${s.badgeBg};color:${s.badgeText};">${n.type}</span>
         <span class="term-chip">${n.term}</span>
       </div>
       <div class="underlying">${n.underlying}</div>
-      <div class="issuer-line">Morgan Stanley · Issuer price ${n.price}</div>
+      <div class="issuer-line">${n.issuer} · ${n.price} per note</div>
     </div>
-
-    ${metricsForType(n)}
-
+    ${metricsFor(n)}
     <div class="card-protection">
-      <div class="prot-label-row">
-        <span class="prot-label">Principal protection</span>
-        <span class="prot-value" style="color:${bColor}">${n.protection}%</span>
+      <div class="bar-label-row">
+        <span class="bar-label">Principal protection</span>
+        <span class="bar-value" style="color:${bColor}">${n.protection}%</span>
       </div>
-      <div class="prot-bar-track">
-        <div class="prot-bar-fill" style="width:${pct}%;background:${bColor};"></div>
-      </div>
-      <div class="prot-type">${protLabel}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${protPct}%;background:${bColor};"></div></div>
+      <div class="bar-sub">${protLabel}</div>
     </div>
-
+    <div class="card-closing">
+      <div class="bar-label-row">
+        <span class="bar-label">Closing window</span>
+        <span class="bar-value" style="color:${urgency}">${daysLeftLabel}</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${cpct}%;background:${urgency};"></div></div>
+      <div class="closing-sub">
+        <span>Day ${daysElapsed} of ${daysTotal}</span>
+        <span>Closes ${fmtClose(n.closeDate)}</span>
+      </div>
+    </div>
     <div class="card-footer">
-      <span class="cusip">CUSIP ${n.cusip}</span>
-      <span class="price-chip">Closes May 29</span>
+      <span class="close-chip">10:00 AM EDT</span>
     </div>
   </div>`;
 }
 
-function render(filter) {
-  const filtered = filter === "all" ? NOTES : NOTES.filter(n => n.type === filter);
-  const grid = document.getElementById("grid");
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="empty">No notes found for this filter.</div>`;
-  } else {
-    grid.innerHTML = filtered.map(renderCard).join("");
+let currentFilter = "all";
+let currentSort   = "close-asc";
+
+function sortNotes(arr, key) {
+  const c = [...arr];
+  switch(key) {
+    case "close-asc":  return c.sort((a,b)=> new Date(a.closeDate)-new Date(b.closeDate));
+    case "close-desc": return c.sort((a,b)=> new Date(b.closeDate)-new Date(a.closeDate));
+    case "term-asc":   return c.sort((a,b)=> termMonths(a.term)-termMonths(b.term));
+    case "term-desc":  return c.sort((a,b)=> termMonths(b.term)-termMonths(a.term));
+    case "prot-desc":  return c.sort((a,b)=> b.protection-a.protection);
+    case "prot-asc":   return c.sort((a,b)=> a.protection-b.protection);
+    default: return c;
   }
-  const badge = document.getElementById("count-badge");
-  badge.textContent = `${filtered.length} note${filtered.length !== 1 ? "s" : ""}`;
 }
 
-document.getElementById("filters").addEventListener("click", e => {
+function render() {
+  let list = currentFilter==="all" ? NOTES : NOTES.filter(n=>n.type===currentFilter);
+  list = sortNotes(list, currentSort);
+  const grid = document.getElementById("grid");
+  grid.innerHTML = list.length===0
+    ? `<div class="empty">No notes found for this filter.</div>`
+    : list.map(renderCard).join("");
+  document.getElementById("count-badge").textContent = `${list.length} note${list.length!==1?"s":""}`;
+}
+
+document.getElementById("filters").addEventListener("click", e=>{
   if (!e.target.classList.contains("pill")) return;
-  document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
   e.target.classList.add("active");
-  render(e.target.dataset.filter);
+  currentFilter = e.target.dataset.filter;
+  render();
 });
 
-render("all");
+document.getElementById("sort-select").addEventListener("change", e=>{
+  currentSort = e.target.value;
+  render();
+});
+
+render();
 </script>
 </body>
 </html>
