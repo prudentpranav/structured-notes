@@ -4,32 +4,26 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Structured Notes Calendar — Prudent Prosperity</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    /* Brand */
-    --navy:   #091930;
-    --gold:   #d0b689;
+    --navy:    #091930;
+    --gold:    #d0b689;
     --gold-lt: #e8d5af;
     --gold-dk: #b09060;
-    --white:  #ffffff;
-
-    /* Neutrals derived from brand */
-    --bg:       #f4f2ee;
-    --surface:  #ffffff;
-    --surface2: #ede9e1;
-    --border:   #ddd8cc;
-    --border2:  #c8c2b0;
-    --text:     #091930;
-    --text2:    #4a5568;
-    --text3:    #8a8880;
-
+    --white:   #ffffff;
+    --bg:      #f4f2ee;
+    --surface: #ffffff;
+    --surface2:#ede9e1;
+    --border:  #ddd8cc;
+    --border2: #c8c2b0;
+    --text:    #091930;
+    --text2:   #4a5568;
+    --text3:   #8a8880;
     --mono: 'DM Mono', monospace;
     --sans: 'DM Sans', sans-serif;
-
-    /* Type badge palettes */
     --growth-bg:#e8f4fb;   --growth-text:#1a4f7a;   --growth-bar:#3a8fd4;
     --income-bg:#eaf5ec;   --income-text:#1a5c2a;   --income-bar:#2e9e50;
     --absolute-bg:#f0ecfb; --absolute-text:#3d2080; --absolute-bar:#7c52d4;
@@ -46,18 +40,13 @@
 
   /* ── HEADER ── */
   .site-header {
-    background: var(--navy);
-    padding: 0 2rem;
+    background: var(--navy); padding: 0 2rem;
     display: flex; align-items: center; justify-content: space-between;
     height: 68px; position: sticky; top: 0; z-index: 100;
     border-bottom: 2px solid var(--gold);
   }
   .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-mark {
-    width: 36px; height: 36px; border-radius: 8px;
-    background: var(--gold); display: flex; align-items: center; justify-content: center;
-    font-size: 16px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em;
-  }
+  .logo-mark { width: 36px; height: 36px; border-radius: 8px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: var(--navy); }
   .logo-text { font-size: 15px; font-weight: 600; color: var(--white); letter-spacing: -0.01em; line-height: 1.3; }
   .logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--gold-lt); letter-spacing: 0.04em; }
   .header-right { font-size: 11px; color: var(--gold-lt); font-family: var(--mono); text-align: right; line-height: 1.7; }
@@ -67,8 +56,8 @@
 
   /* ── HERO ── */
   .hero {
-    background: var(--navy); color: var(--white);
-    border-radius: 14px; padding: 2rem 2.5rem; margin-bottom: 2rem;
+    background: var(--navy); color: var(--white); border-radius: 14px;
+    padding: 2rem 2.5rem; margin-bottom: 2rem;
     display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
     border: 1px solid rgba(208,182,137,0.25);
   }
@@ -82,7 +71,6 @@
   /* ── TOOLBAR ── */
   .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 0.85rem; }
   .toolbar-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); white-space: nowrap; }
-
   .filters { display: flex; flex-wrap: wrap; gap: 6px; }
   .pill {
     font-size: 12px; font-weight: 500; font-family: var(--sans);
@@ -92,6 +80,7 @@
   }
   .pill:hover { border-color: var(--gold-dk); color: var(--navy); }
   .pill.active { background: var(--navy); color: var(--gold); border-color: var(--navy); }
+  .pill.featured-pill.active { background: var(--gold); color: var(--navy); border-color: var(--gold-dk); }
 
   /* ── ISSUER FILTER ── */
   .issuer-filters { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -124,9 +113,19 @@
   .card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
     display: flex; flex-direction: column; overflow: visible;
-    transition: box-shadow 0.2s, transform 0.2s;
+    transition: box-shadow 0.2s, transform 0.2s; position: relative;
   }
   .card:hover { box-shadow: 0 6px 24px rgba(9,25,48,0.10); transform: translateY(-2px); }
+  .card.is-featured { border-color: var(--gold); border-width: 1.5px; }
+
+  /* ── FEATURED RIBBON ── */
+  .featured-ribbon {
+    position: absolute; top: -1px; right: 18px;
+    background: var(--gold); color: var(--navy);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 0 0 7px 7px;
+    font-family: var(--sans);
+  }
 
   .card-top { padding: 1rem 1.2rem 0.85rem; border-bottom: 1px solid var(--border); border-radius: 12px 12px 0 0; overflow: hidden; }
   .card-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 6px; }
@@ -134,7 +133,6 @@
   .type-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
   .issuer-badge { font-size: 10px; font-weight: 500; font-family: var(--mono); padding: 3px 8px; border-radius: 6px; background: var(--surface2); color: var(--text3); white-space: nowrap; }
   .term-chip { font-size: 11px; font-family: var(--mono); color: var(--text3); background: var(--surface2); padding: 3px 9px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
-
   .underlying { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 2px; line-height: 1.3; color: var(--navy); }
   .issuer-line { font-size: 12px; color: var(--text3); }
 
@@ -144,27 +142,13 @@
   .metric { background: var(--surface2); border-radius: 8px; padding: 8px 10px; }
   .metric-label { font-size: 10px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text3); margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
   .metric-value { font-size: 15px; font-weight: 600; color: var(--navy); line-height: 1.2; }
-  .metric-value.accent { font-size: 17px; color: var(--navy); }
+  .metric-value.accent { font-size: 17px; }
 
   /* ── TOOLTIP ── */
   .info-wrap { position: relative; display: inline-flex; }
-  .info-icon {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 13px; height: 13px; border-radius: 50%;
-    background: var(--gold-lt); color: var(--navy);
-    font-size: 9px; font-weight: 700; cursor: default;
-    flex-shrink: 0; font-style: normal; font-family: var(--sans);
-  }
+  .info-icon { display: inline-flex; align-items: center; justify-content: center; width: 13px; height: 13px; border-radius: 50%; background: var(--gold-lt); color: var(--navy); font-size: 9px; font-weight: 700; cursor: default; flex-shrink: 0; font-style: normal; font-family: var(--sans); }
   .info-wrap:hover .tooltip { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-  .tooltip {
-    position: absolute; bottom: calc(100% + 7px); left: 50%;
-    transform: translateX(-50%) translateY(4px);
-    background: var(--navy); color: var(--white); font-size: 10px; line-height: 1.55;
-    padding: 7px 11px; border-radius: 7px; min-width: 190px; max-width: 250px; white-space: normal;
-    pointer-events: none; opacity: 0; transition: opacity 0.15s, transform 0.15s;
-    z-index: 300; font-weight: 400; letter-spacing: 0; text-transform: none; font-family: var(--sans);
-    box-shadow: 0 4px 16px rgba(9,25,48,0.25); border: 1px solid rgba(208,182,137,0.3);
-  }
+  .tooltip { position: absolute; bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%) translateY(4px); background: var(--navy); color: var(--white); font-size: 10px; line-height: 1.55; padding: 7px 11px; border-radius: 7px; min-width: 190px; max-width: 250px; white-space: normal; pointer-events: none; opacity: 0; transition: opacity 0.15s, transform 0.15s; z-index: 300; font-weight: 400; text-transform: none; font-family: var(--sans); box-shadow: 0 4px 16px rgba(9,25,48,0.25); border: 1px solid rgba(208,182,137,0.3); }
   .tooltip::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:4px solid transparent; border-top-color:var(--navy); }
 
   /* ── BARS ── */
@@ -177,34 +161,35 @@
   .bar-sub   { font-size: 10px; color: var(--text3); font-family: var(--mono); }
   .closing-sub { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); font-family: var(--mono); margin-top: 4px; }
 
-  /* ── CTA BUTTON ── */
+  /* ── CTA ── */
   .card-footer { padding: 0.9rem 1.2rem; border-radius: 0 0 12px 12px; overflow: hidden; }
-  .cta-btn {
-    display: block; width: 100%; text-align: center;
-    padding: 9px 16px; border-radius: 8px;
-    background: var(--navy); color: var(--gold);
-    font-size: 13px; font-weight: 600; font-family: var(--sans);
-    text-decoration: none; letter-spacing: 0.01em;
-    border: 1px solid var(--navy);
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-  }
+  .cta-btn { display: block; width: 100%; text-align: center; padding: 9px 16px; border-radius: 8px; background: var(--navy); color: var(--gold); font-size: 13px; font-weight: 600; font-family: var(--sans); text-decoration: none; letter-spacing: 0.01em; border: 1px solid var(--navy); transition: background 0.15s, color 0.15s, border-color 0.15s; }
   .cta-btn:hover { background: var(--gold); color: var(--navy); border-color: var(--gold-dk); }
+
+  /* ── LOADING STATE ── */
+  .loading-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5rem 2rem; gap: 1rem; }
+  .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 13px; color: var(--text3); font-family: var(--mono); }
+
+  /* ── ERROR STATE ── */
+  .error-wrap { grid-column: 1/-1; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 10px; padding: 2rem; text-align: center; }
+  .error-wrap p { font-size: 13px; color: #c53030; margin-bottom: 8px; }
+  .retry-btn { font-size: 12px; padding: 6px 16px; border-radius: 8px; border: 1px solid #c53030; background: transparent; color: #c53030; cursor: pointer; font-family: var(--sans); }
+  .retry-btn:hover { background: #c53030; color: white; }
+
+  /* ── EMPTY STATE ── */
+  .empty { grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--text3); font-size: 14px; }
 
   /* ── DISCLOSURE ── */
   .disclosure { margin-top: 3rem; padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; }
   .disclosure p { font-size: 11px; line-height: 1.7; color: var(--text3); }
   .disclosure strong { color: var(--text2); font-weight: 500; }
 
-  .empty { grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--text3); font-size: 14px; }
-
-  /* ── RESPONSIVE ── */
   @media (max-width: 640px) {
-    .page { padding: 1rem; }
-    .site-header { padding: 0 1rem; }
-    .grid { grid-template-columns: 1fr; }
-    .count-badge { display: none; }
-    .hero { flex-direction: column; }
-    .hero-stats { justify-content: center; }
+    .page { padding: 1rem; } .site-header { padding: 0 1rem; }
+    .grid { grid-template-columns: 1fr; } .count-badge { display: none; }
+    .hero { flex-direction: column; } .hero-stats { justify-content: center; }
   }
 </style>
 </head>
@@ -215,423 +200,85 @@
     <div class="logo-mark">PP</div>
     <div class="logo-text">Prudent Prosperity<span>Structured Notes Calendar</span></div>
   </div>
-  <div class="header-right">For Institutional Use Only<br>May 2026 Offerings</div>
+  <div class="header-right">For Institutional Use Only<br><span id="header-date">Loading...</span></div>
 </header>
 
 <main class="page">
 
   <div class="hero">
     <div>
-      <h1>May 2026 Structured Notes</h1>
-      <p>Multi-issuer calendar · Multiple close dates · $1,000 increments · Review prospectus before investing</p>
+      <h1>Structured Notes Calendar</h1>
+      <p>Live offerings · Multi-issuer · Review prospectus before investing</p>
     </div>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Total Notes</div></div>
+      <div class="stat"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Notes</div></div>
       <div class="stat"><div class="stat-num" id="stat-issuers">—</div><div class="stat-label">Issuers</div></div>
       <div class="stat"><div class="stat-num" id="stat-types">—</div><div class="stat-label">Types</div></div>
     </div>
   </div>
 
-  <div class="toolbar">
-    <span class="toolbar-label">Type</span>
-    <div class="filters" id="type-filters">
-      <button class="pill active" data-filter="all">All</button>
-      <button class="pill" data-filter="Growth">Growth</button>
-      <button class="pill" data-filter="Income">Income</button>
-      <button class="pill" data-filter="Absolute">Absolute</button>
-      <button class="pill" data-filter="Catapult">Catapult</button>
-      <button class="pill" data-filter="Call Premium">Call Premium</button>
-      <button class="pill" data-filter="Digital">Digital</button>
-      <button class="pill" data-filter="Digital Plus">Digital Plus</button>
-      <button class="pill" data-filter="Snowball">Snowball</button>
-      <button class="pill" data-filter="PPN">PPN</button>
-      <button class="pill" data-filter="MLCD">MLCD</button>
+  <!-- Controls (hidden until data loads) -->
+  <div id="controls" style="display:none;">
+    <div class="toolbar">
+      <span class="toolbar-label">Type</span>
+      <div class="filters" id="type-filters">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill featured-pill" data-filter="featured">⭐ Featured</button>
+        <button class="pill" data-filter="Growth">Growth</button>
+        <button class="pill" data-filter="Income">Income</button>
+        <button class="pill" data-filter="Absolute">Absolute</button>
+        <button class="pill" data-filter="Catapult">Catapult</button>
+        <button class="pill" data-filter="Call Premium">Call Premium</button>
+        <button class="pill" data-filter="Digital">Digital</button>
+        <button class="pill" data-filter="Digital Plus">Digital Plus</button>
+        <button class="pill" data-filter="Snowball">Snowball</button>
+        <button class="pill" data-filter="PPN">PPN</button>
+        <button class="pill" data-filter="MLCD">MLCD</button>
+      </div>
+    </div>
+
+    <div class="toolbar" style="margin-bottom:0.75rem;">
+      <span class="toolbar-label">Issuer</span>
+      <div class="issuer-filters" id="issuer-filters">
+        <button class="issuer-pill active" data-issuer="all">All</button>
+      </div>
+    </div>
+
+    <div class="sort-row">
+      <span class="toolbar-label">Sort</span>
+      <select class="sort-select" id="sort-select">
+        <option value="featured-first">Featured first</option>
+        <option value="close-asc">Close date — soonest first</option>
+        <option value="close-desc">Close date — latest first</option>
+        <option value="term-asc">Term — shortest first</option>
+        <option value="term-desc">Term — longest first</option>
+        <option value="prot-desc">Protection — highest first</option>
+        <option value="prot-asc">Protection — lowest first</option>
+      </select>
+      <span class="count-badge" id="count-badge"></span>
     </div>
   </div>
 
-  <div class="toolbar" style="margin-bottom:0.75rem;">
-    <span class="toolbar-label">Issuer</span>
-    <div class="issuer-filters" id="issuer-filters">
-      <button class="issuer-pill active" data-issuer="all">All</button>
-    </div>
-  </div>
-
-  <div class="sort-row">
-    <span class="toolbar-label">Sort</span>
-    <select class="sort-select" id="sort-select">
-      <option value="close-asc">Close date — soonest first</option>
-      <option value="close-desc">Close date — latest first</option>
-      <option value="term-asc">Term — shortest first</option>
-      <option value="term-desc">Term — longest first</option>
-      <option value="prot-desc">Protection — highest first</option>
-      <option value="prot-asc">Protection — lowest first</option>
-    </select>
-    <span class="count-badge" id="count-badge"></span>
+  <!-- Loading spinner -->
+  <div id="loading-wrap" class="loading-wrap">
+    <div class="spinner"></div>
+    <div class="loading-text">Loading live offerings from Airtable...</div>
   </div>
 
   <div class="grid" id="grid"></div>
 
-  <div class="disclosure">
-    <p><strong>For Institutional Use Only.</strong> This material is provided for informational and educational purposes only and does not constitute an offer to sell or a solicitation to buy any security. Structured notes involve significant risks including potential loss of principal, credit risk of the issuer, illiquidity, and payoff complexity. Soft protection is a barrier; hard protection is a buffer. All payments are subject to the credit risk of the issuing institution. Prospectus available on platform — please review carefully before investing. Past performance is not indicative of future results. Nothing herein should be considered investment advice. Securities offered through Halo Securities LLC, a SEC registered broker/dealer and member of FINRA/SIPC.</p>
+  <div class="disclosure" style="margin-top:2rem;">
+    <p><strong>For Institutional Use Only.</strong> This material is provided for informational and educational purposes only and does not constitute an offer to sell or a solicitation to buy any security. Structured notes involve significant risks including potential loss of principal, credit risk of the issuer, illiquidity, and payoff complexity. Soft protection is a barrier; hard protection is a buffer. All payments are subject to the credit risk of the issuing institution. Please review the applicable prospectus carefully before investing. Past performance is not indicative of future results. Nothing herein should be considered investment advice. Securities offered through Halo Securities LLC, a SEC registered broker/dealer and member of FINRA/SIPC.</p>
   </div>
 
 </main>
 
 <script>
 // ─────────────────────────────────────────────────────────────
-// CONFIGURATION
+// CONFIGURATION — only change these two lines
 // ─────────────────────────────────────────────────────────────
+const WORKER_URL    = "https://structured-notes-api.pranav-a05.workers.dev";
 const CALENDLY_LINK = "https://calendly.com/prudentprosperity/30min";
-
-// ─────────────────────────────────────────────────────────────
-// DATA — UPDATE THIS SECTION EACH MONTH
-//
-// Fields on every note:
-//   type, underlying, term ("24 mo" / "36 mo" etc.)
-//   issuer, closeDate ("YYYY-MM-DD"), calendarStart ("YYYY-MM-DD")
-//   protection (number), protectionType ("Soft"|"Hard"|"Full"), price
-//
-// Type-specific fields (see examples below per type)
-// Income/Snowball support a `tooltips` object
-// ─────────────────────────────────────────────────────────────
-const NOTES = [
-
-  // ════════════════════════════════
-  // ABSOLUTE
-  // ════════════════════════════════
-  { type:"Absolute", issuer:"RBC", underlying:"SPX", term:"24 mo", participation:"100%", maxReturn:"18.75%", protection:15, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"RBC", underlying:"NDX", term:"24 mo", participation:"100%", maxReturn:"23.00%", protection:15, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"BMO", underlying:"SPX", term:"24 mo", participation:"100%", maxReturn:"17.25%", protection:20, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"BMO", underlying:"SPX", term:"24 mo", participation:"300%", maxReturn:"20.25%", protection:10, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"Barclays", underlying:"SPX", term:"36 mo", participation:"100%", maxReturn:"31.00%", protection:20, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"BMO", underlying:"SPX", term:"36 mo", participation:"300%", maxReturn:"30.00%", protection:10, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"BMO", underlying:"SPX", term:"36 mo", participation:"100%", maxReturn:"32.50%", protection:20, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"BMO", underlying:"DJI, NDX, RUT", term:"36 mo", participation:"200%", maxReturn:"57.50%", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"Barclays", underlying:"SPXFP", term:"60 mo", participation:"190%", maxReturn:"Uncapped", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"Barclays", underlying:"DJI, SPX", term:"60 mo", participation:"100%", maxReturn:"Uncapped", protection:30, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"Morgan Stanley", underlying:"NDXT, RUT", term:"48 mo", upsideParticipation:"138–153%", downsideParticipation:"50%", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"Morgan Stanley", underlying:"SPXFP", term:"60 mo", upsideParticipation:"57.75–59.75%", downsideParticipation:"100% Abs. Return", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"Morgan Stanley", underlying:"SPX, SX5E", term:"60 mo", upsideParticipation:"191–206%", downsideParticipation:"50%", protection:20, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Absolute", issuer:"Morgan Stanley", underlying:"SPXFP", term:"60 mo", upsideParticipation:"180–195%", downsideParticipation:"50%", protection:40, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-
-  // ════════════════════════════════
-  // CALL PREMIUM
-  // ════════════════════════════════
-  { type:"Call Premium", issuer:"BMO", underlying:"DJI, RUT, SPX", term:"36 mo", callPremium:"12.0%", upsideParticipation:"200%", autocall:"Annually", nonCallPeriod:"12 mo", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Call Premium", issuer:"Morgan Stanley", underlying:"DJI, NDX, SPX", term:"48 mo", callPremium:"16.5%", upsideParticipation:"150%", autocall:"Semi-Annually", nonCallPeriod:"12 mo", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Call Premium", issuer:"Morgan Stanley", underlying:"DJI, RUT, SPX", term:"48 mo", callPremium:"18.25%", upsideParticipation:"150%", autocall:"Semi-Annually", nonCallPeriod:"12 mo", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-
-  // ════════════════════════════════
-  // CATAPULT
-  // ════════════════════════════════
-  { type:"Catapult", issuer:"RBC", underlying:"ADBE, CRM, MSFT, ORCL, PANW", term:"36 mo", callPremium:"20.0%", upsideParticipation:"125%", firstCallDate:"Jun 4, 2027", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Catapult", issuer:"RBC", underlying:"BAC, C, GS, MS, WFC", term:"36 mo", callPremium:"16.5%", upsideParticipation:"150%", firstCallDate:"Jun 11, 2027", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Catapult", issuer:"BMO", underlying:"DJI, NDX, RUT", term:"36 mo", callPremium:"20.3%", upsideParticipation:"175%", firstCallDate:"Jun 4, 2027", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Catapult", issuer:"BMO", underlying:"SPX", term:"36 mo", callPremium:"9.0%", upsideParticipation:"125%", firstCallDate:"Jun 4, 2027", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Catapult", issuer:"Morgan Stanley", underlying:"RUT, SPX", term:"48 mo", callPremium:"18.25%", upsideParticipation:"150%", firstCallDate:"Jun 8, 2027", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Catapult", issuer:"Morgan Stanley", underlying:"NDXT, RUT, SPX", term:"48 mo", callPremium:"18.75%", upsideParticipation:"150%", firstCallDate:"Jun 8, 2027", protection:20, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Catapult", issuer:"Morgan Stanley", underlying:"NDXT, RUT, SPX", term:"48 mo", callPremium:"24.75%", upsideParticipation:"150%", firstCallDate:"Jun 8, 2027", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Catapult", issuer:"Morgan Stanley", underlying:"RUT, SPX, SX5E", term:"48 mo", callPremium:"31.25%", upsideParticipation:"150%", firstCallDate:"Jun 8, 2027", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-
-  // ════════════════════════════════
-  // DIGITAL
-  // ════════════════════════════════
-  { type:"Digital", issuer:"BMO", underlying:"RUT, SPX", term:"15 mo", digitalReturn:"11.30%", participation:"N/A", couponProtection:"25%", protection:25, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Digital", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"18 mo", digitalReturn:"15.00%", participation:"N/A", couponProtection:"30%", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Digital", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"18 mo", digitalReturn:"20.00%", participation:"N/A", couponProtection:"None", protection:40, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Digital", issuer:"Bank of America", underlying:"NDX, RUT, SPX", term:"18 mo", digitalReturn:"15.00%", participation:"N/A", couponProtection:"30%", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Digital", issuer:"BMO", underlying:"NDX, RUT, SPX", term:"23 mo", digitalReturn:"20.50%", participation:"N/A", couponProtection:"30%", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-
-  // ════════════════════════════════
-  // DIGITAL PLUS
-  // ════════════════════════════════
-  { type:"Digital Plus", issuer:"BMO", underlying:"SPXFP", term:"60 mo", digitalReturn:"65.00%", participation:"100%", couponProtection:"None", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Digital Plus", issuer:"Morgan Stanley", underlying:"DJI, NDX, RUT", term:"60 mo", digitalReturn:"47.00%", participation:"100%", couponProtection:"30%", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-
-  // ════════════════════════════════
-  // GROWTH
-  // ════════════════════════════════
-  { type:"Growth", issuer:"BMO", underlying:"SPX", term:"18 mo", participation:"150%", maxReturn:"13.00%", protection:20, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"RBC", underlying:"SPX", term:"24 mo", participation:"150%", maxReturn:"21.50%", protection:10, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"RBC", underlying:"RUT", term:"24 mo", participation:"150%", maxReturn:"29.00%", protection:10, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"RBC", underlying:"NDX", term:"24 mo", participation:"150%", maxReturn:"26.00%", protection:10, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"RBC", underlying:"SX5E", term:"24 mo", participation:"300%", maxReturn:"21.00%", protection:15, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Bank of America", underlying:"SPX", term:"24 mo", participation:"140%", maxReturn:"21.00%", protection:10, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"BMO", underlying:"NDX, SPX", term:"36 mo", participation:"200%", maxReturn:"37.00%", protection:15, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Morgan Stanley", underlying:"NDXT, RUT, SPX", term:"48 mo", participation:"170%", maxReturn:"Uncapped", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Morgan Stanley", underlying:"RUT, SPX", term:"48 mo", participation:"125%", maxReturn:"Uncapped", protection:20, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Morgan Stanley", underlying:"RUT, SPX", term:"48 mo", participation:"147%", maxReturn:"Uncapped", protection:25, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Barclays", underlying:"DJI, SPX", term:"60 mo", participation:"100%", maxReturn:"Uncapped", protection:40, protectionType:"Hard", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Barclays", underlying:"DJI, SPX", term:"60 mo", participation:"120%", maxReturn:"Uncapped", protection:50, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Barclays", underlying:"SPXFP", term:"60 mo", participation:"210%", maxReturn:"Uncapped", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Morgan Stanley", underlying:"SPXFP", term:"60 mo", participation:"210%", maxReturn:"Uncapped", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Morgan Stanley", underlying:"DJI, SPX", term:"60 mo", participation:"143%", maxReturn:"Uncapped", protection:25, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Morgan Stanley", underlying:"NDX, RUT, SPX", term:"60 mo", participation:"400%", maxReturn:"80%", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"Growth", issuer:"Bank of America", underlying:"SPXFP", term:"60 mo", participation:"208%", maxReturn:"Uncapped", protection:30, protectionType:"Soft", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-
-  // ════════════════════════════════
-  // INCOME
-  // ════════════════════════════════
-  {
-    type:"Income", issuer:"BBVA", underlying:"AMD, TSLA", term:"24 mo",
-    annualizedYield:"27.70%", frequency:"Monthly", couponProtection:"40%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons paid monthly — subject to barrier observation", couponProtection:"Coupon barrier at 40% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-19", calendarStart:"2026-05-01", protection:40, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BBVA", underlying:"ORCL, PLTR", term:"24 mo",
-    annualizedYield:"23.00%", frequency:"Monthly", couponProtection:"50%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons paid monthly — subject to barrier observation", couponProtection:"Coupon barrier at 50% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-19", calendarStart:"2026-05-01", protection:50, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BBVA", underlying:"META, RKLB", term:"24 mo",
-    annualizedYield:"31.25%", frequency:"Monthly", couponProtection:"50%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons paid monthly — subject to barrier observation", couponProtection:"Coupon barrier at 50% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-19", calendarStart:"2026-05-01", protection:50, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BBVA", underlying:"HOOD, JPM", term:"24 mo",
-    annualizedYield:"20.45%", frequency:"Monthly", couponProtection:"50%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons paid monthly — subject to barrier observation", couponProtection:"Coupon barrier at 50% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-19", calendarStart:"2026-05-01", protection:50, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BBVA", underlying:"CRWV, MSFT", term:"24 mo",
-    annualizedYield:"28.40%", frequency:"Monthly", couponProtection:"50%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons paid monthly — subject to barrier observation", couponProtection:"Coupon barrier at 50% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-19", calendarStart:"2026-05-01", protection:50, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BBVA", underlying:"AMD, TSLA", term:"24 mo",
-    annualizedYield:"21.35%", frequency:"Monthly", couponProtection:"50%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons paid monthly — subject to barrier observation", couponProtection:"Coupon barrier at 50% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-19", calendarStart:"2026-05-01", protection:50, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BBVA", underlying:"AMD, INTC, MRVL, MU", term:"36 mo",
-    annualizedYield:"40.00%", frequency:"Monthly", couponProtection:"50%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons paid monthly — subject to barrier observation", couponProtection:"Coupon barrier at 50% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-19", calendarStart:"2026-05-01", protection:50, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"MQUSTVA", term:"36 mo",
-    annualizedYield:"14.75%", frequency:"Monthly", couponProtection:"35%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Autocallable monthly — redeemed early if trigger hit", couponProtection:"Coupon barrier at 35% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-28", calendarStart:"2026-05-01", protection:35, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"MQUSLVA", term:"36 mo",
-    annualizedYield:"14.75%", frequency:"Monthly", couponProtection:"35%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Autocallable monthly — redeemed early if trigger hit", couponProtection:"Coupon barrier at 35% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-28", calendarStart:"2026-05-01", protection:35, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Morgan Stanley", underlying:"NDXT, SPX", term:"15 mo",
-    annualizedYield:"10.75%", frequency:"Quarterly", couponProtection:"25%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons quarterly — paid only if index above coupon barrier", couponProtection:"Coupon barrier at 25% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:25, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Morgan Stanley", underlying:"DJI, XLE", term:"18 mo",
-    annualizedYield:"11.25%", frequency:"Quarterly", couponProtection:"25%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Contingent coupons quarterly — paid only if index above coupon barrier", couponProtection:"Coupon barrier at 25% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:25, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"RUT, SPX", term:"18 mo",
-    annualizedYield:"9.00%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Issuer callable monthly after non-call period", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Bank of America", underlying:"NDX, RUT, SPX", term:"18 mo",
-    annualizedYield:"10.50%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"3 mo",
-    tooltips:{ frequency:"Issuer callable monthly after non-call period", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 3 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Morgan Stanley", underlying:"DJI, KRE", term:"21 mo",
-    annualizedYield:"11.00%", frequency:"Quarterly w/ Memory", couponProtection:"30%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Memory coupon: missed coupons accumulate and are paid when barrier is met again", couponProtection:"Coupon barrier at 30% below initial level — memory recovers missed payments", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"DJI, NDXT, RUT", term:"23 mo",
-    annualizedYield:"8.10%", frequency:"Monthly", couponProtection:"40%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Autocallable monthly — redeemed early if trigger hit", couponProtection:"Coupon barrier at 40% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:40, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"NDX, RUT, SPX", term:"23 mo",
-    annualizedYield:"10.40%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"5 mo",
-    tooltips:{ frequency:"Issuer callable monthly after non-call period", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 5 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"24 mo",
-    annualizedYield:"12.00%", frequency:"Monthly", couponProtection:"25%", nonCallPeriod:"3 mo",
-    tooltips:{ frequency:"Issuer callable monthly after non-call period", couponProtection:"Coupon barrier at 25% below initial level", nonCallPeriod:"Non-callable for first 3 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"NDXT, RUT, SPX", term:"24 mo",
-    annualizedYield:"10.60%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Autocallable monthly", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"DJI, SMH", term:"24 mo",
-    annualizedYield:"13.50%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"12 mo",
-    tooltips:{ frequency:"Autocallable monthly", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 12 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDXT, RUT, SPX", term:"36 mo",
-    annualizedYield:"12.00%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"3 mo",
-    tooltips:{ frequency:"Issuer callable monthly after non-call period", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 3 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDX, XLE", term:"36 mo",
-    annualizedYield:"13.00%", frequency:"Monthly", couponProtection:"20%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Autocallable quarterly", couponProtection:"Coupon barrier at 20% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"36 mo",
-    annualizedYield:"13.25%", frequency:"Monthly", couponProtection:"20%", nonCallPeriod:"3 mo",
-    tooltips:{ frequency:"Issuer callable monthly after non-call period", couponProtection:"Coupon barrier at 20% below initial level", nonCallPeriod:"Non-callable for first 3 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"DJI, SPX, XLE", term:"36 mo",
-    annualizedYield:"10.25%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Autocallable quarterly", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"36 mo",
-    annualizedYield:"10.25%", frequency:"Monthly", couponProtection:"25%", nonCallPeriod:"12 mo",
-    tooltips:{ frequency:"Autocallable monthly", couponProtection:"Coupon barrier at 25% below initial level", nonCallPeriod:"Non-callable for first 12 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"36 mo",
-    annualizedYield:"11.00%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"3 mo",
-    tooltips:{ frequency:"Issuer callable monthly after non-call period", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 3 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"GDX, NDXT, SPX", term:"36 mo",
-    annualizedYield:"13.80%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Autocallable monthly", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:50, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"NDXT, RUT, SPX", term:"36 mo",
-    annualizedYield:"10.10%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Autocallable monthly", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Bank of America", underlying:"NDX, RUT, SPX", term:"36 mo",
-    annualizedYield:"10.00%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Issuer callable monthly", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"DJI, RUT, SPX", term:"36 mo",
-    annualizedYield:"8.75%", frequency:"Monthly", couponProtection:"25%", nonCallPeriod:"12 mo",
-    tooltips:{ frequency:"Autocallable monthly", couponProtection:"Coupon barrier at 25% below initial level", nonCallPeriod:"Non-callable for first 12 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:25, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Bank of America", underlying:"NDXT, RUT, SPX", term:"36 mo",
-    annualizedYield:"11.00%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Issuer callable monthly", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"BMO", underlying:"NDXT, RUT, SPX", term:"48 mo",
-    annualizedYield:"8.50%", frequency:"Monthly", couponProtection:"40%", nonCallPeriod:"12 mo",
-    tooltips:{ frequency:"Autocallable monthly", couponProtection:"Coupon barrier at 40% below initial level", nonCallPeriod:"Non-callable for first 12 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:40, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"BXIIUT4E", term:"60 mo",
-    annualizedYield:"14.00%", frequency:"Monthly w/ Memory", couponProtection:"30%", nonCallPeriod:"12 mo",
-    tooltips:{ frequency:"Memory coupon: missed payments accumulate and are paid when barrier is met again", couponProtection:"Coupon barrier at 30% below initial level — memory feature applies", nonCallPeriod:"Non-callable for first 12 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:15, protectionType:"Hard", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"60 mo",
-    annualizedYield:"11.25%", frequency:"Monthly", couponProtection:"25%", nonCallPeriod:"3 mo",
-    tooltips:{ frequency:"Issuer callable monthly", couponProtection:"Coupon barrier at 25% below initial level", nonCallPeriod:"Non-callable for first 3 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"60 mo",
-    annualizedYield:"11.00%", frequency:"Monthly", couponProtection:"25%", nonCallPeriod:"3 mo",
-    tooltips:{ frequency:"Issuer callable monthly", couponProtection:"Coupon barrier at 25% below initial level", nonCallPeriod:"Non-callable for first 3 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:40, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Barclays", underlying:"NDX, RUT, SPX", term:"60 mo",
-    annualizedYield:"10.50%", frequency:"Monthly", couponProtection:"30%", nonCallPeriod:"3 mo",
-    tooltips:{ frequency:"Issuer callable monthly", couponProtection:"Coupon barrier at 30% below initial level", nonCallPeriod:"Non-callable for first 3 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Income", issuer:"Bank of America", underlying:"NDX, RUT, SPX", term:"60 mo",
-    annualizedYield:"10.00%", frequency:"Monthly", couponProtection:"25%", nonCallPeriod:"6 mo",
-    tooltips:{ frequency:"Issuer callable monthly", couponProtection:"Coupon barrier at 25% below initial level", nonCallPeriod:"Non-callable for first 6 months" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:40, protectionType:"Soft", price:"$100.00"
-  },
-
-  // ════════════════════════════════
-  // MLCD
-  // ════════════════════════════════
-  { type:"MLCD", issuer:"Morgan Stanley", underlying:"BAUSE5X", term:"48 mo", participation:"375.5%", maxReturn:"Uncapped", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-
-  // ════════════════════════════════
-  // PPN
-  // ════════════════════════════════
-  { type:"PPN", issuer:"BMO", underlying:"RUT, SPX", term:"24 mo", participation:"100%", maxReturn:"14.50%", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"PPN", issuer:"BMO", underlying:"EFA, SX5E", term:"36 mo", participation:"100%", maxReturn:"45.00%", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"PPN", issuer:"RBC", underlying:"SPMKTD", term:"36 mo", participation:"105%", maxReturn:"Uncapped", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"PPN", issuer:"Morgan Stanley", underlying:"SX5E", term:"48 mo", participation:"107.75%", maxReturn:"Uncapped", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"PPN", issuer:"Bank of America", underlying:"SPXFP", term:"60 mo", participation:"128%", maxReturn:"Uncapped", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"PPN", issuer:"Barclays", underlying:"DJI, SPX", term:"60 mo", participation:"100%", maxReturn:"59.00%", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"PPN", issuer:"Morgan Stanley", underlying:"SX5E", term:"60 mo", participation:"123%", maxReturn:"Uncapped", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"PPN", issuer:"BMO", underlying:"SPXFP", term:"60 mo", participation:"136%", maxReturn:"Uncapped", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-  { type:"PPN", issuer:"Morgan Stanley", underlying:"SPXFP", term:"60 mo", participation:"130.5%", maxReturn:"Uncapped", protection:100, protectionType:"Full", closeDate:"2026-05-29", calendarStart:"2026-05-01", price:"$100.00" },
-
-  // ════════════════════════════════
-  // SNOWBALL
-  // ════════════════════════════════
-  {
-    type:"Snowball", issuer:"Barclays", underlying:"DJI, NDXT, RUT", term:"36 mo",
-    annualizedYield:"16.00%", frequency:"Quarterly w/ Memory", couponProtection:"None", nonCallPeriod:"12 mo",
-    tooltips:{ frequency:"Memory coupon paid quarterly — accumulated missed payments paid when index recovers above barrier", couponProtection:"No separate coupon protection — coupons tied directly to index performance", nonCallPeriod:"Autocallable quarterly after 12-month non-call period" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Snowball", issuer:"BBVA", underlying:"NDX, RUT, SPX", term:"60 mo",
-    annualizedYield:"11.00%", frequency:"Annually w/ Memory", couponProtection:"None", nonCallPeriod:"12 mo",
-    tooltips:{ frequency:"Memory coupon paid annually — accumulated missed payments paid when index recovers above barrier", couponProtection:"No separate coupon protection — autocall at 90% of initial", nonCallPeriod:"Autocallable annually at 90% of initial after 12-month non-call period" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  },
-  {
-    type:"Snowball", issuer:"Barclays", underlying:"DJI, NDX, RUT", term:"60 mo",
-    annualizedYield:"13.75%", frequency:"Annually w/ Memory", couponProtection:"None", nonCallPeriod:"12 mo",
-    tooltips:{ frequency:"Memory coupon paid annually — accumulated missed payments paid when index recovers above barrier", couponProtection:"No separate coupon protection — coupons accumulate until trigger", nonCallPeriod:"Autocallable annually after 12-month non-call period" },
-    closeDate:"2026-05-29", calendarStart:"2026-05-01", protection:30, protectionType:"Soft", price:"$100.00"
-  }
-
-];
-// ─────────────────────────────────────────────────────────────
-// END OF DATA SECTION
 // ─────────────────────────────────────────────────────────────
 
 const TYPE_STYLES = {
@@ -653,21 +300,26 @@ function barColor(type, protType) {
   return TYPE_STYLES[type]?.bar || "#888";
 }
 
-function termMonths(t) { const m = t.match(/(\d+)/); return m ? parseInt(m[1]) : 0; }
+function termMonths(t) {
+  const m = String(t).match(/(\d+)/);
+  return m ? parseInt(m[1]) : 0;
+}
 
 function closingProgress(calendarStart, closeDate) {
-  const now = Date.now();
+  if (!calendarStart || !closeDate) return { pct:0, daysLeft:0, daysTotal:0, daysElapsed:0 };
+  const now   = Date.now();
   const start = new Date(calendarStart + "T00:00:00").getTime();
-  const end   = new Date(closeDate + "T10:00:00").getTime();
+  const end   = new Date(closeDate    + "T10:00:00").getTime();
   const daysTotal = Math.max(1, Math.round((end - start) / 86400000));
   if (now >= end) return { pct:100, daysLeft:0, daysTotal, daysElapsed:daysTotal };
   if (now <= start) return { pct:0, daysLeft:daysTotal, daysTotal, daysElapsed:0 };
-  const pct = Math.min(99, Math.round(((now - start) / (end - start)) * 100));
+  const pct      = Math.min(99, Math.round(((now - start) / (end - start)) * 100));
   const daysLeft = Math.max(1, Math.round((end - now) / 86400000));
   return { pct, daysLeft, daysTotal, daysElapsed: daysTotal - daysLeft };
 }
 
 function fmtClose(dateStr) {
+  if (!dateStr) return "—";
   return new Date(dateStr + "T12:00:00").toLocaleDateString("en-US", { month:"short", day:"numeric", year:"numeric" });
 }
 
@@ -678,17 +330,22 @@ function infoIcon(tip) {
 }
 
 function metric(label, value, accent, tip) {
+  if (!value) return "";
   return `<div class="metric"><div class="metric-label">${label}${infoIcon(tip)}</div><div class="metric-value${accent?" accent":""}">${value}</div></div>`;
 }
 
 function metricsFor(n) {
-  const tt = n.tooltips || {};
   switch(n.type) {
     case "Growth":
-      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"—")}</div>`;
+      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"Uncapped")}</div>`;
     case "Income":
     case "Snowball":
-      return `<div class="card-metrics metrics-grid-2">${metric("Annualized yield",n.annualizedYield,true)}${metric("Frequency",n.frequency,false,tt.frequency)}${metric("Coupon protection",n.couponProtection,false,tt.couponProtection)}${metric("Non-call period",n.nonCallPeriod,false,tt.nonCallPeriod)}</div>`;
+      return `<div class="card-metrics metrics-grid-2">
+        ${metric("Annualized yield",n.annualizedYield,true)}
+        ${metric("Frequency",n.frequency,false,"Coupon frequency and autocall schedule")}
+        ${metric("Coupon protection",n.couponProtection,false,"Minimum index level for coupon to be paid")}
+        ${metric("Non-call period",n.nonCallPeriod,false,"Note cannot be called by issuer during this window")}
+      </div>`;
     case "Absolute":
       if (n.upsideParticipation) {
         return `<div class="card-metrics metrics-grid-2">${metric("Upside participation",n.upsideParticipation,true)}${metric("Downside participation",n.downsideParticipation)}</div>`;
@@ -702,23 +359,25 @@ function metricsFor(n) {
       return `<div class="card-metrics metrics-grid-2">${metric("Digital return",n.digitalReturn,true)}${metric("Coupon protection",n.couponProtection)}</div>`;
     case "Digital Plus":
       return `<div class="card-metrics metrics-grid-2">${metric("Digital return",n.digitalReturn,true)}${metric("Participation plus",n.participation)}${metric("Coupon protection",n.couponProtection)}</div>`;
-    case "PPN":
-    case "MLCD":
+    case "PPN": case "MLCD":
       return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"Uncapped")}</div>`;
-    default: return "";
+    default:
+      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"—")}</div>`;
   }
 }
 
 function renderCard(n) {
-  const s = TYPE_STYLES[n.type] || {};
-  const bColor = barColor(n.type, n.protectionType);
-  const protPct = Math.min(n.protection, 100);
-  const protLabel = n.protection === 100 ? "Full principal protection" : `${n.protection}% ${n.protectionType} protection`;
+  const s = TYPE_STYLES[n.type] || { badgeBg:"var(--surface2)", badgeText:"var(--text2)", bar:"var(--text3)" };
+  const bColor   = barColor(n.type, n.protectionType);
+  const protPct  = Math.min(n.protection, 100);
+  const protLabel= n.protection === 100 ? "Full principal protection" : `${n.protection}% ${n.protectionType} protection`;
   const { pct:cpct, daysLeft, daysTotal, daysElapsed } = closingProgress(n.calendarStart, n.closeDate);
-  const urgency = daysLeft === 0 ? "#888" : daysLeft <= 3 ? "#c0392b" : daysLeft <= 7 ? "#e8830a" : "#4a5568";
-  const daysLeftLabel = daysLeft === 0 ? "Closed" : `${daysLeft} day${daysLeft!==1?"s":""} left`;
+  const urgency  = daysLeft === 0 ? "#888" : daysLeft <= 3 ? "#c0392b" : daysLeft <= 7 ? "#e8830a" : "#4a5568";
+  const daysLeftLabel = daysLeft === 0 ? "Closes today" : `${daysLeft} day${daysLeft!==1?"s":""} left`;
+  const isFeatured = n.status === "Featured";
 
-  return `<div class="card" data-type="${n.type}" data-issuer="${n.issuer}">
+  return `<div class="card${isFeatured?" is-featured":""}">
+    ${isFeatured ? `<div class="featured-ribbon">Featured</div>` : ""}
     <div class="card-top">
       <div class="card-header-row">
         <div class="badges">
@@ -756,79 +415,124 @@ function renderCard(n) {
   </div>`;
 }
 
+// ── State ──
+let ALL_NOTES     = [];
 let currentFilter = "all";
 let currentIssuer = "all";
-let currentSort   = "close-asc";
+let currentSort   = "featured-first";
 
 function sortNotes(arr, key) {
   const c = [...arr];
   switch(key) {
-    case "close-asc":  return c.sort((a,b)=> new Date(a.closeDate)-new Date(b.closeDate));
-    case "close-desc": return c.sort((a,b)=> new Date(b.closeDate)-new Date(a.closeDate));
-    case "term-asc":   return c.sort((a,b)=> termMonths(a.term)-termMonths(b.term));
-    case "term-desc":  return c.sort((a,b)=> termMonths(b.term)-termMonths(a.term));
-    case "prot-desc":  return c.sort((a,b)=> b.protection-a.protection);
-    case "prot-asc":   return c.sort((a,b)=> a.protection-b.protection);
+    case "featured-first": return c.sort((a,b) => (b.status==="Featured")-(a.status==="Featured"));
+    case "close-asc":      return c.sort((a,b) => new Date(a.closeDate)-new Date(b.closeDate));
+    case "close-desc":     return c.sort((a,b) => new Date(b.closeDate)-new Date(a.closeDate));
+    case "term-asc":       return c.sort((a,b) => termMonths(a.term)-termMonths(b.term));
+    case "term-desc":      return c.sort((a,b) => termMonths(b.term)-termMonths(a.term));
+    case "prot-desc":      return c.sort((a,b) => b.protection-a.protection);
+    case "prot-asc":       return c.sort((a,b) => a.protection-b.protection);
     default: return c;
   }
 }
 
-function buildIssuerFilters() {
-  const issuers = [...new Set(NOTES.map(n=>n.issuer))].sort();
+function buildIssuerFilters(notes) {
   const container = document.getElementById("issuer-filters");
+  const existing  = [...container.querySelectorAll(".issuer-pill")].map(b=>b.dataset.issuer);
+  const issuers   = [...new Set(notes.map(n=>n.issuer))].filter(Boolean).sort();
   issuers.forEach(iss => {
+    if (existing.includes(iss)) return;
     const btn = document.createElement("button");
-    btn.className = "issuer-pill";
+    btn.className    = "issuer-pill";
     btn.dataset.issuer = iss;
-    btn.textContent = iss;
+    btn.textContent  = iss;
     container.appendChild(btn);
   });
 }
 
 function updateStats(list) {
-  document.getElementById("stat-total").textContent = list.length;
+  document.getElementById("stat-total").textContent   = list.length;
   document.getElementById("stat-issuers").textContent = new Set(list.map(n=>n.issuer)).size;
-  document.getElementById("stat-types").textContent = new Set(list.map(n=>n.type)).size;
+  document.getElementById("stat-types").textContent   = new Set(list.map(n=>n.type)).size;
 }
 
 function render() {
-  let list = NOTES.filter(n => {
-    const typeOk   = currentFilter === "all" || n.type === currentFilter;
+  let list = ALL_NOTES.filter(n => {
+    const typeOk   = currentFilter === "all"      ? true
+                   : currentFilter === "featured"  ? n.status === "Featured"
+                   : n.type === currentFilter;
     const issuerOk = currentIssuer === "all" || n.issuer === currentIssuer;
     return typeOk && issuerOk;
   });
   list = sortNotes(list, currentSort);
+
   const grid = document.getElementById("grid");
   grid.innerHTML = list.length === 0
     ? `<div class="empty">No notes match your current filters.</div>`
     : list.map(renderCard).join("");
+
   document.getElementById("count-badge").textContent = `${list.length} note${list.length!==1?"s":""}`;
   updateStats(list);
 }
 
-document.getElementById("type-filters").addEventListener("click", e=>{
+async function loadNotes() {
+  document.getElementById("loading-wrap").style.display = "flex";
+  document.getElementById("controls").style.display     = "none";
+  document.getElementById("grid").innerHTML              = "";
+
+  try {
+    const res  = await fetch(WORKER_URL);
+    if (!res.ok) throw new Error(`Worker returned ${res.status}`);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    ALL_NOTES = data.notes || [];
+
+    // Set header date range
+    const dates = ALL_NOTES.map(n=>n.closeDate).filter(Boolean).sort();
+    if (dates.length) {
+      const latest = fmtClose(dates[dates.length-1]);
+      document.getElementById("header-date").textContent = `Closes ${latest}`;
+    }
+
+    buildIssuerFilters(ALL_NOTES);
+    document.getElementById("loading-wrap").style.display = "none";
+    document.getElementById("controls").style.display     = "block";
+    render();
+
+  } catch (err) {
+    document.getElementById("loading-wrap").style.display = "none";
+    document.getElementById("grid").innerHTML = `
+      <div class="error-wrap">
+        <p>⚠ Could not load offerings: ${err.message}</p>
+        <button class="retry-btn" onclick="loadNotes()">Try again</button>
+      </div>`;
+  }
+}
+
+// ── Event listeners ──
+document.getElementById("type-filters").addEventListener("click", e => {
   if (!e.target.classList.contains("pill")) return;
-  document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
   e.target.classList.add("active");
   currentFilter = e.target.dataset.filter;
   render();
 });
 
-document.getElementById("issuer-filters").addEventListener("click", e=>{
+document.getElementById("issuer-filters").addEventListener("click", e => {
   if (!e.target.classList.contains("issuer-pill")) return;
-  document.querySelectorAll(".issuer-pill").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".issuer-pill").forEach(p => p.classList.remove("active"));
   e.target.classList.add("active");
   currentIssuer = e.target.dataset.issuer;
   render();
 });
 
-document.getElementById("sort-select").addEventListener("change", e=>{
+document.getElementById("sort-select").addEventListener("change", e => {
   currentSort = e.target.value;
   render();
 });
 
-buildIssuerFilters();
-render();
+// ── Boot ──
+loadNotes();
 </script>
 </body>
 </html>
