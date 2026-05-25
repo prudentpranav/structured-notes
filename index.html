@@ -6,191 +6,319 @@
 <title>Structured Notes Calendar — Prudent Prosperity</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy:    #091930;
-    --gold:    #d0b689;
-    --gold-lt: #e8d5af;
-    --gold-dk: #b09060;
-    --white:   #ffffff;
-    --bg:      #f4f2ee;
-    --surface: #ffffff;
-    --surface2:#ede9e1;
-    --border:  #ddd8cc;
-    --border2: #c8c2b0;
-    --text:    #091930;
-    --text2:   #4a5568;
-    --text3:   #8a8880;
-    --mono: 'DM Mono', monospace;
-    --sans: 'DM Sans', sans-serif;
-    --growth-bg:#e8f4fb;   --growth-text:#1a4f7a;   --growth-bar:#3a8fd4;
-    --income-bg:#eaf5ec;   --income-text:#1a5c2a;   --income-bar:#2e9e50;
-    --absolute-bg:#f0ecfb; --absolute-text:#3d2080; --absolute-bar:#7c52d4;
-    --catapult-bg:#fff4e6; --catapult-text:#7a3d00; --catapult-bar:#e8830a;
-    --premium-bg:#fdeef4;  --premium-text:#7a1a3c;  --premium-bar:#d4426e;
-    --digital-bg:#e6f8f4;  --digital-text:#0d5c4a;  --digital-bar:#1aaa8a;
-    --digitalp-bg:#dff5f0; --digitalp-text:#085041; --digitalp-bar:#0e8a70;
-    --ppn-bg:#f0f0ec;      --ppn-text:#3a3830;      --ppn-bar:#888070;
-    --mlcd-bg:#fdf0e8;     --mlcd-text:#7a3010;     --mlcd-bar:#d45a1a;
-    --snowball-bg:#f0f4ff; --snowball-text:#1a2e7a;  --snowball-bar:#4a6ed4;
-  }
+:root {
+  --navy:     #091930;
+  --navy-lt:  #0f2647;
+  --gold:     #d0b689;
+  --gold-lt:  #e8d5af;
+  --gold-dk:  #b09060;
+  --white:    #ffffff;
+  --bg:       #f2f0ec;
+  --surface:  #ffffff;
+  --surface2: #eeebe4;
+  --border:   #e0dbd0;
+  --border2:  #c8c2b0;
+  --text:     #091930;
+  --text2:    #3d4a5c;
+  --text3:    #8a8880;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+  --radius: 10px;
 
-  body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  /* Type colors */
+  --growth-bg:#e8f4fb;   --growth-text:#1a4f7a;   --growth-bar:#3a8fd4;   --growth-accent:#3a8fd4;
+  --income-bg:#eaf5ec;   --income-text:#1a5c2a;   --income-bar:#2e9e50;   --income-accent:#2e9e50;
+  --absolute-bg:#f0ecfb; --absolute-text:#3d2080; --absolute-bar:#7c52d4; --absolute-accent:#7c52d4;
+  --catapult-bg:#fff4e6; --catapult-text:#7a3d00; --catapult-bar:#e8830a; --catapult-accent:#e8830a;
+  --premium-bg:#fdeef4;  --premium-text:#7a1a3c;  --premium-bar:#d4426e;  --premium-accent:#d4426e;
+  --digital-bg:#e6f8f4;  --digital-text:#0d5c4a;  --digital-bar:#1aaa8a;  --digital-accent:#1aaa8a;
+  --digitalp-bg:#dff5f0; --digitalp-text:#085041; --digitalp-bar:#0e8a70; --digitalp-accent:#0e8a70;
+  --ppn-bg:#f0f0ec;      --ppn-text:#3a3830;      --ppn-bar:#888070;      --ppn-accent:#888070;
+  --mlcd-bg:#fdf0e8;     --mlcd-text:#7a3010;     --mlcd-bar:#d45a1a;     --mlcd-accent:#d45a1a;
+  --snowball-bg:#f0f4ff; --snowball-text:#1a2e7a;  --snowball-bar:#4a6ed4; --snowball-accent:#4a6ed4;
+}
 
-  /* ── HEADER ── */
-  .site-header {
-    background: var(--navy); padding: 0 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 68px; position: sticky; top: 0; z-index: 100;
-    border-bottom: 2px solid var(--gold);
-  }
-  .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-mark { width: 36px; height: 36px; border-radius: 8px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: var(--navy); }
-  .logo-text { font-size: 15px; font-weight: 600; color: var(--white); letter-spacing: -0.01em; line-height: 1.3; }
-  .logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--gold-lt); letter-spacing: 0.04em; }
-  .header-right { font-size: 11px; color: var(--gold-lt); font-family: var(--mono); text-align: right; line-height: 1.7; }
+body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
-  /* ── PAGE ── */
-  .page { max-width: 1320px; margin: 0 auto; padding: 2rem; }
+/* ─── HEADER ─── */
+.site-header {
+  background: var(--navy);
+  border-bottom: 2px solid var(--gold);
+  padding: 0 2.5rem;
+  height: 66px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 200;
+}
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-mark {
+  width: 34px; height: 34px; border-radius: 7px;
+  background: var(--gold); display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; flex-shrink: 0;
+}
+.logo-text { line-height: 1.25; }
+.logo-name { font-size: 14px; font-weight: 600; color: var(--white); letter-spacing: -0.01em; display: block; }
+.logo-sub  { font-size: 11px; font-weight: 400; color: var(--gold-lt); letter-spacing: 0.04em; display: block; }
+.header-right { font-size: 11px; color: var(--gold-lt); font-family: var(--mono); text-align: right; line-height: 1.8; }
 
-  /* ── HERO ── */
-  .hero {
-    background: var(--navy); color: var(--white); border-radius: 14px;
-    padding: 2rem 2.5rem; margin-bottom: 2rem;
-    display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
-    border: 1px solid rgba(208,182,137,0.25);
-  }
-  .hero h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 4px; }
-  .hero p  { font-size: 13px; color: var(--gold-lt); line-height: 1.6; }
-  .hero-stats { display: flex; gap: 2rem; flex-shrink: 0; }
-  .stat { text-align: center; }
-  .stat-num { font-size: 26px; font-weight: 600; color: var(--gold); font-family: var(--mono); line-height: 1; }
-  .stat-label { font-size: 11px; color: var(--gold-lt); margin-top: 3px; letter-spacing: 0.03em; }
+/* ─── PAGE ─── */
+.page { max-width: 1400px; margin: 0 auto; padding: 2rem 2.5rem; }
 
-  /* ── TOOLBAR ── */
-  .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 0.85rem; }
-  .toolbar-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); white-space: nowrap; }
-  .filters { display: flex; flex-wrap: wrap; gap: 6px; }
-  .pill {
-    font-size: 12px; font-weight: 500; font-family: var(--sans);
-    padding: 5px 13px; border-radius: 99px;
-    border: 1px solid var(--border2); background: var(--surface); color: var(--text2);
-    cursor: pointer; transition: all 0.15s; white-space: nowrap;
-  }
-  .pill:hover { border-color: var(--gold-dk); color: var(--navy); }
-  .pill.active { background: var(--navy); color: var(--gold); border-color: var(--navy); }
-  .pill.featured-pill.active { background: var(--gold); color: var(--navy); border-color: var(--gold-dk); }
+/* ─── HERO ─── */
+.hero {
+  background: var(--navy);
+  border: 1px solid rgba(208,182,137,0.2);
+  border-radius: 12px;
+  padding: 1.75rem 2.25rem;
+  margin-bottom: 1.75rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.hero-left h1 { font-size: 20px; font-weight: 600; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px; }
+.hero-left p  { font-size: 12px; color: var(--gold-lt); line-height: 1.6; }
+.hero-stats   { display: flex; gap: 2.5rem; flex-shrink: 0; }
+.stat { text-align: center; }
+.stat-num   { font-size: 28px; font-weight: 600; color: var(--gold); font-family: var(--mono); line-height: 1; }
+.stat-label { font-size: 10px; color: var(--gold-lt); margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
 
-  /* ── ISSUER FILTER ── */
-  .issuer-filters { display: flex; flex-wrap: wrap; gap: 6px; }
-  .issuer-pill {
-    font-size: 11px; font-weight: 500; font-family: var(--mono);
-    padding: 4px 10px; border-radius: 6px;
-    border: 1px solid var(--border2); background: var(--surface); color: var(--text3);
-    cursor: pointer; transition: all 0.15s; white-space: nowrap;
-  }
-  .issuer-pill:hover { border-color: var(--gold-dk); color: var(--navy); }
-  .issuer-pill.active { background: var(--gold); color: var(--navy); border-color: var(--gold-dk); font-weight: 600; }
+/* ─── CONTROLS ─── */
+.controls { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
 
-  /* ── SORT ROW ── */
-  .sort-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1.75rem; flex-wrap: wrap; }
-  .sort-select {
-    font-size: 12px; font-weight: 500; font-family: var(--sans);
-    padding: 5px 28px 5px 12px; border-radius: 8px; border: 1px solid var(--border2);
-    background: var(--surface); color: var(--text2); cursor: pointer;
-    appearance: none; -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239b998f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 10px center;
-  }
-  .sort-select:focus { outline: none; border-color: var(--gold-dk); }
-  .count-badge { margin-left: auto; font-size: 12px; color: var(--text3); font-family: var(--mono); white-space: nowrap; }
+.control-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.control-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text3); width: 44px; flex-shrink: 0;
+}
 
-  /* ── GRID ── */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; }
+/* Pills */
+.pill-group { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
+.pill {
+  font-size: 11px; font-weight: 500; font-family: var(--sans);
+  padding: 4px 12px; border-radius: 99px;
+  border: 1px solid var(--border2); background: var(--surface); color: var(--text2);
+  cursor: pointer; transition: all 0.14s; white-space: nowrap; line-height: 1.5;
+}
+.pill:hover { border-color: var(--gold-dk); color: var(--navy); }
+.pill.active { background: var(--navy); color: var(--gold); border-color: var(--navy); }
+.pill.featured-pill.active { background: var(--gold); color: var(--navy); border-color: var(--gold-dk); }
 
-  /* ── CARD ── */
-  .card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-    display: flex; flex-direction: column; overflow: visible;
-    transition: box-shadow 0.2s, transform 0.2s; position: relative;
-  }
-  .card:hover { box-shadow: 0 6px 24px rgba(9,25,48,0.10); transform: translateY(-2px); }
-  .card.is-featured { border-color: var(--gold); border-width: 1.5px; }
+/* Issuer pills */
+.issuer-pill {
+  font-size: 10px; font-weight: 500; font-family: var(--mono);
+  padding: 3px 9px; border-radius: 5px;
+  border: 1px solid var(--border2); background: var(--surface); color: var(--text3);
+  cursor: pointer; transition: all 0.14s; white-space: nowrap;
+}
+.issuer-pill:hover { border-color: var(--gold-dk); color: var(--navy); }
+.issuer-pill.active { background: var(--gold); color: var(--navy); border-color: var(--gold-dk); font-weight: 600; }
 
-  /* ── FEATURED RIBBON ── */
-  .featured-ribbon {
-    position: absolute; top: -1px; right: 18px;
-    background: var(--gold); color: var(--navy);
-    font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-    padding: 3px 10px; border-radius: 0 0 7px 7px;
-    font-family: var(--sans);
-  }
+/* Sort + count row */
+.sort-count-row { display: flex; align-items: center; gap: 10px; padding-top: 4px; }
+.sort-select {
+  font-size: 11px; font-weight: 500; font-family: var(--sans); color: var(--text2);
+  padding: 5px 26px 5px 10px; border-radius: 7px; border: 1px solid var(--border2);
+  background: var(--surface); cursor: pointer; appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='5' viewBox='0 0 9 5'%3E%3Cpath d='M1 1l3.5 3L8 1' stroke='%239b998f' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 9px center;
+}
+.sort-select:focus { outline: none; border-color: var(--gold-dk); }
+.count-badge { margin-left: auto; font-size: 11px; color: var(--text3); font-family: var(--mono); }
 
-  .card-top { padding: 1rem 1.2rem 0.85rem; border-bottom: 1px solid var(--border); border-radius: 12px 12px 0 0; overflow: hidden; }
-  .card-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 6px; }
-  .badges { display: flex; gap: 5px; flex-wrap: wrap; }
-  .type-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
-  .issuer-badge { font-size: 10px; font-weight: 500; font-family: var(--mono); padding: 3px 8px; border-radius: 6px; background: var(--surface2); color: var(--text3); white-space: nowrap; }
-  .term-chip { font-size: 11px; font-family: var(--mono); color: var(--text3); background: var(--surface2); padding: 3px 9px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
-  .underlying { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 2px; line-height: 1.3; color: var(--navy); }
-  .issuer-line { font-size: 12px; color: var(--text3); }
+/* ─── CARD LIST ─── */
+.card-list { display: flex; flex-direction: column; gap: 10px; }
 
-  /* ── METRICS ── */
-  .card-metrics { padding: 0.85rem 1.2rem; display: grid; gap: 8px; border-bottom: 1px solid var(--border); }
-  .metrics-grid-2 { grid-template-columns: 1fr 1fr; }
-  .metric { background: var(--surface2); border-radius: 8px; padding: 8px 10px; }
-  .metric-label { font-size: 10px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text3); margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
-  .metric-value { font-size: 15px; font-weight: 600; color: var(--navy); line-height: 1.2; }
-  .metric-value.accent { font-size: 17px; }
+/* ─── HORIZONTAL CARD ─── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex; align-items: stretch;
+  overflow: visible;
+  position: relative;
+  transition: box-shadow 0.18s, transform 0.18s;
+  border-left-width: 3px;
+}
+.card:hover {
+  box-shadow: 0 4px 22px rgba(9,25,48,0.09);
+  transform: translateY(-1px);
+}
+.card.is-featured {
+  border-color: var(--gold);
+  border-left-width: 3px;
+  box-shadow: 0 0 0 0 transparent;
+}
+.card.is-featured:hover {
+  box-shadow: 0 4px 22px rgba(208,182,137,0.25);
+}
 
-  /* ── TOOLTIP ── */
-  .info-wrap { position: relative; display: inline-flex; }
-  .info-icon { display: inline-flex; align-items: center; justify-content: center; width: 13px; height: 13px; border-radius: 50%; background: var(--gold-lt); color: var(--navy); font-size: 9px; font-weight: 700; cursor: default; flex-shrink: 0; font-style: normal; font-family: var(--sans); }
-  .info-wrap:hover .tooltip { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-  .tooltip { position: absolute; bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%) translateY(4px); background: var(--navy); color: var(--white); font-size: 10px; line-height: 1.55; padding: 7px 11px; border-radius: 7px; min-width: 190px; max-width: 250px; white-space: normal; pointer-events: none; opacity: 0; transition: opacity 0.15s, transform 0.15s; z-index: 300; font-weight: 400; text-transform: none; font-family: var(--sans); box-shadow: 0 4px 16px rgba(9,25,48,0.25); border: 1px solid rgba(208,182,137,0.3); }
-  .tooltip::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:4px solid transparent; border-top-color:var(--navy); }
+/* ── FEATURED RIBBON ── */
+.featured-ribbon {
+  position: absolute; top: -1px; left: 48px;
+  background: var(--gold); color: var(--navy);
+  font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 2px 9px; border-radius: 0 0 6px 6px;
+  font-family: var(--sans); line-height: 1.6;
+}
 
-  /* ── BARS ── */
-  .card-protection, .card-closing { padding: 0.75rem 1.2rem; border-bottom: 1px solid var(--border); }
-  .bar-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .bar-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text3); }
-  .bar-value { font-size: 12px; font-weight: 600; font-family: var(--mono); }
-  .bar-track { height: 5px; background: var(--surface2); border-radius: 99px; overflow: hidden; margin-bottom: 4px; }
-  .bar-fill  { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
-  .bar-sub   { font-size: 10px; color: var(--text3); font-family: var(--mono); }
-  .closing-sub { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); font-family: var(--mono); margin-top: 4px; }
+/* ── SECTION: IDENTITY ── */
+.card-identity {
+  padding: 1.1rem 1.4rem 1.1rem 1.25rem;
+  width: 250px; flex-shrink: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  border-right: 1px solid var(--border);
+}
+.identity-badges { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.type-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 99px; white-space: nowrap;
+}
+.issuer-badge {
+  font-size: 9px; font-weight: 500; font-family: var(--mono);
+  padding: 2px 7px; border-radius: 4px;
+  background: var(--surface2); color: var(--text3); white-space: nowrap;
+}
+.card-underlying {
+  font-size: 15px; font-weight: 600; color: var(--navy);
+  letter-spacing: -0.01em; line-height: 1.25;
+}
+.card-meta { font-size: 11px; color: var(--text3); font-family: var(--mono); }
 
-  /* ── CTA ── */
-  .card-footer { padding: 0.9rem 1.2rem; border-radius: 0 0 12px 12px; overflow: hidden; }
-  .cta-btn { display: block; width: 100%; text-align: center; padding: 9px 16px; border-radius: 8px; background: var(--navy); color: var(--gold); font-size: 13px; font-weight: 600; font-family: var(--sans); text-decoration: none; letter-spacing: 0.01em; border: 1px solid var(--navy); transition: background 0.15s, color 0.15s, border-color 0.15s; }
-  .cta-btn:hover { background: var(--gold); color: var(--navy); border-color: var(--gold-dk); }
+/* ── SECTION: METRICS ── */
+.card-metrics {
+  flex: 1;
+  padding: 1.1rem 1.25rem;
+  display: flex; align-items: center; gap: 8px;
+  border-right: 1px solid var(--border);
+  min-width: 0;
+}
+.metric {
+  background: var(--surface2);
+  border-radius: 7px;
+  padding: 7px 11px;
+  flex: 1; min-width: 80px;
+}
+.metric-label {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 3px;
+  display: flex; align-items: center; gap: 3px;
+}
+.metric-value { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.2; }
+.metric-value.accent { font-size: 16px; }
 
-  /* ── LOADING STATE ── */
-  .loading-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5rem 2rem; gap: 1rem; }
-  .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-text { font-size: 13px; color: var(--text3); font-family: var(--mono); }
+/* tooltip */
+.info-wrap { position: relative; display: inline-flex; }
+.info-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--gold-lt); color: var(--navy);
+  font-size: 8px; font-weight: 700; cursor: default; flex-shrink: 0;
+  font-style: normal; font-family: var(--sans);
+}
+.info-wrap:hover .tooltip { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.tooltip {
+  position: absolute; bottom: calc(100% + 7px); left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--navy); color: var(--white);
+  font-size: 10px; line-height: 1.55; padding: 7px 11px; border-radius: 7px;
+  min-width: 180px; max-width: 240px; white-space: normal;
+  pointer-events: none; opacity: 0; transition: opacity 0.14s, transform 0.14s;
+  z-index: 400; font-weight: 400; text-transform: none; font-family: var(--sans);
+  box-shadow: 0 4px 16px rgba(9,25,48,0.22); border: 1px solid rgba(208,182,137,0.25);
+}
+.tooltip::after {
+  content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 4px solid transparent; border-top-color: var(--navy);
+}
 
-  /* ── ERROR STATE ── */
-  .error-wrap { grid-column: 1/-1; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 10px; padding: 2rem; text-align: center; }
-  .error-wrap p { font-size: 13px; color: #c53030; margin-bottom: 8px; }
-  .retry-btn { font-size: 12px; padding: 6px 16px; border-radius: 8px; border: 1px solid #c53030; background: transparent; color: #c53030; cursor: pointer; font-family: var(--sans); }
-  .retry-btn:hover { background: #c53030; color: white; }
+/* ── SECTION: BARS ── */
+.card-bars {
+  width: 280px; flex-shrink: 0;
+  padding: 1.1rem 1.25rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 10px;
+  border-right: 1px solid var(--border);
+}
+.bar-block { display: flex; flex-direction: column; gap: 4px; }
+.bar-header { display: flex; justify-content: space-between; align-items: center; }
+.bar-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); }
+.bar-value { font-size: 11px; font-weight: 600; font-family: var(--mono); }
+.bar-track { height: 4px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+.bar-fill  { height: 100%; border-radius: 99px; transition: width 0.5s ease; }
+.bar-sub   { font-size: 9px; color: var(--text3); font-family: var(--mono); display: flex; justify-content: space-between; }
 
-  /* ── EMPTY STATE ── */
-  .empty { grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--text3); font-size: 14px; }
+/* ── SECTION: CTA ── */
+.card-cta {
+  width: 150px; flex-shrink: 0;
+  padding: 1.1rem 1.25rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+}
+.cta-btn {
+  display: block; width: 100%; text-align: center;
+  padding: 9px 12px; border-radius: 8px;
+  background: var(--navy); color: var(--gold);
+  font-size: 11px; font-weight: 600; font-family: var(--sans);
+  text-decoration: none; letter-spacing: 0.01em;
+  border: 1px solid var(--navy);
+  transition: background 0.14s, color 0.14s, border-color 0.14s;
+  line-height: 1.4;
+}
+.cta-btn:hover { background: var(--gold); color: var(--navy); border-color: var(--gold-dk); }
 
-  /* ── DISCLOSURE ── */
-  .disclosure { margin-top: 3rem; padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; }
-  .disclosure p { font-size: 11px; line-height: 1.7; color: var(--text3); }
-  .disclosure strong { color: var(--text2); font-weight: 500; }
+/* ─── LOADING ─── */
+.loading-wrap {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 5rem 2rem; gap: 14px;
+}
+.spinner {
+  width: 34px; height: 34px; border: 3px solid var(--border);
+  border-top-color: var(--gold); border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-size: 12px; color: var(--text3); font-family: var(--mono); }
 
-  @media (max-width: 640px) {
-    .page { padding: 1rem; } .site-header { padding: 0 1rem; }
-    .grid { grid-template-columns: 1fr; } .count-badge { display: none; }
-    .hero { flex-direction: column; } .hero-stats { justify-content: center; }
-  }
+/* ─── ERROR ─── */
+.error-wrap {
+  background: #fff5f5; border: 1px solid #fed7d7; border-radius: 10px;
+  padding: 2rem; text-align: center; margin-top: 1rem;
+}
+.error-wrap p { font-size: 13px; color: #c53030; margin-bottom: 10px; }
+.retry-btn {
+  font-size: 12px; padding: 6px 16px; border-radius: 7px;
+  border: 1px solid #c53030; background: transparent; color: #c53030;
+  cursor: pointer; font-family: var(--sans);
+}
+.retry-btn:hover { background: #c53030; color: white; }
+
+/* ─── EMPTY ─── */
+.empty {
+  text-align: center; padding: 4rem 2rem; color: var(--text3);
+  font-size: 13px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ─── DISCLOSURE ─── */
+.disclosure {
+  margin-top: 2.5rem; padding: 1.25rem 1.5rem;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+}
+.disclosure p { font-size: 10.5px; line-height: 1.75; color: var(--text3); }
+.disclosure strong { color: var(--text2); font-weight: 500; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .page { padding: 1rem; }
+  .site-header { padding: 0 1rem; }
+  .card { flex-direction: column; border-left-width: 1px; border-top-width: 3px; }
+  .card-identity, .card-metrics, .card-bars { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .card-cta { width: 100%; padding: 1rem 1.25rem; }
+  .hero { flex-direction: column; gap: 1.25rem; }
+  .hero-stats { justify-content: center; gap: 2rem; }
+  .count-badge { display: none; }
+}
+@media (max-width: 600px) {
+  .card-metrics { flex-wrap: wrap; }
+  .metric { min-width: calc(50% - 4px); flex: unset; }
+}
 </style>
 </head>
 <body>
@@ -198,17 +326,23 @@
 <header class="site-header">
   <div class="logo">
     <div class="logo-mark">PP</div>
-    <div class="logo-text">Prudent Prosperity<span>Structured Notes Calendar</span></div>
+    <div class="logo-text">
+      <span class="logo-name">Prudent Prosperity</span>
+      <span class="logo-sub">Structured Notes Calendar</span>
+    </div>
   </div>
-  <div class="header-right">For Institutional Use Only<br><span id="header-date">Loading...</span></div>
+  <div class="header-right">
+    For Institutional Use Only<br>
+    <span id="header-date">Loading…</span>
+  </div>
 </header>
 
 <main class="page">
 
   <div class="hero">
-    <div>
+    <div class="hero-left">
       <h1>Structured Notes Calendar</h1>
-      <p>Live offerings · Multi-issuer · Review prospectus before investing</p>
+      <p>Live multi-issuer offerings · Review prospectus before investing · $1,000 increments</p>
     </div>
     <div class="hero-stats">
       <div class="stat"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Notes</div></div>
@@ -217,57 +351,48 @@
     </div>
   </div>
 
-  <!-- Controls (hidden until data loads) -->
-  <div id="controls" style="display:none;">
-    <div class="toolbar">
-      <span class="toolbar-label">Type</span>
-      <div class="filters" id="type-filters">
+  <div id="controls" class="controls" style="display:none;">
+
+    <div class="control-row">
+      <span class="control-label">Type</span>
+      <div class="pill-group" id="type-filters">
         <button class="pill active" data-filter="all">All</button>
         <button class="pill featured-pill" data-filter="featured">⭐ Featured</button>
-        <button class="pill" data-filter="Growth">Growth</button>
-        <button class="pill" data-filter="Income">Income</button>
-        <button class="pill" data-filter="Absolute">Absolute</button>
-        <button class="pill" data-filter="Catapult">Catapult</button>
-        <button class="pill" data-filter="Call Premium">Call Premium</button>
-        <button class="pill" data-filter="Digital">Digital</button>
-        <button class="pill" data-filter="Digital Plus">Digital Plus</button>
-        <button class="pill" data-filter="Snowball">Snowball</button>
-        <button class="pill" data-filter="PPN">PPN</button>
-        <button class="pill" data-filter="MLCD">MLCD</button>
       </div>
     </div>
 
-    <div class="toolbar" style="margin-bottom:0.75rem;">
-      <span class="toolbar-label">Issuer</span>
-      <div class="issuer-filters" id="issuer-filters">
+    <div class="control-row">
+      <span class="control-label">Issuer</span>
+      <div class="pill-group" id="issuer-filters">
         <button class="issuer-pill active" data-issuer="all">All</button>
       </div>
     </div>
 
-    <div class="sort-row">
-      <span class="toolbar-label">Sort</span>
+    <div class="sort-count-row">
+      <span class="control-label">Sort</span>
       <select class="sort-select" id="sort-select">
         <option value="featured-first">Featured first</option>
-        <option value="close-asc">Close date — soonest first</option>
-        <option value="close-desc">Close date — latest first</option>
-        <option value="term-asc">Term — shortest first</option>
-        <option value="term-desc">Term — longest first</option>
-        <option value="prot-desc">Protection — highest first</option>
-        <option value="prot-asc">Protection — lowest first</option>
+        <option value="close-asc">Close date — soonest</option>
+        <option value="close-desc">Close date — latest</option>
+        <option value="term-asc">Term — shortest</option>
+        <option value="term-desc">Term — longest</option>
+        <option value="prot-desc">Protection — highest</option>
+        <option value="prot-asc">Protection — lowest</option>
+        <option value="yield-desc">Yield — highest</option>
       </select>
       <span class="count-badge" id="count-badge"></span>
     </div>
+
   </div>
 
-  <!-- Loading spinner -->
   <div id="loading-wrap" class="loading-wrap">
     <div class="spinner"></div>
-    <div class="loading-text">Loading live offerings from Airtable...</div>
+    <div class="loading-text">Fetching live offerings…</div>
   </div>
 
-  <div class="grid" id="grid"></div>
+  <div class="card-list" id="card-list"></div>
 
-  <div class="disclosure" style="margin-top:2rem;">
+  <div class="disclosure">
     <p><strong>For Institutional Use Only.</strong> This material is provided for informational and educational purposes only and does not constitute an offer to sell or a solicitation to buy any security. Structured notes involve significant risks including potential loss of principal, credit risk of the issuer, illiquidity, and payoff complexity. Soft protection is a barrier; hard protection is a buffer. All payments are subject to the credit risk of the issuing institution. Please review the applicable prospectus carefully before investing. Past performance is not indicative of future results. Nothing herein should be considered investment advice. Securities offered through Halo Securities LLC, a SEC registered broker/dealer and member of FINRA/SIPC.</p>
   </div>
 
@@ -275,25 +400,30 @@
 
 <script>
 // ─────────────────────────────────────────────────────────────
-// CONFIGURATION — only change these two lines
+// CONFIGURATION
 // ─────────────────────────────────────────────────────────────
 const WORKER_URL    = "https://structured-notes-api.pranav-a05.workers.dev";
 const CALENDLY_LINK = "https://calendly.com/prudentprosperity/30min";
-// ─────────────────────────────────────────────────────────────
 
+// ─────────────────────────────────────────────────────────────
+// TYPE STYLE MAP
+// ─────────────────────────────────────────────────────────────
 const TYPE_STYLES = {
-  "Growth":       { badgeBg:"var(--growth-bg)",   badgeText:"var(--growth-text)",   bar:"var(--growth-bar)" },
-  "Income":       { badgeBg:"var(--income-bg)",   badgeText:"var(--income-text)",   bar:"var(--income-bar)" },
-  "Absolute":     { badgeBg:"var(--absolute-bg)", badgeText:"var(--absolute-text)", bar:"var(--absolute-bar)" },
-  "Catapult":     { badgeBg:"var(--catapult-bg)", badgeText:"var(--catapult-text)", bar:"var(--catapult-bar)" },
-  "Call Premium": { badgeBg:"var(--premium-bg)",  badgeText:"var(--premium-text)",  bar:"var(--premium-bar)" },
-  "Digital":      { badgeBg:"var(--digital-bg)",  badgeText:"var(--digital-text)",  bar:"var(--digital-bar)" },
-  "Digital Plus": { badgeBg:"var(--digitalp-bg)", badgeText:"var(--digitalp-text)", bar:"var(--digitalp-bar)" },
-  "PPN":          { badgeBg:"var(--ppn-bg)",      badgeText:"var(--ppn-text)",      bar:"var(--ppn-bar)" },
-  "MLCD":         { badgeBg:"var(--mlcd-bg)",     badgeText:"var(--mlcd-text)",     bar:"var(--mlcd-bar)" },
-  "Snowball":     { badgeBg:"var(--snowball-bg)",  badgeText:"var(--snowball-text)", bar:"var(--snowball-bar)" },
+  "Growth":       { bg:"var(--growth-bg)",   text:"var(--growth-text)",   bar:"var(--growth-bar)",   accent:"var(--growth-accent)"   },
+  "Income":       { bg:"var(--income-bg)",   text:"var(--income-text)",   bar:"var(--income-bar)",   accent:"var(--income-accent)"   },
+  "Absolute":     { bg:"var(--absolute-bg)", text:"var(--absolute-text)", bar:"var(--absolute-bar)", accent:"var(--absolute-accent)" },
+  "Catapult":     { bg:"var(--catapult-bg)", text:"var(--catapult-text)", bar:"var(--catapult-bar)", accent:"var(--catapult-accent)" },
+  "Call Premium": { bg:"var(--premium-bg)",  text:"var(--premium-text)",  bar:"var(--premium-bar)",  accent:"var(--premium-accent)"  },
+  "Digital":      { bg:"var(--digital-bg)",  text:"var(--digital-text)",  bar:"var(--digital-bar)",  accent:"var(--digital-accent)"  },
+  "Digital Plus": { bg:"var(--digitalp-bg)", text:"var(--digitalp-text)", bar:"var(--digitalp-bar)", accent:"var(--digitalp-accent)" },
+  "PPN":          { bg:"var(--ppn-bg)",      text:"var(--ppn-text)",      bar:"var(--ppn-bar)",      accent:"var(--ppn-accent)"      },
+  "MLCD":         { bg:"var(--mlcd-bg)",     text:"var(--mlcd-text)",     bar:"var(--mlcd-bar)",     accent:"var(--mlcd-accent)"     },
+  "Snowball":     { bg:"var(--snowball-bg)",  text:"var(--snowball-text)", bar:"var(--snowball-bar)", accent:"var(--snowball-accent)"  },
 };
 
+// ─────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────
 function barColor(type, protType) {
   if (protType === "Full") return "#2aaa6a";
   if (protType === "Hard") return "#4a9fd4";
@@ -301,15 +431,15 @@ function barColor(type, protType) {
 }
 
 function termMonths(t) {
-  const m = String(t).match(/(\d+)/);
+  const m = String(t || "").match(/(\d+)/);
   return m ? parseInt(m[1]) : 0;
 }
 
-function closingProgress(calendarStart, closeDate) {
-  if (!calendarStart || !closeDate) return { pct:0, daysLeft:0, daysTotal:0, daysElapsed:0 };
+function closingProgress(calStart, closeDate) {
+  if (!calStart || !closeDate) return { pct:0, daysLeft:0, daysTotal:0, daysElapsed:0 };
   const now   = Date.now();
-  const start = new Date(calendarStart + "T00:00:00").getTime();
-  const end   = new Date(closeDate    + "T10:00:00").getTime();
+  const start = new Date(calStart   + "T00:00:00").getTime();
+  const end   = new Date(closeDate  + "T10:00:00").getTime();
   const daysTotal = Math.max(1, Math.round((end - start) / 86400000));
   if (now >= end) return { pct:100, daysLeft:0, daysTotal, daysElapsed:daysTotal };
   if (now <= start) return { pct:0, daysLeft:daysTotal, daysTotal, daysElapsed:0 };
@@ -318,104 +448,154 @@ function closingProgress(calendarStart, closeDate) {
   return { pct, daysLeft, daysTotal, daysElapsed: daysTotal - daysLeft };
 }
 
-function fmtClose(dateStr) {
-  if (!dateStr) return "—";
-  return new Date(dateStr + "T12:00:00").toLocaleDateString("en-US", { month:"short", day:"numeric", year:"numeric" });
+function fmtDate(d) {
+  if (!d) return "—";
+  return new Date(d + "T12:00:00").toLocaleDateString("en-US", { month:"short", day:"numeric", year:"numeric" });
+}
+
+function esc(s) {
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
 function infoIcon(tip) {
   if (!tip) return "";
-  const safe = tip.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-  return `<span class="info-wrap"><span class="info-icon">i</span><span class="tooltip">${safe}</span></span>`;
+  return `<span class="info-wrap"><span class="info-icon">i</span><span class="tooltip">${esc(tip)}</span></span>`;
 }
 
-function metric(label, value, accent, tip) {
+function m(label, value, accent, tip) {
   if (!value) return "";
-  return `<div class="metric"><div class="metric-label">${label}${infoIcon(tip)}</div><div class="metric-value${accent?" accent":""}">${value}</div></div>`;
+  return `<div class="metric">
+    <div class="metric-label">${label}${infoIcon(tip)}</div>
+    <div class="metric-value${accent?" accent":""}">${value}</div>
+  </div>`;
 }
 
+// ─────────────────────────────────────────────────────────────
+// METRICS PER TYPE
+// ─────────────────────────────────────────────────────────────
 function metricsFor(n) {
-  switch(n.type) {
+  switch (n.type) {
     case "Growth":
-      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"Uncapped")}</div>`;
+      return m("Participation", n.participation, true)
+           + m("Max Return", n.maxReturn || "Uncapped");
+
     case "Income":
     case "Snowball":
-      return `<div class="card-metrics metrics-grid-2">
-        ${metric("Annualized yield",n.annualizedYield,true)}
-        ${metric("Frequency",n.frequency,false,"Coupon frequency and autocall schedule")}
-        ${metric("Coupon protection",n.couponProtection,false,"Minimum index level for coupon to be paid")}
-        ${metric("Non-call period",n.nonCallPeriod,false,"Note cannot be called by issuer during this window")}
-      </div>`;
+      return m("Annualized Yield", n.annualizedYield, true)
+           + m("Frequency", n.frequency, false, "Coupon frequency and autocall schedule")
+           + m("Coupon Protection", n.couponProtection, false, "Minimum index level required for coupon to be paid")
+           + m("Non-Call Period", n.nonCallPeriod, false, "Note cannot be called by issuer during this window");
+
     case "Absolute":
-      if (n.upsideParticipation) {
-        return `<div class="card-metrics metrics-grid-2">${metric("Upside participation",n.upsideParticipation,true)}${metric("Downside participation",n.downsideParticipation)}</div>`;
-      }
-      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"—")}</div>`;
+      return n.upsideParticipation
+        ? m("Upside Participation", n.upsideParticipation, true)
+        + m("Downside Participation", n.downsideParticipation)
+        : m("Participation", n.participation, true)
+        + m("Max Return", n.maxReturn || "—");
+
     case "Catapult":
-      return `<div class="card-metrics metrics-grid-2">${metric("Call premium",n.callPremium,true)}${metric("Upside participation",n.upsideParticipation)}${metric("First call date",n.firstCallDate)}</div>`;
+      return m("Call Premium", n.callPremium, true)
+           + m("Upside Participation", n.upsideParticipation)
+           + m("First Call Date", n.firstCallDate);
+
     case "Call Premium":
-      return `<div class="card-metrics metrics-grid-2">${metric("Call premium",n.callPremium,true)}${metric("Upside participation",n.upsideParticipation)}${metric("Autocall",n.autocall)}${metric("Non-call period",n.nonCallPeriod)}</div>`;
+      return m("Call Premium", n.callPremium, true)
+           + m("Upside Participation", n.upsideParticipation)
+           + m("Autocall", n.autocall)
+           + m("Non-Call Period", n.nonCallPeriod);
+
     case "Digital":
-      return `<div class="card-metrics metrics-grid-2">${metric("Digital return",n.digitalReturn,true)}${metric("Coupon protection",n.couponProtection)}</div>`;
+      return m("Digital Return", n.digitalReturn, true)
+           + m("Coupon Protection", n.couponProtection);
+
     case "Digital Plus":
-      return `<div class="card-metrics metrics-grid-2">${metric("Digital return",n.digitalReturn,true)}${metric("Participation plus",n.participation)}${metric("Coupon protection",n.couponProtection)}</div>`;
-    case "PPN": case "MLCD":
-      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"Uncapped")}</div>`;
+      return m("Digital Return", n.digitalReturn, true)
+           + m("Participation Plus", n.participation)
+           + m("Coupon Protection", n.couponProtection);
+
+    case "PPN":
+    case "MLCD":
+      return m("Participation", n.participation, true)
+           + m("Max Return", n.maxReturn || "Uncapped");
+
     default:
-      return `<div class="card-metrics metrics-grid-2">${metric("Participation",n.participation,true)}${metric("Max return",n.maxReturn||"—")}</div>`;
+      return m("Participation", n.participation, true)
+           + m("Max Return", n.maxReturn || "—");
   }
 }
 
+// ─────────────────────────────────────────────────────────────
+// RENDER CARD (horizontal)
+// ─────────────────────────────────────────────────────────────
 function renderCard(n) {
-  const s = TYPE_STYLES[n.type] || { badgeBg:"var(--surface2)", badgeText:"var(--text2)", bar:"var(--text3)" };
-  const bColor   = barColor(n.type, n.protectionType);
-  const protPct  = Math.min(n.protection, 100);
-  const protLabel= n.protection === 100 ? "Full principal protection" : `${n.protection}% ${n.protectionType} protection`;
+  const s          = TYPE_STYLES[n.type] || { bg:"var(--surface2)", text:"var(--text2)", bar:"#888", accent:"#888" };
+  const bColor     = barColor(n.type, n.protectionType);
+  const protPct    = Math.min(n.protection, 100);
+  const protLabel  = n.protection === 100 ? "Full protection" : `${n.protection}% ${n.protectionType}`;
   const { pct:cpct, daysLeft, daysTotal, daysElapsed } = closingProgress(n.calendarStart, n.closeDate);
-  const urgency  = daysLeft === 0 ? "#888" : daysLeft <= 3 ? "#c0392b" : daysLeft <= 7 ? "#e8830a" : "#4a5568";
-  const daysLeftLabel = daysLeft === 0 ? "Closes today" : `${daysLeft} day${daysLeft!==1?"s":""} left`;
+  const urgency    = daysLeft === 0 ? "#aaa" : daysLeft <= 3 ? "#c0392b" : daysLeft <= 7 ? "#e8830a" : "var(--text3)";
+  const daysLabel  = daysLeft === 0 ? "Closes today" : `${daysLeft} day${daysLeft!==1?"s":""} left`;
   const isFeatured = n.status === "Featured";
 
-  return `<div class="card${isFeatured?" is-featured":""}">
+  return `
+  <div class="card${isFeatured?" is-featured":""}" style="border-left-color:${s.accent};">
     ${isFeatured ? `<div class="featured-ribbon">Featured</div>` : ""}
-    <div class="card-top">
-      <div class="card-header-row">
-        <div class="badges">
-          <span class="type-badge" style="background:${s.badgeBg};color:${s.badgeText};">${n.type}</span>
-          <span class="issuer-badge">${n.issuer}</span>
+
+    <!-- IDENTITY -->
+    <div class="card-identity">
+      <div class="identity-badges">
+        <span class="type-badge" style="background:${s.bg};color:${s.text};">${n.type}</span>
+        <span class="issuer-badge">${n.issuer}</span>
+      </div>
+      <div class="card-underlying">${n.underlying}</div>
+      <div class="card-meta">${n.term} &nbsp;·&nbsp; Closes ${fmtDate(n.closeDate)}</div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="card-metrics">
+      ${metricsFor(n)}
+    </div>
+
+    <!-- BARS -->
+    <div class="card-bars">
+      <div class="bar-block">
+        <div class="bar-header">
+          <span class="bar-label">Principal Protection</span>
+          <span class="bar-value" style="color:${bColor}">${n.protection}%</span>
         </div>
-        <span class="term-chip">${n.term}</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${protPct}%;background:${bColor};"></div>
+        </div>
+        <div class="bar-sub"><span>${protLabel}</span></div>
       </div>
-      <div class="underlying">${n.underlying}</div>
-      <div class="issuer-line">Closes ${fmtClose(n.closeDate)}</div>
-    </div>
-    ${metricsFor(n)}
-    <div class="card-protection">
-      <div class="bar-label-row">
-        <span class="bar-label">Principal protection</span>
-        <span class="bar-value" style="color:${bColor}">${n.protection}%</span>
-      </div>
-      <div class="bar-track"><div class="bar-fill" style="width:${protPct}%;background:${bColor};"></div></div>
-      <div class="bar-sub">${protLabel}</div>
-    </div>
-    <div class="card-closing">
-      <div class="bar-label-row">
-        <span class="bar-label">Closing window</span>
-        <span class="bar-value" style="color:${urgency}">${daysLeftLabel}</span>
-      </div>
-      <div class="bar-track"><div class="bar-fill" style="width:${cpct}%;background:${urgency};"></div></div>
-      <div class="closing-sub">
-        <span>Day ${daysElapsed} of ${daysTotal}</span>
-        <span>Closes ${fmtClose(n.closeDate)}</span>
+
+      <div class="bar-block">
+        <div class="bar-header">
+          <span class="bar-label">Closing Window</span>
+          <span class="bar-value" style="color:${urgency}">${daysLabel}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${cpct}%;background:${urgency};"></div>
+        </div>
+        <div class="bar-sub">
+          <span>Day ${daysElapsed} of ${daysTotal}</span>
+          <span>${fmtDate(n.closeDate)}</span>
+        </div>
       </div>
     </div>
-    <div class="card-footer">
-      <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to an Advisor →</a>
+
+    <!-- CTA -->
+    <div class="card-cta">
+      <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">
+        Speak to an<br>Advisor →
+      </a>
     </div>
   </div>`;
 }
 
-// ── State ──
+// ─────────────────────────────────────────────────────────────
+// STATE & RENDER
+// ─────────────────────────────────────────────────────────────
 let ALL_NOTES     = [];
 let currentFilter = "all";
 let currentIssuer = "all";
@@ -423,7 +603,7 @@ let currentSort   = "featured-first";
 
 function sortNotes(arr, key) {
   const c = [...arr];
-  switch(key) {
+  switch (key) {
     case "featured-first": return c.sort((a,b) => (b.status==="Featured")-(a.status==="Featured"));
     case "close-asc":      return c.sort((a,b) => new Date(a.closeDate)-new Date(b.closeDate));
     case "close-desc":     return c.sort((a,b) => new Date(b.closeDate)-new Date(a.closeDate));
@@ -431,20 +611,35 @@ function sortNotes(arr, key) {
     case "term-desc":      return c.sort((a,b) => termMonths(b.term)-termMonths(a.term));
     case "prot-desc":      return c.sort((a,b) => b.protection-a.protection);
     case "prot-asc":       return c.sort((a,b) => a.protection-b.protection);
+    case "yield-desc":     return c.sort((a,b) => parseFloat(b.annualizedYield||0)-parseFloat(a.annualizedYield||0));
     default: return c;
   }
 }
 
+function buildTypeFilters(notes) {
+  const types     = [...new Set(notes.map(n=>n.type))].filter(Boolean).sort();
+  const container = document.getElementById("type-filters");
+  // Remove all except All + Featured
+  [...container.querySelectorAll(".pill:not([data-filter='all']):not([data-filter='featured'])")].forEach(p=>p.remove());
+  types.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className      = "pill";
+    btn.dataset.filter = t;
+    btn.textContent    = t;
+    container.appendChild(btn);
+  });
+}
+
 function buildIssuerFilters(notes) {
+  const issuers   = [...new Set(notes.map(n=>n.issuer))].filter(Boolean).sort();
   const container = document.getElementById("issuer-filters");
   const existing  = [...container.querySelectorAll(".issuer-pill")].map(b=>b.dataset.issuer);
-  const issuers   = [...new Set(notes.map(n=>n.issuer))].filter(Boolean).sort();
   issuers.forEach(iss => {
     if (existing.includes(iss)) return;
     const btn = document.createElement("button");
-    btn.className    = "issuer-pill";
-    btn.dataset.issuer = iss;
-    btn.textContent  = iss;
+    btn.className       = "issuer-pill";
+    btn.dataset.issuer  = iss;
+    btn.textContent     = iss;
     container.appendChild(btn);
   });
 }
@@ -457,16 +652,16 @@ function updateStats(list) {
 
 function render() {
   let list = ALL_NOTES.filter(n => {
-    const typeOk   = currentFilter === "all"      ? true
-                   : currentFilter === "featured"  ? n.status === "Featured"
+    const typeOk   = currentFilter === "all"     ? true
+                   : currentFilter === "featured" ? n.status === "Featured"
                    : n.type === currentFilter;
     const issuerOk = currentIssuer === "all" || n.issuer === currentIssuer;
     return typeOk && issuerOk;
   });
   list = sortNotes(list, currentSort);
 
-  const grid = document.getElementById("grid");
-  grid.innerHTML = list.length === 0
+  const el = document.getElementById("card-list");
+  el.innerHTML = list.length === 0
     ? `<div class="empty">No notes match your current filters.</div>`
     : list.map(renderCard).join("");
 
@@ -474,10 +669,13 @@ function render() {
   updateStats(list);
 }
 
+// ─────────────────────────────────────────────────────────────
+// DATA FETCH
+// ─────────────────────────────────────────────────────────────
 async function loadNotes() {
   document.getElementById("loading-wrap").style.display = "flex";
   document.getElementById("controls").style.display     = "none";
-  document.getElementById("grid").innerHTML              = "";
+  document.getElementById("card-list").innerHTML        = "";
 
   try {
     const res  = await fetch(WORKER_URL);
@@ -487,21 +685,22 @@ async function loadNotes() {
 
     ALL_NOTES = data.notes || [];
 
-    // Set header date range
+    // Header date
     const dates = ALL_NOTES.map(n=>n.closeDate).filter(Boolean).sort();
     if (dates.length) {
-      const latest = fmtClose(dates[dates.length-1]);
-      document.getElementById("header-date").textContent = `Closes ${latest}`;
+      document.getElementById("header-date").textContent = `Closes ${fmtDate(dates[dates.length-1])}`;
     }
 
+    buildTypeFilters(ALL_NOTES);
     buildIssuerFilters(ALL_NOTES);
+
     document.getElementById("loading-wrap").style.display = "none";
-    document.getElementById("controls").style.display     = "block";
+    document.getElementById("controls").style.display     = "flex";
     render();
 
   } catch (err) {
     document.getElementById("loading-wrap").style.display = "none";
-    document.getElementById("grid").innerHTML = `
+    document.getElementById("card-list").innerHTML = `
       <div class="error-wrap">
         <p>⚠ Could not load offerings: ${err.message}</p>
         <button class="retry-btn" onclick="loadNotes()">Try again</button>
@@ -509,7 +708,9 @@ async function loadNotes() {
   }
 }
 
-// ── Event listeners ──
+// ─────────────────────────────────────────────────────────────
+// EVENTS
+// ─────────────────────────────────────────────────────────────
 document.getElementById("type-filters").addEventListener("click", e => {
   if (!e.target.classList.contains("pill")) return;
   document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
@@ -531,7 +732,9 @@ document.getElementById("sort-select").addEventListener("change", e => {
   render();
 });
 
-// ── Boot ──
+// ─────────────────────────────────────────────────────────────
+// BOOT
+// ─────────────────────────────────────────────────────────────
 loadNotes();
 </script>
 </body>
