@@ -564,18 +564,14 @@ function renderListCard(n) {
         ${secondaryMetrics(n)}
       </div>
       <div class="card-list-bars">${barsHTML(n)}</div>
-      <div class="card-list-cta">
-        <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
-        <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
-  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
-  </svg>
-</button>
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
-          </svg>
-        </button>
-      </div>
+     <div class="card-list-cta">
+    <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
+    <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
+      </svg>
+    </button>
+    </div>
     </div>
   </div>`;
 }
