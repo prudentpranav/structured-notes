@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Structured Notes — Investor Guide | Prudent Prosperity</title>
+<meta name="description" content="A plain-language guide to structured notes for first-time investors. Learn about note types, protection mechanics, risks, and how returns work."/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#091930;--gold:#d0b689;--gold-lt:#e8d5af;--gold-dk:#b09060;
+  --white:#ffffff;--bg:#f2f0ec;--surface:#ffffff;--surface2:#eeebe4;
+  --border:#e0dbd0;--border2:#c9c2ae;--text:#091930;--text2:#374151;--text3:#8a8880;
+  --sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;--r:10px;
+  --sidebar:240px;
+  /* type palette */
+  --growth-bg:#e8f4fb;--growth-text:#1a4f7a;--growth-border:#b8d8f0;
+  --income-bg:#eaf5ec;--income-text:#1a5c2a;--income-border:#b8e8c4;
+  --absolute-bg:#f0ecfb;--absolute-text:#3d2080;--absolute-border:#d4c8f0;
+  --catapult-bg:#fff4e6;--catapult-text:#7a3d00;--catapult-border:#fdd9a0;
+  --premium-bg:#fdeef4;--premium-text:#7a1a3c;--premium-border:#f5c0d4;
+  --digital-bg:#e6f8f4;--digital-text:#0d5c4a;--digital-border:#b8e8df;
+  --ppn-bg:#f0f0ec;--ppn-text:#3a3830;--ppn-border:#d0cdc4;
+  --mlcd-bg:#fdf0e8;--mlcd-text:#7a3010;--mlcd-border:#f5d0b8;
+  --snowball-bg:#f0f4ff;--snowball-text:#1a2e7a;--snowball-border:#c4d0f0;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;}
+
+/* ── HEADER ── */
+.site-header{background:var(--navy);border-bottom:2px solid var(--gold);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:32px;height:32px;border-radius:7px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--navy);}
+.logo-name{font-size:14px;font-weight:600;color:var(--white);display:block;}
+.logo-sub{font-size:10px;color:var(--gold-lt);letter-spacing:.05em;display:block;}
+.header-actions{display:flex;gap:8px;align-items:center;}
+.btn-ghost{font-size:11px;font-weight:500;color:var(--gold-lt);text-decoration:none;padding:5px 12px;border-radius:6px;border:1px solid rgba(208,182,137,.3);transition:all .14s;}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold);}
+.btn-gold{font-size:11px;font-weight:600;color:var(--navy);background:var(--gold);padding:5px 14px;border-radius:6px;text-decoration:none;transition:background .14s;}
+.btn-gold:hover{background:var(--gold-lt);}
+
+/* ── HERO ── */
+.hero{background:var(--navy);border-bottom:1px solid rgba(208,182,137,.2);padding:2.5rem 2rem;text-align:center;}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.hero h1{font-size:28px;font-weight:600;color:var(--white);letter-spacing:-.02em;line-height:1.2;margin-bottom:10px;}
+.hero p{font-size:13px;color:var(--gold-lt);max-width:540px;margin:0 auto 1.5rem;line-height:1.7;}
+.search-wrap{max-width:480px;margin:0 auto;position:relative;}
+.search-input{width:100%;padding:10px 16px 10px 38px;border-radius:8px;border:1px solid rgba(208,182,137,.3);background:rgba(255,255,255,.08);color:var(--white);font-size:13px;font-family:var(--sans);outline:none;transition:border-color .14s;}
+.search-input::placeholder{color:rgba(232,213,175,.5);}
+.search-input:focus{border-color:var(--gold);}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gold-lt);pointer-events:none;}
+.search-count{font-size:11px;color:var(--gold-lt);margin-top:8px;min-height:16px;font-family:var(--mono);}
+
+/* ── LAYOUT ── */
+.layout{display:flex;align-items:flex-start;max-width:1200px;margin:0 auto;padding:2rem;}
+.sidebar{width:var(--sidebar);flex-shrink:0;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:1rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px;}
+.main{flex:1;min-width:0;}
+
+/* ── SIDEBAR NAV ── */
+.sidebar-nav{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 0;overflow:hidden;}
+.sidebar-label{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);padding:8px 14px 4px;}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 14px;font-size:12px;font-weight:500;color:var(--text2);text-decoration:none;cursor:pointer;transition:all .13s;border-left:2px solid transparent;}
+.nav-item:hover{color:var(--navy);background:var(--surface2);}
+.nav-item.active{color:var(--navy);background:var(--surface2);border-left-color:var(--gold);font-weight:600;}
+.nav-icon{font-size:13px;flex-shrink:0;}
+.nav-divider{height:1px;background:var(--border);margin:6px 0;}
+.progress-wrap{padding:10px 14px 4px;}
+.progress-bar{height:3px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:4px;}
+.progress-fill{height:100%;background:var(--gold);border-radius:99px;transition:width .3s;}
+.progress-label{font-size:9px;color:var(--text3);font-family:var(--mono);}
+
+/* ── SECTIONS ── */
+.faq-section{margin-bottom:2.5rem;scroll-margin-top:90px;}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;padding-bottom:10px;border-bottom:2px solid var(--gold);}
+.section-icon{width:34px;height:34px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.section-title{font-size:17px;font-weight:600;color:var(--navy);letter-spacing:-.01em;}
+.section-sub{font-size:11px;color:var(--text3);margin-top:1px;}
+
+/* ── TYPE CARDS GRID ── */
+.type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:10px;margin-bottom:1.5rem;}
+.type-card{border-radius:var(--r);padding:14px;border:1px solid;cursor:default;transition:transform .14s,box-shadow .14s;}
+.type-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(9,25,48,.08);}
+.type-card-name{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;}
+.type-card-desc{font-size:11px;line-height:1.5;margin-bottom:10px;opacity:.85;}
+.type-card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
+.type-tag{font-size:9px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:rgba(0,0,0,.07);}
+.type-card-for{font-size:10px;font-weight:500;opacity:.7;border-top:1px solid rgba(0,0,0,.08);padding-top:8px;margin-top:2px;}
+.type-card-for span{font-weight:700;}
+/* mini protection bar */
+.mini-prot{margin-bottom:4px;}
+.mini-prot-label{font-size:9px;opacity:.6;margin-bottom:2px;}
+.mini-prot-bar{height:3px;border-radius:99px;background:rgba(0,0,0,.08);overflow:hidden;}
+.mini-prot-fill{height:100%;border-radius:99px;background:currentColor;opacity:.5;}
+
+/* ── ACCORDION ── */
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:7px;overflow:hidden;}
+.faq-item.hidden{display:none;}
+.faq-question{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.1rem;cursor:pointer;gap:1rem;user-select:none;transition:background .13s;}
+.faq-question:hover{background:var(--surface2);}
+.faq-q-text{font-size:13px;font-weight:500;color:var(--navy);line-height:1.4;}
+.faq-chevron{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .13s;}
+.faq-chevron svg{width:10px;height:10px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;transition:stroke .13s;}
+.faq-item.open .faq-chevron{transform:rotate(180deg);background:var(--gold);}
+.faq-item.open .faq-chevron svg{stroke:var(--navy);}
+.faq-item.open>.faq-question{background:var(--surface2);}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .28s ease;}
+.faq-body{padding:.25rem 1.1rem 1rem;font-size:12.5px;color:var(--text2);line-height:1.75;}
+.faq-body p{margin-bottom:.75rem;}
+.faq-body p:last-child{margin-bottom:0;}
+.faq-body ul{margin:.5rem 0 .75rem 1rem;}
+.faq-body li{margin-bottom:.4rem;}
+.faq-body strong{color:var(--navy);font-weight:600;}
+
+/* inline example boxes */
+.example{background:var(--surface2);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:10px 12px;margin:.75rem 0;font-size:11.5px;font-family:var(--mono);line-height:1.9;color:var(--text2);}
+.callout{background:#eef6ff;border:1px solid #c4dcf5;border-radius:6px;padding:10px 12px;margin:.75rem 0;font-size:11.5px;color:#1a4f7a;line-height:1.6;}
+.warning{background:#fff8f0;border:1px solid #fdd8a0;border-radius:6px;padding:10px 12px;margin:.75rem 0;font-size:11.5px;color:#7a4400;line-height:1.6;}
+
+/* compare table */
+.compare-table{width:100%;border-collapse:collapse;font-size:11.5px;margin:.75rem 0;}
+.compare-table th{background:var(--navy);color:var(--gold);padding:7px 10px;text-align:left;font-weight:600;font-size:10px;letter-spacing:.04em;}
+.compare-table th:first-child{border-radius:6px 0 0 0;}
+.compare-table th:last-child{border-radius:0 6px 0 0;}
+.compare-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2);}
+.compare-table tr:nth-child(even) td{background:var(--surface2);}
+.compare-table tr:last-child td{border-bottom:none;}
+
+/* ── CTA BANNER ── */
+.cta-banner{background:var(--navy);border-radius:var(--r);padding:1.5rem 2rem;text-align:center;margin-bottom:1.5rem;}
+.cta-banner h3{font-size:16px;font-weight:600;color:var(--white);margin-bottom:6px;}
+.cta-banner p{font-size:12px;color:var(--gold-lt);margin-bottom:1rem;line-height:1.6;}
+.cta-btn{display:inline-block;padding:9px 22px;border-radius:7px;background:var(--gold);color:var(--navy);font-size:12px;font-weight:600;text-decoration:none;transition:background .13s;}
+.cta-btn:hover{background:var(--gold-lt);}
+
+/* ── DISCLOSURE ── */
+.disclosure{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;margin-top:2rem;}
+.disclosure p{font-size:10px;color:var(--text3);line-height:1.75;}
+
+/* ── MOBILE NAV TABS ── */
+.mobile-tabs{display:none;overflow-x:auto;gap:6px;padding:.75rem 1rem;background:var(--surface);border-bottom:1px solid var(--border);}
+.mob-tab{font-size:11px;font-weight:500;white-space:nowrap;padding:5px 12px;border-radius:99px;border:1px solid var(--border2);background:transparent;cursor:pointer;color:var(--text2);transition:all .13s;}
+.mob-tab.active{background:var(--navy);color:var(--gold);border-color:var(--navy);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:780px){
+  .sidebar{display:none;}
+  .mobile-tabs{display:flex;}
+  .layout{padding:1.25rem 1rem;}
+  .hero{padding:1.75rem 1rem;}
+  .hero h1{font-size:22px;}
+  .type-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:480px){
+  .type-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="#">
+    <div class="logo-mark">PP</div>
+    <div><span class="logo-name">Prudent Prosperity</span><span class="logo-sub">Investor Education</span></div>
+  </a>
+  <div class="header-actions">
+    <a class="btn-ghost" href="index.html">← Notes Calendar</a>
+    <a class="btn-gold" href="https://calendly.com/prudentprosperity/30min" target="_blank" rel="noopener">Speak to Advisor</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Investor Education</div>
+  <h1>Understanding Structured Notes</h1>
+  <p>A plain-language guide for first-time investors. No jargon, no assumptions — just clear answers to the questions that matter before you invest.</p>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search-input" type="text" placeholder="Search questions… e.g. 'barrier', 'participation', 'autocall'" oninput="doSearch(this.value)"/>
+    <div class="search-count" id="search-count"></div>
+  </div>
+</div>
+
+<!-- MOBILE TABS -->
+<div class="mobile-tabs" id="mobile-tabs">
+  <button class="mob-tab active" onclick="scrollTo('basics')">📌 Basics</button>
+  <button class="mob-tab" onclick="scrollTo('protection')">🛡️ Protection</button>
+  <button class="mob-tab" onclick="scrollTo('types')">📊 Types</button>
+  <button class="mob-tab" onclick="scrollTo('returns')">📈 Returns</button>
+  <button class="mob-tab" onclick="scrollTo('mechanics')">⚙️ Mechanics</button>
+  <button class="mob-tab" onclick="scrollTo('risks')">⚠️ Risks</button>
+  <button class="mob-tab" onclick="scrollTo('suitability')">🎯 Suitability</button>
+  <button class="mob-tab" onclick="scrollTo('process')">🗓️ Process</button>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <div class="sidebar-label">Contents</div>
+      <a class="nav-item active" href="#basics" onclick="setActive(this)"><span class="nav-icon">📌</span>The Basics</a>
+      <a class="nav-item" href="#protection" onclick="setActive(this)"><span class="nav-icon">🛡️</span>Protection</a>
+      <a class="nav-item" href="#types" onclick="setActive(this)"><span class="nav-icon">📊</span>Note Types</a>
+      <a class="nav-item" href="#returns" onclick="setActive(this)"><span class="nav-icon">📈</span>Returns</a>
+      <a class="nav-item" href="#mechanics" onclick="setActive(this)"><span class="nav-icon">⚙️</span>Key Mechanics</a>
+      <a class="nav-item" href="#risks" onclick="setActive(this)"><span class="nav-icon">⚠️</span>Risks</a>
+      <a class="nav-item" href="#suitability" onclick="setActive(this)"><span class="nav-icon">🎯</span>Suitability</a>
+      <a class="nav-item" href="#process" onclick="setActive(this)"><span class="nav-icon">🗓️</span>The Process</a>
+      <div class="nav-divider"></div>
+      <div class="progress-wrap">
+        <div class="progress-label">Reading progress</div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ════════════════ BASICS ════════════════ -->
+    <section class="faq-section" id="basics">
+      <div class="section-header">
+        <div class="section-icon">📌</div>
+        <div><div class="section-title">The Basics</div><div class="section-sub">What structured notes are and how they fit into a portfolio</div></div>
+      </div>
+
+      <div class="faq-item" data-text="what is a structured note bond derivative bank">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What exactly is a structured note?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>A structured note is a financial product that combines two components: a <strong>bond</strong> (which provides stability or income) and a <strong>derivative</strong> (which links your return to a market index like the S&P 500). The result is a contract with specifically defined outcomes at maturity.</p>
+          <p>Instead of simply buying the S&P 500 and accepting whatever happens, a structured note lets you pre-agree to terms like: "If the S&P 500 rises over 5 years, I receive 200% of that gain. If it falls by less than 30%, I'm fully protected."</p>
+          <div class="callout">💡 Think of it like a custom insurance policy layered onto an investment. You exchange some flexibility for a defined, predictable range of outcomes.</div>
+          <p>The bond component earns enough return to fund the derivative, which creates the enhanced or protected payoff. It's engineered — not magic — and the economics always balance.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="who issues issuer bank credit risk Morgan Stanley JP Morgan Barclays">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">Who issues them, and what does "issuer risk" mean?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Structured notes are issued by major global financial institutions — Morgan Stanley, JP Morgan, Barclays, BNP Paribas, Bank of America, BMO, RBC, HSBC, BBVA, and others.</p>
+          <p>They are <strong>unsecured debt obligations</strong> of the issuing bank. Your money is not separately held in a protected account — the bank promises to pay you back. If the issuer were to default, you could lose your investment even if the underlying index performed exactly as expected.</p>
+          <div class="warning">⚠️ Structured notes are not FDIC insured (except MLCDs). They are not bank deposits. Your protection comes from the issuer's credit strength — not a government guarantee.</div>
+          <p>In practice, the issuers of structured notes are among the most heavily regulated, systemically important banks in the world. This risk is real but considered low. The best mitigation is to diversify across multiple issuers rather than concentrating in one.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="underlying index SPX NDX RUT DJI tickers what does it mean">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What does "underlying" mean — what are SPX, NDX, RUT?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>The underlying is the market reference your note's return is tied to. Common underlyings:</p>
+          <ul>
+            <li><strong>SPX / SPXFP</strong> — S&P 500 Index (500 largest US companies)</li>
+            <li><strong>NDX / NDXT</strong> — Nasdaq 100 (top 100 tech-heavy companies)</li>
+            <li><strong>RUT</strong> — Russell 2000 (US small-cap companies)</li>
+            <li><strong>DJI</strong> — Dow Jones Industrial Average (30 major US companies)</li>
+            <li><strong>SX5E</strong> — Euro Stoxx 50 (top 50 European companies)</li>
+            <li><strong>EFA, EEM</strong> — International and emerging market indices</li>
+            <li><strong>Single stocks</strong> (TSLA, AAPL, META, etc.) — higher volatility, higher yield potential</li>
+          </ul>
+          <p>When multiple underlyings are listed (e.g., "NDX, RUT, SPX"), your outcome is almost always determined by the <strong>worst performer</strong> of the group — called a "worst-of" structure. This is explained in detail in the Key Mechanics section.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="term maturity how long 2 year 5 year liquidity hold">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is the "term" and do I have to hold it the entire time?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>The term is the maximum life of the note — how long until it matures and you receive your principal back plus any return. Common terms range from 15 months to 7 years.</p>
+          <p>Structured notes are designed to be <strong>held to maturity</strong>. There is no exchange where you can sell them freely. If you need to exit early, you must sell back to the issuer's broker-dealer — almost always at a discount — because the secondary market for structured notes is thin and illiquid.</p>
+          <div class="warning">⚠️ Only invest money you genuinely don't need for the full term. Treat the capital as locked.</div>
+          <p>That said, some notes <strong>call early</strong> automatically (autocallable) or at the issuer's discretion. When called, you receive your principal back plus any applicable premium — which can actually be a good outcome. More on this in Key Mechanics.</p>
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- ════════════════ PROTECTION ════════════════ -->
+    <section class="faq-section" id="protection">
+      <div class="section-header">
+        <div class="section-icon">🛡️</div>
+        <div><div class="section-title">Protection Mechanics</div><div class="section-sub">Buffers, barriers, and what they actually mean for your money</div></div>
+      </div>
+
+      <div class="faq-item" data-text="buffer barrier hard soft protection difference principal">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is the difference between a hard buffer and a soft barrier?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>This is the single most important distinction to understand before investing in any structured note.</p>
+          <p><strong>Hard Buffer</strong> — absorbs the first X% of losses entirely. You never feel any market decline within the buffer.</p>
+          <div class="example">
+            Example: 20% Hard Buffer | Index falls 35%<br>
+            Issuer absorbs first 20% → you only lose 15% (35% − 20%)<br>
+            Your return: <strong>−15%</strong> (not −35%)
+          </div>
+          <p><strong>Soft Barrier</strong> — protects you completely as long as the index never falls more than X%. But if it closes below that level at maturity, the protection disappears and you lose dollar-for-dollar from the start.</p>
+          <div class="example">
+            Example: 30% Soft Barrier | Index falls 35%<br>
+            Barrier breached (fell more than 30%) → you lose the full 35%<br>
+            Your return: <strong>−35%</strong> (same as if there was no protection)
+          </div>
+          <div class="warning">⚠️ The soft barrier is all-or-nothing. Falling 31% vs 29% produces dramatically different outcomes. This cliff effect is the most misunderstood feature of structured notes.</div>
+          <p>All else equal, a hard buffer at the same protection level is structurally superior to a soft barrier. The trade-off is that notes with hard buffers typically offer lower participation rates or yields to compensate.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="full protection principal protected 100% PPN MLCD FDIC safe">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What does "Full Protection" mean? Is my money guaranteed?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Full Protection means your principal is returned in full at maturity regardless of how the underlying performs. If the index drops 50%, you still get 100% of your money back. This applies to PPNs (Principal Protected Notes) and MLCDs (Market-Linked CDs).</p>
+          <p>The trade-off: full protection is expensive to engineer. The bank uses all your bond returns to fund the protection, which leaves less to engineer upside. So participation rates on fully protected notes tend to be lower.</p>
+          <table class="compare-table">
+            <thead><tr><th>Feature</th><th>PPN</th><th>MLCD</th></tr></thead>
+            <tbody>
+              <tr><td>Full protection source</td><td>Issuer's promise</td><td>Issuer's promise + FDIC</td></tr>
+              <tr><td>FDIC insured</td><td>No</td><td>Yes (up to limits)</td></tr>
+              <tr><td>Credit risk</td><td>Issuer default risk</td><td>Lower (FDIC backstop)</td></tr>
+              <tr><td>Best for</td><td>Conservative, larger amounts</td><td>Very conservative, ≤FDIC limits</td></tr>
+            </tbody>
+          </table>
+          <div class="callout">💡 Full protection is only as good as the issuer's financial strength — it's a promise, not a government guarantee (except for MLCDs within FDIC limits).</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="coupon protection barrier income yield payment">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is "coupon protection" on income notes?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Income notes have two separate protection levels — one for your <strong>principal</strong> and one for your <strong>coupons</strong>. These are often different numbers.</p>
+          <div class="example">
+            Example: 30% principal protection | 20% coupon protection<br>
+            → Coupon paid only if index stays above 80% of initial (20% barrier)<br>
+            → Principal protected down to 70% of initial (30% barrier)<br>
+            → Coupon barrier is tighter — easier to breach
+          </div>
+          <p>The coupon protection (also called the coupon barrier) is the minimum index level required on each observation date for your coupon to be paid that period. If the index is below this level on the observation date, that coupon is missed.</p>
+          <p>On notes with a <strong>memory feature</strong>, missed coupons are remembered and paid back in full the next time the index recovers above the barrier. This significantly improves expected income in volatile markets.</p>
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- ════════════════ NOTE TYPES ════════════════ -->
+    <section class="faq-section" id="types">
+      <div class="section-header">
+        <div class="section-icon">📊</div>
+        <div><div class="section-title">Note Types Explained</div><div class="section-sub">What each category is designed to do — and who it's built for</div></div>
+      </div>
+
+      <div class="type-grid">
+
+        <div class="type-card" style="background:var(--growth-bg);color:var(--growth-text);border-color:var(--growth-border);">
+          <div class="type-card-name">Growth</div>
+          <div class="type-card-desc">Leveraged upside participation with downside protection. No income during the term.</div>
+          <div class="type-card-tags"><span class="type-tag">Participation</span><span class="type-tag">Buffer/Barrier</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Typical protection: 20–50%</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:35%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Moderately bullish, long-horizon investors</div>
+        </div>
+
+        <div class="type-card" style="background:var(--income-bg);color:var(--income-text);border-color:var(--income-border);">
+          <div class="type-card-name">Income</div>
+          <div class="type-card-desc">Regular contingent coupons paid when the index stays above a barrier. Monthly or quarterly.</div>
+          <div class="type-card-tags"><span class="type-tag">Contingent Yield</span><span class="type-tag">Autocallable</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Typical yield: 8–35% annual</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:60%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Yield-seekers in sideways or mild-bear markets</div>
+        </div>
+
+        <div class="type-card" style="background:var(--absolute-bg);color:var(--absolute-text);border-color:var(--absolute-border);">
+          <div class="type-card-name">Absolute</div>
+          <div class="type-card-desc">Profits from both up and down moves — converts moderate declines into positive returns.</div>
+          <div class="type-card-tags"><span class="type-tag">Two-Way Return</span><span class="type-tag">Barrier</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Typical protection: 20–40%</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:30%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Range-bound or uncertain market outlook</div>
+        </div>
+
+        <div class="type-card" style="background:var(--catapult-bg);color:var(--catapult-text);border-color:var(--catapult-border);">
+          <div class="type-card-name">Catapult</div>
+          <div class="type-card-desc">Single call date: receive premium if called, or 150%+ upside participation if not.</div>
+          <div class="type-card-tags"><span class="type-tag">Call Premium</span><span class="type-tag">Participation</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Typical premium: 15–35%</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:25%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Investors wanting defined early payout or big upside</div>
+        </div>
+
+        <div class="type-card" style="background:var(--premium-bg);color:var(--premium-text);border-color:var(--premium-border);">
+          <div class="type-card-name">Call Premium</div>
+          <div class="type-card-desc">Periodic premiums paid regardless. Multiple call dates; upside participation at maturity if not called.</div>
+          <div class="type-card-tags"><span class="type-tag">Multi-Call</span><span class="type-tag">Income-Like</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Typical premium: 10–25%</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:20%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Income-like certainty with embedded upside optionality</div>
+        </div>
+
+        <div class="type-card" style="background:var(--digital-bg);color:var(--digital-text);border-color:var(--digital-border);">
+          <div class="type-card-name">Digital</div>
+          <div class="type-card-desc">Fixed return if index is positive at maturity — regardless of how much it rose. Binary outcome.</div>
+          <div class="type-card-tags"><span class="type-tag">Fixed Return</span><span class="type-tag">Barrier</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Typical digital return: 10–45%</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:25%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Mild bulls who want a defined return if market simply holds up</div>
+        </div>
+
+        <div class="type-card" style="background:var(--snowball-bg);color:var(--snowball-text);border-color:var(--snowball-border);">
+          <div class="type-card-name">Snowball</div>
+          <div class="type-card-desc">Unpaid coupons accumulate ("snowball") and are paid in full when the autocall eventually triggers.</div>
+          <div class="type-card-tags"><span class="type-tag">Memory Coupon</span><span class="type-tag">Autocall</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Typical yield: 10–20% annual</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:40%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Investors comfortable with timing uncertainty, seeking max yield</div>
+        </div>
+
+        <div class="type-card" style="background:var(--ppn-bg);color:var(--ppn-text);border-color:var(--ppn-border);">
+          <div class="type-card-name">PPN</div>
+          <div class="type-card-desc">100% principal protected at maturity via issuer promise. Upside linked to index performance.</div>
+          <div class="type-card-tags"><span class="type-tag">Full Protection</span><span class="type-tag">No Credit Risk Upside</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Protection: 100%</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:100%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Conservative investors, cannot tolerate any loss of principal</div>
+        </div>
+
+        <div class="type-card" style="background:var(--mlcd-bg);color:var(--mlcd-text);border-color:var(--mlcd-border);">
+          <div class="type-card-name">MLCD</div>
+          <div class="type-card-desc">Market-Linked CD. Same as PPN but FDIC-insured up to applicable limits. Issued by FDIC member banks.</div>
+          <div class="type-card-tags"><span class="type-tag">FDIC Insured</span><span class="type-tag">Full Protection</span></div>
+          <div class="mini-prot"><div class="mini-prot-label">Protection: 100% + FDIC backstop</div><div class="mini-prot-bar"><div class="mini-prot-fill" style="width:100%"></div></div></div>
+          <div class="type-card-for"><span>Best for:</span> Most conservative investors, within FDIC coverage limits</div>
+        </div>
+
+      </div>
+
+      <div class="faq-item" data-text="catapult call premium difference autocall">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is the difference between a Catapult and a Call Premium note?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Both pay a premium and offer participation at maturity if not called. The difference is <strong>when and how the call works</strong>.</p>
+          <p><strong>Catapult</strong> — one first call date. If the index is at or above its initial level on that specific date, the note is called and you receive your principal plus the full premium. If not called on that date, it continues to maturity with full upside participation. One shot.</p>
+          <p><strong>Call Premium</strong> — multiple potential call dates (semi-annually, annually, quarterly). Each observation is a fresh chance for the note to be called or continue. You receive the premium on each scheduled observation whether called or not — it's more income-like and less binary than a Catapult.</p>
+          <div class="example">
+            Catapult: 20% premium | First call Jun 2027 | 150% participation<br>
+            → If called Jun 2027: receive $120 per $100 invested<br>
+            → If not called: participate 150% in any index gain at maturity
+          </div>
+          <p>Catapult is more all-or-nothing. Call Premium is more like a series of income payments with an embedded growth kicker.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="autocallable issuer callable difference call type income notes">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">Autocallable vs. Issuer Callable — which is better for me?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>This distinction matters a lot on Income notes and is often buried in the details.</p>
+          <p><strong>Autocallable</strong> — the note redeems itself automatically when the index is at or above a trigger level on an observation date. <em>Neither you nor the issuer controls it</em> — the mechanism does. More investor-friendly: the call happens when the market cooperates, and you receive your principal plus any premium regardless.</p>
+          <p><strong>Issuer Callable</strong> — the bank holds the option and decides when to call. They will call when it benefits <em>them</em> — typically when interest rates fall and they can replace your note with cheaper debt. This creates <strong>reinvestment risk</strong>: you get your money back at the worst possible time (when yields are falling), leaving you searching for a lower-yielding replacement.</p>
+          <div class="callout">💡 All else equal, autocallable is more investor-friendly than issuer callable. Issuer callable notes often offer a slightly higher yield to compensate for this disadvantage — but the compensation may not be worth it.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="snowball what is memory coupon accumulate">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">How exactly does a Snowball note work?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>A Snowball note is an autocallable income note where <strong>all missed coupons accumulate and are paid together</strong> when the autocall triggers. The longer it runs without triggering, the larger the eventual payout — like a snowball rolling downhill.</p>
+          <div class="example">
+            Snowball: 16% annual | Quarterly autocall | 12-month non-call period<br>
+            Q4 (first observation): index above trigger → not called, 4% accumulated<br>
+            Q5: index above trigger → CALLED → receive 4% + 4% = 8% accumulated<br><br>
+            Alternative path:<br>
+            Q4-Q8: index below trigger → 0% paid, 8% accumulated<br>
+            Q9: index above trigger → CALLED → receive 8% all at once ✓
+          </div>
+          <p>Snowballs have <strong>no separate coupon protection</strong> — instead, coupons are always accumulating in the background. This suits investors who are comfortable not receiving regular income and would prefer a larger lump sum when conditions improve.</p>
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- ════════════════ RETURNS ════════════════ -->
+    <section class="faq-section" id="returns">
+      <div class="section-header">
+        <div class="section-icon">📈</div>
+        <div><div class="section-title">How Returns Work</div><div class="section-sub">Participation rates, caps, and why you don't receive dividends</div></div>
+      </div>
+
+      <div class="faq-item" data-text="participation rate 200% 300% what does it mean leveraged">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is a participation rate — why can it be above 100%?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>The participation rate is the multiplier applied to the index's gain at maturity. A 200% participation rate means you receive twice the index's percentage gain.</p>
+          <div class="example">
+            200% participation | SPX rises 25% over 5 years<br>
+            Your return = 200% × 25% = <strong>50%</strong> (vs 25% from owning SPX directly)
+          </div>
+          <p>Participation above 100% is possible because you <strong>give up dividends</strong>. When you hold the S&P 500 index directly, dividends add roughly 1.3–1.5% per year — compounded over 5 years, that's 6–8% of total return you forgo. The issuing bank captures those dividends and uses them to fund leverage, giving you a higher participation rate in exchange.</p>
+          <p>This is not a hidden fee — it's the engine that makes the economics work. The higher the dividend yield of the underlying index, and the longer the term, the more participation the bank can offer you.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="cap capped max return uncapped limit ceiling">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What does "uncapped" mean — is a cap always bad?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p><strong>Uncapped</strong> means no ceiling on your return — if the index rises 100%, you receive your participation rate × 100%.</p>
+          <p><strong>Capped</strong> means your maximum return is fixed regardless of how much the index rises above that level. You trade extreme upside for better downside protection or higher participation below the cap.</p>
+          <div class="example">
+            Capped note: 150% participation | Max return 40%<br>
+            Index up 20% → 150% × 20% = 30% ✓ (below cap)<br>
+            Index up 35% → would be 52.5%, but capped at 40%<br>
+            Index up 80% → still capped at 40% — you leave a lot on the table
+          </div>
+          <p>A cap is not inherently bad — it depends on your market outlook. If you expect a 20–25% move, you likely won't hit the cap. If you expect a 50%+ rally, an uncapped note serves you better. A cap allows the bank to offer you better downside protection in exchange for the extreme upside you give up.</p>
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- ════════════════ KEY MECHANICS ════════════════ -->
+    <section class="faq-section" id="mechanics">
+      <div class="section-header">
+        <div class="section-icon">⚙️</div>
+        <div><div class="section-title">Key Mechanics</div><div class="section-sub">Observation dates, worst-of, memory coupons, and non-call periods</div></div>
+      </div>
+
+      <div class="faq-item" data-text="worst of multiple underlyings basket index worst performer">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is "worst-of" — why does it matter that there are multiple indexes?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>When a note lists multiple underlyings (e.g., "NDX, RUT, SPX"), your outcome is almost always determined by the <strong>worst-performing index</strong> in the group at each observation date. This is the "worst-of" structure.</p>
+          <div class="example">
+            Income note: NDX, RUT, SPX | 30% coupon barrier<br>
+            Observation date: NDX +12%, SPX +8%, RUT −32%<br>
+            → Worst performer (RUT) is −32%, below the 30% barrier<br>
+            → <strong>No coupon paid</strong> — even though two of three indexes are positive
+          </div>
+          <p>The bank offers better economics (higher yield, more protection, higher participation) in exchange for this additional risk. The addition of each index to the basket increases your risk while boosting the offered terms.</p>
+          <div class="warning">⚠️ Worst-of structures carry meaningfully more risk than single-index notes. Always ask which index in the basket is most volatile — that's your binding constraint.</div>
+          <p>Single-stock baskets (e.g., TSLA, NVDA) are far riskier than index baskets and command extremely high yields as compensation. Understand what you're accepting before investing.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="observation date point in time what day barrier checked">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is an observation date — why does timing matter so much?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>An observation date is a specific date on which the index level is checked to determine whether a coupon is paid, whether the note is called, or (at maturity) what your final return is.</p>
+          <p>It is a <strong>point-in-time snapshot</strong>, not an average over time. This has important implications:</p>
+          <ul>
+            <li>The index could be below the barrier for months, recover just before the observation date, and your coupon is paid in full</li>
+            <li>The index could be above the barrier for the entire quarter, drop just before observation, and your coupon is missed</li>
+          </ul>
+          <p>This point-in-time nature is both the opportunity and the risk. It's why memory coupons are valuable — they compensate for missed observations when the index happens to be below the barrier on that specific day.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="memory coupon missed payment recovery accumulated what is">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">How does a memory coupon work in practice?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>A memory coupon means missed coupon payments are <strong>remembered and owed to you</strong>. The next time the index is above the barrier on an observation date, you receive all accumulated missed coupons in one payment.</p>
+          <div class="example">
+            10% annual | Monthly w/ Memory | 25% coupon barrier<br>
+            Month 1: index above 75% of initial → 0.83% paid ✓<br>
+            Month 2: index at 72% (below barrier) → missed, 0.83% remembered<br>
+            Month 3: index at 71% → missed, 1.67% total remembered<br>
+            Month 4: index at 80% → 0.83% (current) + 1.67% (remembered) = <strong>2.5% paid</strong> ✓
+          </div>
+          <p>Memory coupons significantly improve expected income in volatile markets compared to non-memory structures. If you are choosing between two otherwise identical income notes and one has a memory feature, strongly prefer the one with memory — it's a meaningful structural advantage at no additional cost.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="non-call period what is minimum hold time guaranteed">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is a non-call period and why does it protect me?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>The non-call period is the initial window during which the note <strong>cannot be called</strong> — by either the autocall mechanism or by the issuer. It guarantees you a minimum holding period and a minimum income stream.</p>
+          <div class="example">
+            24-month income note | 6-month non-call | 12% annual yield<br>
+            Months 1–6: coupons paid (if barrier met), cannot be called<br>
+            Month 7+: note may be called if autocall trigger met<br>
+            → Minimum guaranteed coupon window: 6 months = 6% minimum earned
+          </div>
+          <p>A longer non-call period is generally more investor-friendly — it guarantees a longer income stream before early redemption is possible. When comparing notes, a 12-month non-call period is more protective than a 3-month non-call period on otherwise similar terms.</p>
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- ════════════════ RISKS ════════════════ -->
+    <section class="faq-section" id="risks">
+      <div class="section-header">
+        <div class="section-icon">⚠️</div>
+        <div><div class="section-title">Risks to Understand</div><div class="section-sub">What can go wrong — and how to think about each risk honestly</div></div>
+      </div>
+
+      <div class="faq-item" data-text="credit risk issuer default bankrupt lose money">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What happens if the bank that issued my note goes bankrupt?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Structured notes are unsecured debt. If the issuing bank defaults, you become a creditor in the bankruptcy proceedings — and you could lose some or all of your investment, even if the underlying index performed exactly as expected.</p>
+          <p>Historical reference: in 2008, Lehman Brothers issued structured notes that became worthless when it filed for bankruptcy — not because the indexes moved, but because the issuer failed.</p>
+          <div class="callout">💡 Mitigation: diversify across multiple issuers. Limit any single issuer to a prudent percentage of your total structured notes portfolio. Never concentrate heavily in one issuer regardless of how strong their credit appears.</div>
+          <p>For current issuers (Morgan Stanley, JP Morgan, Barclays, BMO, etc.), this risk is considered low given their systemic importance and regulatory oversight. But it is not zero, and it should be consciously accepted before investing.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="liquidity sell early secondary market discount exit">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What if I need my money before the note matures?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Structured notes are <strong>illiquid by design</strong>. There is no public exchange where you can sell them. If you need to exit early, you must sell back to the issuer's broker-dealer at whatever price they offer — almost certainly at a discount.</p>
+          <p>Factors affecting your early exit price:</p>
+          <ul>
+            <li>How far the index has moved since the note was issued</li>
+            <li>How much time remains until maturity</li>
+            <li>Interest rate changes since issuance</li>
+            <li>The issuer's bid-ask spread (their margin on the transaction)</li>
+          </ul>
+          <div class="warning">⚠️ The primary rule: never invest in a structured note with money you may need before maturity. The secondary market discount can be significant — sometimes 10–20% or more in adverse conditions.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="fees costs embedded hidden how much does it cost">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What are the real costs of investing in structured notes?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Structured notes have embedded costs — not explicit line items you see charged separately, but built into the economics of the note from day one. The issuer's estimated fair value on the day of issuance is typically <strong>2–5% below the issue price of $100</strong>.</p>
+          <p>Embedded costs include structuring fees, hedging costs, and distribution compensation. Issuers are now required to disclose an "estimated value" on the prospectus cover — this tells you the day-one cost.</p>
+          <div class="callout">💡 The estimated value disclosure is the single most important number to check on any prospectus. A note issued at $100 with an estimated value of $95.50 has $4.50 of embedded cost — that's the total cost to you for the product, not an ongoing annual fee.</div>
+          <p>These costs reduce the theoretical "fair" upside slightly compared to a self-constructed position. For most investors, the protection, certainty, and access to structures you can't replicate yourself justify the embedded cost — but you should understand what you're paying for.</p>
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- ════════════════ SUITABILITY ════════════════ -->
+    <section class="faq-section" id="suitability">
+      <div class="section-header">
+        <div class="section-icon">🎯</div>
+        <div><div class="section-title">Is It Right for Me?</div><div class="section-sub">Matching note types to investor profiles and portfolio goals</div></div>
+      </div>
+
+      <div class="faq-item" data-text="who should invest suitable accredited investor">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What type of investor are structured notes suited for?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Structured notes work well for investors who:</p>
+          <ul>
+            <li>Want <strong>market participation with defined downside protection</strong> they can't easily replicate with stocks or bonds alone</li>
+            <li>Seek <strong>enhanced yield</strong> above what traditional fixed income offers, and are comfortable with contingent (not guaranteed) income</li>
+            <li>Have a <strong>medium to long time horizon</strong> (2–7 years) and can genuinely commit the capital for the full term</li>
+            <li>Are comfortable with <strong>complexity and illiquidity</strong> in exchange for more tailored outcomes</li>
+          </ul>
+          <p>They are generally <strong>not appropriate</strong> for investors who may need the capital before maturity, who cannot tolerate the complexity of conditional payoffs, or whose entire investable portfolio would be in structured notes.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="how much allocation portfolio percentage first time">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">How much of my portfolio should be in structured notes?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>There's no universal answer — it depends on your liquidity needs, overall portfolio composition, and how structured notes fit your specific goals. Common approaches among institutional investors and family offices:</p>
+          <ul>
+            <li><strong>5–15%</strong> for conservative portfolios where structured notes replace a portion of bond allocation</li>
+            <li><strong>15–30%</strong> for moderate portfolios seeking growth and income with defined risk parameters</li>
+            <li>Rarely more than 30–40% given the illiquidity profile of the asset class</li>
+          </ul>
+          <p>Diversification within structured notes also matters: spread across note types, issuers, terms, and underlying indexes — just as you would diversify any other asset class.</p>
+          <div class="callout">💡 Start small. Investing in 1–2 notes initially lets you experience the observation dates, understand the coupon mechanics, and evaluate the actual returns before scaling up allocation.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="where to start first time beginner simple">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">Which note type should a first-time investor start with?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Start with structures that have the fewest conditions and clearest payoffs:</p>
+          <ul>
+            <li><strong>PPN or MLCD</strong> — if capital preservation is paramount. Learn how structured notes work with zero principal risk as your tuition.</li>
+            <li><strong>Growth note (single index, uncapped)</strong> — index up = you get leveraged gain, index down within buffer = protected. Simple, clean, easy to explain to yourself.</li>
+            <li><strong>Income note (single index, autocallable)</strong> — straightforward contingent income. Start with a note on SPX or NDX alone before adding worst-of basket exposure.</li>
+          </ul>
+          <p>Avoid as your first investment: worst-of single-stock baskets, snowball structures, absolute return notes, or anything with multiple conditional layers. These are great products — but understand the simpler structures first.</p>
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- ════════════════ PROCESS ════════════════ -->
+    <section class="faq-section" id="process">
+      <div class="section-header">
+        <div class="section-icon">🗓️</div>
+        <div><div class="section-title">The Investment Process</div><div class="section-sub">From calendar to closing — how the purchase actually works</div></div>
+      </div>
+
+      <div class="faq-item" data-text="calendar what is offerings available close date">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What is a structured notes calendar?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>A structured notes calendar is a curated menu of notes currently available for purchase — each with specific terms, underlyings, protection levels, and a closing date. It's published monthly by issuers through platforms like Halo or CAIS.</p>
+          <p>Notes on the calendar are in their <strong>offering period</strong>. Once the close date passes, the note is issued and no longer available for purchase at the original $100 issue price. Each month brings a fresh calendar with new offerings — terms change based on current market volatility, interest rates, and index levels.</p>
+          <p>This is why timing matters: a note offering 200% participation today might only offer 180% next month if volatility drops. The calendar reflects the current market environment.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="prospectus read important offering document what to look for">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">What should I look for in a prospectus?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>The prospectus is the legal offering document — the definitive source of truth for every term of the note. At minimum, read and understand:</p>
+          <ul>
+            <li><strong>Cover page</strong> — key terms summary and the issuer's <em>estimated value</em> (the day-one cost signal)</li>
+            <li><strong>Payoff description</strong> — exactly how your return is calculated in every scenario</li>
+            <li><strong>Hypothetical examples</strong> — trace through the best, middle, and worst case scenarios to make sure you understand them</li>
+            <li><strong>Risk factors</strong> — what can go wrong; don't skip this section</li>
+            <li><strong>Tax treatment</strong> — structured notes often have non-intuitive tax treatment; flag anything unclear for your tax advisor</li>
+          </ul>
+          <div class="callout">💡 Personal rule: never invest in a structured note whose payoff you cannot explain clearly to another person without the document in front of you. If you can't explain it, you don't understand it well enough to own it.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item" data-text="tax treatment how are structured notes taxed ordinary income capital gains OID">
+        <div class="faq-question" onclick="toggle(this)"><span class="faq-q-text">How are structured notes taxed?</span><span class="faq-chevron"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></span></div>
+        <div class="faq-answer"><div class="faq-body">
+          <p>Tax treatment varies significantly by note type and can be complex. General guidelines:</p>
+          <ul>
+            <li><strong>Growth notes</strong> — often taxed as ordinary income at maturity, not long-term capital gains — even if held for years. This is meaningfully different from holding an ETF directly and can materially affect after-tax returns.</li>
+            <li><strong>Income notes</strong> — coupons are generally taxed as ordinary income in the year received.</li>
+            <li><strong>Some notes</strong> are treated as prepaid forward contracts or "contingent payment debt instruments" (CPDI), which can create imputed interest income that must be reported annually — even before maturity and even if you received no payment.</li>
+            <li><strong>MLCDs</strong> — generally taxed like bank CDs; interest is ordinary income.</li>
+          </ul>
+          <div class="warning">⚠️ Always consult a tax professional before purchasing structured notes — especially in a taxable account. The OID rules can create unexpected tax bills. Holding certain notes in a tax-deferred account (IRA) eliminates this issue.</div>
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-banner">
+      <h3>Ready to look at the current offerings?</h3>
+      <p>Our advisors walk through every note, explain the payoff in plain language, and help you decide if it fits your goals. No obligation.</p>
+      <a class="cta-btn" href="https://calendly.com/prudentprosperity/30min" target="_blank" rel="noopener">Schedule a 30-Minute Consultation →</a>
+    </div>
+
+    <div class="disclosure">
+      <p><strong>Educational purposes only.</strong> This guide is for informational purposes and does not constitute investment advice, a recommendation, or an offer to buy or sell any security. All examples are hypothetical and for illustration only. Structured notes involve significant risks and are not suitable for all investors. Consult a qualified financial and tax advisor before making any investment decisions. Past performance is not indicative of future results. Securities offered through Halo Securities LLC, a SEC registered broker/dealer and member of FINRA/SIPC.</p>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// Accordion
+function toggle(q) {
+  const item   = q.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>{
+    i.classList.remove('open');
+    i.querySelector('.faq-answer').style.maxHeight='0';
+  });
+  if(!isOpen){ item.classList.add('open'); answer.style.maxHeight=answer.scrollHeight+'px'; }
+}
+
+// Search
+function doSearch(val) {
+  const q   = val.toLowerCase().trim();
+  const items = document.querySelectorAll('.faq-item');
+  let shown = 0;
+  items.forEach(item=>{
+    const text  = (item.dataset.text||'')+(item.querySelector('.faq-q-text')?.textContent||'');
+    const match = !q || text.toLowerCase().includes(q);
+    item.classList.toggle('hidden', !match);
+    if(match) shown++;
+  });
+  const count = document.getElementById('search-count');
+  count.textContent = q ? `${shown} result${shown!==1?'s':''} for "${val}"` : '';
+}
+
+// Sidebar active
+function setActive(el){ document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active')); el.classList.add('active'); }
+
+// Scroll → active sidebar
+const sections = document.querySelectorAll('.faq-section');
+const navItems = document.querySelectorAll('.nav-item');
+const progressFill = document.getElementById('progress-fill');
+window.addEventListener('scroll',()=>{
+  const scrollY  = window.scrollY;
+  const total    = document.body.scrollHeight - window.innerHeight;
+  const pct      = Math.round((scrollY/total)*100);
+  progressFill.style.width = pct+'%';
+  sections.forEach(sec=>{
+    const top = sec.offsetTop - 100;
+    const bot = top + sec.offsetHeight;
+    if(scrollY>=top && scrollY<bot){
+      const id = sec.getAttribute('id');
+      navItems.forEach(n=>{
+        n.classList.toggle('active', n.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{ passive:true });
+
+// Smooth scroll override
+function scrollTo(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const id=a.getAttribute('href').slice(1);
+    document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
