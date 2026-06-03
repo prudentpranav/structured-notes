@@ -36,6 +36,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .logo-name{font-size:14px;font-weight:600;color:var(--white);letter-spacing:-0.01em;display:block;}
 .logo-sub{font-size:10px;color:var(--gold-lt);letter-spacing:0.05em;display:block;}
 .header-right{font-size:10px;color:var(--gold-lt);font-family:var(--mono);text-align:right;line-height:1.8;}
+.learn-btn{font-size:11px;font-weight:600;color:var(--navy);background:var(--gold);padding:5px 14px;border-radius:6px;text-decoration:none;transition:background .14s;white-space:nowrap;}
+.learn-btn:hover{background:var(--gold-lt);}
+
 
 /* ─── PAGE ─── */
 .page{max-width:1400px;margin:0 auto;padding:1.75rem 2rem;}
@@ -234,7 +237,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
       <span class="logo-sub">Structured Notes Calendar</span>
     </div>
   </div>
-  <div class="header-right">For Institutional Use Only<br><span id="header-date">Loading…</span></div>
+ <div style="display:flex;align-items:center;gap:14px;">
+    <div class="header-right">For Institutional Use Only<br><span id="header-date">Loading…</span></div>
+    <a class="learn-btn" href="faq.html" target="_blank">📚 Learn</a>
+  </div>
 </header>
 
 <main class="page">
