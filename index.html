@@ -351,7 +351,11 @@ const TS = {
 // ─────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────
-const barColor = (type, pt) => pt==="Full"?"#2aaa6a":pt==="Hard"?"#4a9fd4":TS[type]?.bar||"#888";
+const barColor = (_type, pt) => {
+  if (pt === "Full") return "#2aaa6a";   // green  — full principal protection
+  if (pt === "Hard") return "#4a9fd4";   // blue   — hard buffer absorbs first X%
+  return "#e8830a";                       // amber  — soft barrier (conditional)
+};
 const termMo   = t => { const m=String(t||"").match(/(\d+)/); return m?+m[1]:0; };
 const fmtDate  = d => { if(!d)return"—"; return new Date(d+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}); };
 const esc      = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
