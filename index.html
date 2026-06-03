@@ -86,8 +86,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .card:hover{box-shadow:0 4px 22px rgba(9,25,48,.09);transform:translateY(-1px);}
 .card.is-featured{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
 .card.is-featured:hover{box-shadow:0 4px 22px rgba(208,182,137,.28);}
-.featured-ribbon{position:absolute;top:-1px;left:16px;background:var(--gold);color:var(--navy);font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:0 0 5px 5px;font-family:var(--sans);line-height:1.6;z-index:1;}
-
+.feat-badge{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--gold);color:var(--navy);white-space:nowrap;}
+  
 /* ─── CHARACTERISTIC TAGS ─── */
 .char-tags{display:flex;flex-wrap:wrap;gap:4px;padding:8px 12px 0;}
 .char-tag{font-size:9px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--surface2);color:var(--text3);border:1px solid var(--border);white-space:nowrap;}
@@ -498,14 +498,14 @@ function renderGridCard(n) {
 
   return `
   <div class="card${isFeat?" is-featured":""}">
-    ${isFeat?`<div class="featured-ribbon">Featured</div>`:""}
     ${tags.length?`<div class="char-tags">${tags.map(t=>`<span class="char-tag ${t.cls}">${t.label}</span>`).join("")}</div>`:""}
     <div class="card-grid-inner">
       <div class="card-top-grid">
         <div class="card-top-row">
           <div class="card-badges">
-            <span class="type-badge" style="background:${s.bg};color:${s.text}">${n.type}</span>
-            <span class="issuer-badge">${n.issuer}</span>
+                ${isFeat ? `<span class="feat-badge">⭐ Featured</span>` : ""}
+                <span class="type-badge" style="background:${s.bg};color:${s.text}">${n.type}</span>
+                <span class="issuer-badge">${n.issuer}</span>
           </div>
           <span class="term-chip">${n.term}</span>
         </div>
@@ -520,7 +520,11 @@ function renderGridCard(n) {
       <div class="card-bars">${barsHTML(n)}</div>
       <div class="card-footer-grid">
         <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
-        <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Snapshot this note">📷</button>
+        <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
+  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
+  </svg>
+</button>
       </div>
     </div>
   </div>`;
@@ -530,22 +534,18 @@ function renderGridCard(n) {
 // RENDER CARD — LIST (horizontal)
 // ─────────────────────────────────────────────────────────────
 function renderListCard(n) {
-  const s   = TS[n.type]||{bg:"var(--surface2)",text:"var(--text2)",bar:"#888"};
-  const pm  = primaryMetric(n);
-  const tags= charTags(n);
+  const s      = TS[n.type]||{bg:"var(--surface2)",text:"var(--text2)",bar:"#888"};
+  const pm     = primaryMetric(n);
+  const tags   = charTags(n);
   const isFeat = n.status==="Featured";
-
-  const metricItems = secondaryMetrics(n)
-    .replace(/<div class="metric span2">/g,'<div class="metric">')
-    .split("</div></div>").filter(s=>s.trim()).map(s=>s+"</div></div>").join("").slice(0,-"</div>".length);
 
   return `
   <div class="card${isFeat?" is-featured":""}">
-    ${isFeat?`<div class="featured-ribbon">Featured</div>`:""}
     ${tags.length?`<div class="list-tags">${tags.map(t=>`<span class="char-tag ${t.cls}">${t.label}</span>`).join("")}</div>`:""}
     <div class="card-list-inner" style="border-left-color:${s.bar}">
       <div class="card-identity">
         <div class="id-badges">
+          ${isFeat?`<span class="feat-badge">⭐ Featured</span>`:""}
           <span class="type-badge" style="background:${s.bg};color:${s.text}">${n.type}</span>
           <span class="issuer-badge">${n.issuer}</span>
         </div>
@@ -562,12 +562,19 @@ function renderListCard(n) {
       <div class="card-list-bars">${barsHTML(n)}</div>
       <div class="card-list-cta">
         <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
-        <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Snapshot">📷</button>
+        <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
+  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
+  </svg>
+</button>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
+          </svg>
+        </button>
       </div>
     </div>
   </div>`;
 }
-
 // ─────────────────────────────────────────────────────────────
 // SNAPSHOT MODAL
 // ─────────────────────────────────────────────────────────────
