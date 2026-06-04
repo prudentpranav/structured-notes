@@ -801,12 +801,21 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
-// On mobile: show only the first section initially
-if (window.matchMedia('(max-width: 780px)').matches) {
-  document.querySelectorAll('.faq-section').forEach((s, i) => {
-    if (i > 0) s.style.display = 'none';
-  });
+const mobileBreakpoint = window.matchMedia('(max-width: 780px)');
+
+function handleViewportChange() {
+  if (mobileBreakpoint.matches) {
+    const activeId = document.querySelector('.mob-tab.active')?.dataset.section || 'basics';
+    document.querySelectorAll('.faq-section').forEach(s => s.style.display = 'none');
+    const active = document.getElementById(activeId);
+    if (active) active.style.display = 'block';
+  } else {
+    document.querySelectorAll('.faq-section').forEach(s => s.style.display = '');
+  }
 }
+
+handleViewportChange();
+mobileBreakpoint.addEventListener('change', handleViewportChange);
   
 </script>
 </body>
