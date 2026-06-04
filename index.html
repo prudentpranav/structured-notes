@@ -82,7 +82,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .card-list-wrap{display:flex;flex-direction:column;gap:10px;}
 
 /* ─── BASE CARD ─── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);border-left-width:3px;position:relative;transition:box-shadow .18s,transform .18s;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);position:relative;transition:box-shadow .18s,transform .18s;}
 .card:hover{box-shadow:0 4px 22px rgba(9,25,48,.09);transform:translateY(-1px);}
 .card.is-featured{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
 .card.is-featured:hover{box-shadow:0 4px 22px rgba(208,182,137,.28);}
@@ -544,7 +544,7 @@ function renderListCard(n) {
   const isFeat = n.status==="Featured";
 
   return `
-  <div class="card${isFeat?" is-featured":""}" style="border-left-color:${s.bar}">
+  <div class="card${isFeat?" is-featured":""}" style="border-left-color:${s.bar};border-left-width:3px">
     ${tags.length?`<div class="list-tags">${tags.map(t=>`<span class="char-tag ${t.cls}">${t.label}</span>`).join("")}</div>`:""}
     <div class="card-list-inner">
       <div class="card-identity">
