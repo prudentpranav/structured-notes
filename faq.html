@@ -187,14 +187,14 @@ html::-webkit-scrollbar { display: none; }
 
 <!-- MOBILE TABS -->
 <div class="mobile-tabs" id="mobile-tabs">
-  <button class="mob-tab active" onclick="scrollTo('basics')">📌 Basics</button>
-  <button class="mob-tab" onclick="scrollTo('protection')">🛡️ Protection</button>
-  <button class="mob-tab" onclick="scrollTo('types')">📊 Types</button>
-  <button class="mob-tab" onclick="scrollTo('returns')">📈 Returns</button>
-  <button class="mob-tab" onclick="scrollTo('mechanics')">⚙️ Mechanics</button>
-  <button class="mob-tab" onclick="scrollTo('risks')">⚠️ Risks</button>
-  <button class="mob-tab" onclick="scrollTo('suitability')">🎯 Suitability</button>
-  <button class="mob-tab" onclick="scrollTo('process')">🗓️ Process</button>
+  <button class="mob-tab active" data-section="basics"      onclick="showSection('basics')">📌 Basics</button>
+  <button class="mob-tab"        data-section="protection"  onclick="showSection('protection')">🛡️ Protection</button>
+  <button class="mob-tab"        data-section="types"       onclick="showSection('types')">📊 Types</button>
+  <button class="mob-tab"        data-section="returns"     onclick="showSection('returns')">📈 Returns</button>
+  <button class="mob-tab"        data-section="mechanics"   onclick="showSection('mechanics')">⚙️ Mechanics</button>
+  <button class="mob-tab"        data-section="risks"       onclick="showSection('risks')">⚠️ Risks</button>
+  <button class="mob-tab"        data-section="suitability" onclick="showSection('suitability')">🎯 Suitability</button>
+  <button class="mob-tab"        data-section="process"     onclick="showSection('process')">🗓️ Process</button>
 </div>
 
 <div class="layout">
@@ -779,7 +779,20 @@ window.addEventListener('scroll',()=>{
 },{ passive:true });
 
 // Smooth scroll override
-function scrollTo(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showSection(id) {
+  // Show/hide for mobile — no scrolling needed, works in any iframe
+  document.querySelectorAll('.faq-section').forEach(s => s.style.display = 'none');
+  const target = document.getElementById(id);
+  if (target) target.style.display = 'block';
+  document.querySelectorAll('.mob-tab').forEach(t => t.classList.remove('active'));
+  const activeTab = document.querySelector(`.mob-tab[data-section="${id}"]`);
+  if (activeTab) activeTab.classList.add('active');
+  window.scrollTo(0, 0);
+}
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     e.preventDefault();
