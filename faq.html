@@ -155,6 +155,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 @media(max-width:480px){
   .type-grid{grid-template-columns:1fr;}
 }
+
+  body.in-iframe .sidebar     { display: none; }
+  body.in-iframe .mobile-tabs { display: flex; }
+  body.in-iframe .layout      { padding: 1rem; }
+  body.in-iframe .hero        { padding: 1.5rem 1rem; }
+
 </style>
 </head>
 <body>
@@ -783,6 +789,19 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
+
+ // Auto-height for iframe embedding
+if (window.self !== window.top) {
+  document.body.classList.add('in-iframe');
+  function reportFaqHeight() {
+    window.parent.postMessage({ iframeHeight: document.documentElement.scrollHeight }, '*');
+  }
+  window.addEventListener('load',   () => setTimeout(reportFaqHeight, 800));
+  window.addEventListener('resize', () => setTimeout(reportFaqHeight, 200), { passive: true });
+  // Re-report when accordions open/close (they change page height)
+  document.addEventListener('click', () => setTimeout(reportFaqHeight, 350));
+} 
+  
 </script>
 </body>
 </html>
