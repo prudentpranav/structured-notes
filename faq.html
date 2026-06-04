@@ -800,6 +800,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
+
+// On mobile: show only the first section initially
+if (window.matchMedia('(max-width: 780px)').matches) {
+  document.querySelectorAll('.faq-section').forEach((s, i) => {
+    if (i > 0) s.style.display = 'none';
+  });
+}
   
 </script>
 </body>
