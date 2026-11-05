@@ -203,6 +203,46 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .disclosure{margin-top:2rem;padding:1.1rem 1.4rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;}
 .disclosure p{font-size:10px;line-height:1.75;color:var(--text3);}
 
+/* ─── TERM (prominent) ─── */
+.term-pill{font-size:11px;font-weight:500;font-family:var(--sans);padding:4px 12px;border-radius:99px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .13s;white-space:nowrap;line-height:1.5;}
+.term-pill:hover{border-color:var(--gold-dk);color:var(--navy);}
+.term-pill.active{background:var(--navy);color:var(--gold);border-color:var(--navy);}
+.term-pill .tcount{font-family:var(--mono);font-size:9px;opacity:.6;margin-left:5px;}
+.term-block{display:inline-flex;align-items:center;gap:7px;background:var(--navy);border-radius:8px;padding:4px 10px 4px 9px;flex-shrink:0;}
+.term-num{font-family:var(--mono);font-size:21px;font-weight:600;color:var(--gold);line-height:1;}
+.term-meta{display:flex;flex-direction:column;line-height:1.25;}
+.term-unit{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--white);}
+.term-yrs{font-size:9px;font-weight:600;letter-spacing:.06em;color:var(--gold-lt);}
+.term-tile{background:#fbf6ea;border:1.5px solid var(--gold);border-radius:6px;padding:6px 11px;flex-shrink:0;min-width:86px;text-align:center;}
+.term-tile .metric-label{justify-content:center;color:var(--gold-dk);}
+.term-tile-val{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--navy);line-height:1.1;}
+.term-tile-val small{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.08em;margin-left:4px;}
+.term-tile-sub{font-size:9px;color:var(--text3);font-weight:600;letter-spacing:.05em;margin-top:1px;}
+
+/* ─── HOW IT WORKS ─── */
+.card-grid.has-open{align-items:start;}
+.explain-row{padding:4px 8px;border-bottom:1px solid var(--border);}
+.explain-row.list{border-bottom:none;border-top:1px solid var(--border);}
+.explain-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:6px;background:none;border:none;cursor:pointer;padding:6px 6px;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--navy);border-radius:6px;transition:background .13s;}
+.explain-toggle:hover{background:var(--surface2);}
+.explain-toggle .ex-l{display:flex;align-items:center;gap:7px;}
+.explain-toggle .ex-i{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:9px;font-weight:700;font-style:normal;}
+.explain-toggle .chev{font-size:10px;color:var(--text3);transition:transform .18s;}
+.explain-toggle[aria-expanded="true"] .chev{transform:rotate(180deg);}
+.expl-panel{padding:10px 14px 12px;background:#faf8f3;border-bottom:1px solid var(--border);}
+.card-list-wrap .expl-panel{border-bottom:none;border-top:1px solid var(--border);border-radius:0 0 var(--r) var(--r);}
+.expl-lead{font-size:12px;line-height:1.55;color:var(--navy);font-weight:600;margin-bottom:9px;}
+.expl-rows{display:flex;flex-direction:column;gap:9px;}
+.card-list-wrap .expl-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+.expl-h{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:2px;}
+.expl-row p{font-size:11px;line-height:1.55;color:var(--text2);}
+.expl-foot{margin-top:10px;padding-top:8px;border-top:1px dashed var(--border2);font-size:9.5px;line-height:1.5;color:var(--text3);}
+.expl-foot a{color:var(--navy);font-weight:600;}
+.snap-expl{margin-bottom:12px;}
+.snap-expl .expl{background:#faf8f3;border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.disc-link-row{margin-top:8px;}
+.disc-link-row a{font-size:10px;font-weight:600;color:var(--navy);}
+
 /* ─── PRINT STYLES ─── */
 @media print{
   body>*:not(.snapshot-overlay){display:none!important;}
@@ -271,6 +311,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
         <button class="issuer-pill active" data-issuer="all">All</button>
       </div>
     </div>
+    <div class="control-row">
+      <span class="ctrl-label">Term</span>
+      <div class="pill-group" id="term-filters">
+        <button class="term-pill active" data-term="all">All</button>
+      </div>
+    </div>
     <div class="bottom-controls">
       <span class="ctrl-label">Sort</span>
       <select class="sort-select" id="sort-select">
@@ -304,6 +350,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 
   <div class="disclosure">
     <p><strong>For Institutional Use Only.</strong> This material is provided for informational and educational purposes only and does not constitute an offer to sell or a solicitation to buy any security. Structured notes involve significant risks including potential loss of principal, credit risk of the issuer, illiquidity, and payoff complexity. Soft protection is a barrier; hard protection is a buffer. All payments are subject to the credit risk of the issuing institution. Please review the applicable prospectus carefully before investing. Past performance is not indicative of future results. Securities offered through Prudent Prosperity of Texas, LLC, a Texas Registered Investment Advisor.</p>
+    <p class="disc-link-row"><a class="js-disc-link" href="#" target="_blank" rel="noopener">Read the full structured note disclosures &amp; risk factors →</a></p>
   </div>
 
 </main>
@@ -331,6 +378,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 // ─────────────────────────────────────────────────────────────
 const WORKER_URL    = "https://structured-notes-api.pranav-a05.workers.dev";
 const CALENDLY_LINK = "https://calendly.com/prudentprosperity/30min";
+// Full disclosures page. Replace with your SuiteDash portal page URL once you
+// create it (same way you did for the Learn page), e.g.
+// "https://portal.prudentwealthsolutions.com/i/StructuredNotesDisclosures"
+const DISCLOSURES_URL = "disclosures.html";
 
 // ─────────────────────────────────────────────────────────────
 // TYPE STYLES
@@ -390,6 +441,252 @@ function underlyingChips(u) {
   if(!u) return "";
   return u.split(",").map(s=>s.trim()).filter(Boolean).map(t=>`<span class="underlying-chip">${t}</span>`).join("");
 }
+
+// ─────────────────────────────────────────────────────────────
+// TERM — shown prominently on every card, plus a Term filter
+// ─────────────────────────────────────────────────────────────
+function termInfo(t) {
+  const m = termMo(t);
+  return { months: m, years: (m && m % 12 === 0) ? m / 12 : null };
+}
+
+// Navy block with a big gold number (grid card header + snapshot)
+function termBlockHTML(n) {
+  const { months, years } = termInfo(n.term);
+  if (!months) return `<span class="term-chip">${esc(n.term)}</span>`;
+  return `<div class="term-block" title="Term: ${months} months">
+    <span class="term-num">${months}</span>
+    <span class="term-meta"><span class="term-unit">MONTHS</span>${years ? `<span class="term-yrs">${years} YR${years > 1 ? "S" : ""}</span>` : ""}</span>
+  </div>`;
+}
+
+// Gold-outlined tile (list card metrics row)
+function termTileHTML(n) {
+  const { months, years } = termInfo(n.term);
+  if (!months) return "";
+  return `<div class="term-tile" title="Term: ${months} months">
+    <div class="metric-label">Term</div>
+    <div class="term-tile-val">${months}<small>MONTHS</small></div>
+    ${years ? `<div class="term-tile-sub">${years} YEAR${years > 1 ? "S" : ""}</div>` : ""}
+  </div>`;
+}
+
+const TERM_BANDS = [
+  { key: "b1", label: "Up to 2 yrs", test: m => m > 0 && m <= 24 },
+  { key: "b2", label: "2–3 yrs",     test: m => m > 24 && m <= 36 },
+  { key: "b3", label: "4–5 yrs",     test: m => m > 36 && m <= 60 },
+  { key: "b4", label: "Over 5 yrs",  test: m => m > 60 },
+];
+
+// New York time label for the close time (EST in winter, EDT in summer)
+function etLabel(d) {
+  try {
+    const dt = new Date((d || "") + "T15:00:00Z");
+    const p = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", timeZoneName: "short" })
+      .formatToParts(dt).find(x => x.type === "timeZoneName");
+    return p ? p.value : "ET";
+  } catch (e) { return "ET"; }
+}
+
+// ─────────────────────────────────────────────────────────────
+// PLAIN-LANGUAGE EXPLAINERS ("How it works")
+// Built from each note's own fields, so there is nothing extra
+// to maintain in Airtable. Wording is deliberately simplified and
+// hedged ("see the prospectus") — have compliance review it.
+// ─────────────────────────────────────────────────────────────
+const TYPE_BLURB = {
+  "Growth":       "A Growth note multiplies your share of market gains while cushioning moderate losses. It pays no income along the way.",
+  "Income":       "An Income note aims to pay a regular coupon as long as the underlying holds above a set level — built for yield rather than growth.",
+  "Absolute":     "An Absolute note can earn a positive return even when the market dips modestly, as long as it stays within the protection level.",
+  "Catapult":     "A Catapult note pays an attractive premium if it is called on a set date — or enhanced upside if it is not.",
+  "Call Premium": "A Call Premium note pays a premium if it is called early, and offers upside participation if it runs to maturity.",
+  "Digital":      "A Digital note pays a fixed return if the underlying finishes above a set level — no matter how much it gained.",
+  "Digital Plus": "A Digital Plus note pays a fixed return if the underlying finishes above a set level, with the potential to earn more if the market rallies strongly.",
+  "Snowball":     "A Snowball note builds up coupons over time and pays them together when the note is called or matures.",
+  "PPN":          "A Principal Protected Note returns your principal at maturity (subject to the issuer’s credit) while letting you share in market gains.",
+  "MLCD":         "A Market-Linked CD is a bank CD whose return is tied to a market index, with principal protection at maturity."
+};
+
+const _num  = s => { const m = String(s == null ? "" : s).match(/-?\d+(\.\d+)?/); return m ? parseFloat(m[0]) : NaN; };
+const _list = a => a.length < 2 ? (a[0] || "") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
+
+function _basket(n) {
+  const u = String(n.underlying || "").split(",").map(s => s.trim()).filter(Boolean);
+  return {
+    multi: u.length > 1,
+    one: esc(u[0] || "the underlying"),
+    txt: u.length > 1 ? `the lowest-performing of ${esc(_list(u))}` : esc(u[0] || "the underlying")
+  };
+}
+
+function _freq(n) {
+  const f = String(n.frequency || "").toLowerCase();
+  if (f.includes("month"))   return { n: 12, word: "month",            adv: "monthly" };
+  if (f.includes("quarter")) return { n: 4,  word: "quarter",          adv: "quarterly" };
+  if (f.includes("semi"))    return { n: 2,  word: "six-month period", adv: "semi-annually" };
+  if (f.includes("annual"))  return { n: 1,  word: "year",             adv: "annually" };
+  return null;
+}
+
+function _cap(n) {
+  const m = String(n.maxReturn || "");
+  if (/uncapped/i.test(m)) return "with no cap on the upside";
+  if (!isNaN(_num(m)))     return `up to a maximum return of ${esc(m)}`;
+  return "";
+}
+
+function _termTxt(n) {
+  const t = termInfo(n.term);
+  if (!t.months) return "its term";
+  return t.years ? `${t.months} months (${t.years} year${t.years > 1 ? "s" : ""})` : `${t.months} months`;
+}
+
+function _prot(n, b, early, absRet) {
+  const p = Number(n.protection) || 0, t = n.protectionType;
+  const lead = early ? "If the note is not called early, at maturity " : "At maturity ";
+  const u = b.multi ? "the lowest-performing underlying" : b.one;
+  if (t === "Full") return `${lead}your full $100 principal is returned regardless of how the underlying performs — subject to the credit of ${esc(n.issuer || "the issuer")}.`;
+  if (t === "Hard") return `${lead}you have a ${p}% downside buffer: the first ${p}% of any decline is absorbed for you. If ${u} finishes more than ${p}% below its starting level, you lose only the amount beyond ${p}% (for example, a ${p + 20}% decline would mean a 20% loss).`;
+  if (t === "Soft") return `${lead}you have a ${p}% protection barrier: if ${u} finishes no more than ${p}% below its starting level, ${absRet ? "you keep your principal and the absolute return feature above applies" : "you get your principal back"}. If it finishes lower than that, protection is lost and you bear the full decline (for example, a ${p + 10}% decline means a ${p + 10}% loss).`;
+  return "";
+}
+
+function explainParts(n) {
+  const b = _basket(n), cap = _cap(n), tt = _termTxt(n), rows = [];
+  const part    = esc(n.participation || n.upsideParticipation || "");
+  const partTxt = part ? `${part} of the gain` : "a share of the gain";
+  const multiNote = b.multi ? " With several underlyings, the lowest performer drives the result." : "";
+  const issuer  = esc(n.issuer || "the issuer");
+  const callTxt = (intro, tail) => {
+    const ct = String(n.callType || "");
+    const nc = n.nonCallPeriod ? `after the ${esc(n.nonCallPeriod)} non-call period, ` : "";
+    if (/issuer/i.test(ct)) return `This note is issuer callable: ${nc}${issuer} may choose to redeem it early — typically when doing so benefits the issuer — and you would receive your $100 plus ${tail}. You may not be able to reinvest at a similar return.`;
+    if (/auto/i.test(ct))   return `This note is autocallable: ${nc}if ${b.txt} is at or above its call level on an observation date, the note is redeemed automatically and you receive your $100 plus ${tail}. You may not be able to reinvest at a similar return.`;
+    return "";
+  };
+
+  switch (n.type) {
+    case "Growth":
+      rows.push(["What you can earn", `Over ${tt}, this note follows ${b.txt}. If it finishes above its starting level at maturity, you earn ${partTxt}${cap ? `, ${cap}` : ""}. If it finishes flat or lower, you earn no return.`]);
+      rows.push(["What protects you", _prot(n, b)]);
+      rows.push(["Good to know", `No interest or dividends are paid along the way — the outcome is determined at maturity.${multiNote}`]);
+      break;
+
+    case "Absolute": {
+      const dsp = /^\d+(\.\d+)?%?$/.test(String(n.downsideParticipation || "").trim()) ? esc(n.downsideParticipation) : "";
+      rows.push(["What you can earn", `If ${b.txt} finishes higher, you earn ${partTxt}${cap ? `, ${cap}` : ""}. If it instead finishes lower but stays within the protection level, the note is designed to turn that decline into a positive return${dsp ? ` (at ${dsp} downside participation)` : ""} — the “absolute return” feature.`]);
+      rows.push(["What protects you", _prot(n, b, false, true)]);
+      rows.push(["Good to know", `The ability to profit from a decline applies only within the protection level; beyond it, losses begin. Results are determined at maturity.${multiNote}`]);
+      break;
+    }
+
+    case "Digital":
+    case "Digital Plus": {
+      const cp   = _num(n.couponProtection);
+      const cond = !isNaN(cp) ? `no more than ${cp}% below its starting level` : "at or above its starting level";
+      const dr   = esc(n.digitalReturn || "a");
+      if (n.type === "Digital") {
+        rows.push(["What you can earn", `If ${b.txt} finishes ${cond} at maturity, you receive a fixed ${dr} return (total over the term, not per year) — whether it gained 1% or 50%. If it finishes below that level, you don’t receive the digital return.`]);
+      } else {
+        rows.push(["What you can earn", `If ${b.txt} finishes ${cond} at maturity, you receive the greater of a fixed ${dr} return (total over the term) or ${partTxt} — see the prospectus for exact terms. Below that level, you don’t receive the digital return.`]);
+      }
+      rows.push(["What protects you", _prot(n, b)]);
+      rows.push(["Good to know", `${n.type === "Digital" ? "Your return is capped at the digital amount — you don’t benefit from gains beyond it. " : ""}Results are determined at maturity.${multiNote}`]);
+      break;
+    }
+
+    case "Catapult": {
+      const when = n.firstCallDate ? `on ${esc(n.firstCallDate)}` : "on its first scheduled call date";
+      const up   = esc(n.upsideParticipation || n.participation || "");
+      const upIsPct = /^[\d.\-–\s%]+$/.test(up);
+      const upTxt = !up ? "a share of any gain" : (upIsPct ? `${up} of any gain` : `a payoff based on: ${up} (see the prospectus)`);
+      rows.push(["What you can earn", `If ${when} ${b.txt} is at or above its call level (generally its starting level — see the prospectus), the note is called early and you receive your $100 plus a ${esc(n.callPremium || "")} call premium. If it isn’t called, the note continues to maturity in ${tt}, where you earn ${upTxt}.`]);
+      rows.push(["What protects you", _prot(n, b, true)]);
+      rows.push(["Good to know", `An early call ends your investment sooner than the stated term, and you may not be able to reinvest at a similar return.${multiNote}`]);
+      break;
+    }
+
+    case "Call Premium": {
+      const issuerCall = /issuer/i.test(n.callType || "") || /issuer/i.test(n.autocall || "");
+      const nc    = n.nonCallPeriod ? `the ${esc(n.nonCallPeriod)} non-call period` : "the initial non-call period";
+      const sched = n.autocall ? ` (${esc(String(n.autocall).toLowerCase())})` : "";
+      const prem  = esc(n.callPremium || "");
+      const tail  = `If the note is never called, at maturity in ${tt} you earn ${partTxt} in ${b.txt}${cap ? `, ${cap}` : ""}.`;
+      rows.push(["What you can earn", issuerCall
+        ? `After ${nc}, ${issuer} may choose to redeem the note early on scheduled dates${sched}, paying your $100 plus a ${prem} call premium (see the prospectus for how the premium is earned by call date). ${tail}`
+        : `After ${nc}, if ${b.txt} is at or above its call level on a scheduled date${sched}, the note is called automatically and you receive your $100 plus a ${prem} call premium (see the prospectus for how the premium is earned by call date). ${tail}`]);
+      rows.push(["What protects you", _prot(n, b, true)]);
+      rows.push(["Good to know", `An early call ends your investment sooner than the stated term, and you may not be able to reinvest at a similar return.${multiNote}`]);
+      break;
+    }
+
+    case "Income": {
+      const f = _freq(n), y = _num(n.annualizedYield), cp = _num(n.couponProtection);
+      const mem = /memory/i.test(n.frequency || ""), fixed = /fixed/i.test(n.couponProtection || "");
+      const per = (f && !isNaN(y)) ? ` (about ${(y / f.n).toFixed(2)}% each ${f.word})` : "";
+      let r1 = `You can earn ${esc(n.annualizedYield || "a coupon")} annualized, paid ${f ? f.adv : "periodically"}${per}.`;
+      if (fixed) r1 += " Coupons on this note are fixed — paid on schedule rather than depending on the underlying’s level (subject to the issuer’s credit).";
+      else if (!isNaN(cp)) r1 += ` A coupon is paid only if ${b.txt} is no more than ${cp}% below its starting level on that observation date; otherwise that coupon is skipped.`;
+      if (mem && !fixed) r1 += " Memory feature: a skipped coupon isn’t lost — it is paid later if the underlying recovers above the coupon level on a future observation date.";
+      rows.push(["What you can earn", r1]);
+      const ct = callTxt("", "the coupon due");
+      if (ct) rows.push(["Early redemption", ct]);
+      rows.push(["What protects you", _prot(n, b, true)]);
+      rows.push(["Good to know", `${fixed ? "Fixed coupons still depend on the issuer’s credit." : "Coupons are not guaranteed — in a weak market you can receive little or no income."}${b.multi ? " With several underlyings, the lowest performer determines both your coupons and your principal outcome." : ""}`]);
+      break;
+    }
+
+    case "Snowball": {
+      const f = _freq(n), mem = /memory/i.test(n.frequency || "");
+      rows.push(["What you can earn", `This note targets ${esc(n.annualizedYield || "a coupon")} annualized, accrued ${f ? f.adv : "periodically"}${mem ? " with a memory feature" : ""}. Instead of paying out along the way, coupons build up (“snowball”) and are paid together when the note is called early or reaches maturity — subject to the conditions in the prospectus.`]);
+      const ct = callTxt("", "the accumulated coupons");
+      if (ct) rows.push(["Early redemption", ct]);
+      rows.push(["What protects you", _prot(n, b, true)]);
+      rows.push(["Good to know", `No regular income is paid before the note is called or matures, and payment of accumulated coupons depends on the conditions in the prospectus.${multiNote}`]);
+      break;
+    }
+
+    case "PPN":
+    case "MLCD":
+      rows.push(["What you can earn", `If ${b.txt} finishes above its starting level at maturity in ${tt}, you earn ${partTxt}${cap ? `, ${cap}` : ""}. If it finishes flat or lower, you receive your principal back with no gain.`]);
+      rows.push(["What protects you", _prot(n, b)]);
+      rows.push(["Good to know", (n.type === "MLCD"
+        ? "As a market-linked CD, it may be eligible for FDIC insurance up to applicable limits — confirm in the issuer’s disclosures. No interest is paid along the way, and withdrawing early may not be possible or may carry a penalty."
+        : "Your protection depends on the issuer’s creditworthiness; this is not a bank deposit and is not FDIC insured. No interest is paid along the way.") + multiNote]);
+      break;
+
+    default:
+      rows.push(["What you can earn", `Your return depends on the performance of ${b.txt} over ${tt}. See the prospectus for the exact payoff.`]);
+      rows.push(["What protects you", _prot(n, b)]);
+  }
+  return rows;
+}
+
+function explainHTML(n) {
+  const rows = explainParts(n).filter(r => r[1]);
+  const lead = TYPE_BLURB[n.type] || "";
+  return `<div class="expl">
+    ${lead ? `<div class="expl-lead">${lead}</div>` : ""}
+    <div class="expl-rows">${rows.map(([h, t]) => `<div class="expl-row"><div class="expl-h">${h}</div><p>${t}</p></div>`).join("")}</div>
+    <div class="expl-foot">A simplified, hypothetical description for education only — not a prediction or an offer. Exact terms (observation dates, call levels, payoff formulas) are set in the prospectus. <a href="${DISCLOSURES_URL}" target="_blank" rel="noopener">Full disclosures &amp; risk factors →</a></div>
+  </div>`;
+}
+
+// Expand / collapse the explainer inside a card (built lazily on first open)
+function toggleExplain(id, btn) {
+  const card  = btn.closest(".card");
+  const panel = card.querySelector(".expl-panel");
+  const open  = card.classList.toggle("open");
+  btn.setAttribute("aria-expanded", open ? "true" : "false");
+  if (open && !panel.dataset.ready) {
+    const n = ALL_NOTES.find(x => x.id === id);
+    if (n) { panel.innerHTML = explainHTML(n); panel.dataset.ready = "1"; }
+  }
+  panel.hidden = !open;
+  const grid = card.closest(".card-grid");
+  if (grid) grid.classList.toggle("has-open", !!grid.querySelector(".card.open"));
+}
+
 
 // ─────────────────────────────────────────────────────────────
 // CHARACTERISTIC TAGS
@@ -511,7 +808,7 @@ function renderGridCard(n) {
                 <span class="type-badge" style="background:${s.bg};color:${s.text}">${n.type}</span>
                 <span class="issuer-badge">${n.issuer}</span>
           </div>
-          <span class="term-chip">${n.term}</span>
+          ${termBlockHTML(n)}
         </div>
         <div class="underlying-chips">${underlyingChips(n.underlying)}</div>
         <div class="card-close-line">Closes ${fmtDate(n.closeDate)}</div>
@@ -522,6 +819,12 @@ function renderGridCard(n) {
       </div>
       <div class="secondary-metrics">${secondaryMetrics(n)}</div>
       <div class="card-bars">${barsHTML(n)}</div>
+      <div class="explain-row">
+        <button class="explain-toggle" aria-expanded="false" onclick="toggleExplain('${n.id}',this)">
+          <span class="ex-l"><span class="ex-i">i</span>How it works</span><span class="chev">▾</span>
+        </button>
+      </div>
+      <div class="expl-panel" hidden></div>
       <div class="card-footer-grid">
         <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
         <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
@@ -554,27 +857,35 @@ function renderListCard(n) {
           <span class="issuer-badge">${n.issuer}</span>
         </div>
         <div class="list-underlying">${n.underlying}</div>
-        <div class="list-meta">${n.term} · Closes ${fmtDate(n.closeDate)}</div>
+        <div class="list-meta">Closes ${fmtDate(n.closeDate)}</div>
       </div>
       <div class="card-list-metrics">
         <div class="metric" style="background:var(--navy);flex-shrink:0;min-width:90px;text-align:center">
           <div class="metric-label" style="color:var(--gold-lt);justify-content:center">${pm.label}</div>
           <div class="metric-value" style="font-size:18px;color:var(--gold);text-align:center">${pm.value||"—"}</div>
         </div>
+        ${termTileHTML(n)}
         ${secondaryMetrics(n)}
       </div>
       <div class="card-list-bars">${barsHTML(n)}</div>
-     <div class="card-list-cta">
-    <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
-    <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
-      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
-      </svg>
-    </button>
+      <div class="card-list-cta">
+        <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
+        <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
+          </svg>
+        </button>
+      </div>
     </div>
+    <div class="explain-row list">
+      <button class="explain-toggle" aria-expanded="false" onclick="toggleExplain('${n.id}',this)">
+        <span class="ex-l"><span class="ex-i">i</span>How it works</span><span class="chev">▾</span>
+      </button>
     </div>
+    <div class="expl-panel" hidden></div>
   </div>`;
 }
+
 // ─────────────────────────────────────────────────────────────
 // SNAPSHOT MODAL
 // ─────────────────────────────────────────────────────────────
@@ -591,7 +902,7 @@ function openSnapshot(n) {
       <div>
         <span class="type-badge" style="background:${s.bg};color:${s.text};font-size:10px;padding:3px 10px;border-radius:99px;">${n.type}</span>
       </div>
-      <span class="snap-term">${n.term}</span>
+      ${termBlockHTML(n)}
     </div>
     <div class="snap-underlying">${n.underlying}</div>
     <div class="snap-issuer">${n.issuer} · Issued at $100.00 per note</div>
@@ -613,8 +924,9 @@ function openSnapshot(n) {
         <div class="bar-sub"><span>Day ${daysElapsed} of ${daysTotal}</span><span>${fmtDate(n.closeDate)}</span></div>
       </div>
     </div>
+    <div class="snap-expl">${explainHTML(n)}</div>
     <a class="snap-cta" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to an Advisor →</a>
-    <div class="snap-close-date">Closes ${fmtDate(n.closeDate)} · 10:00 AM EDT</div>
+    <div class="snap-close-date">Closes ${fmtDate(n.closeDate)} · 10:00 AM ${etLabel(n.closeDate)}</div>
     <div class="snap-disclaimer">For Institutional Use Only. Not an offer to buy or sell securities. Structured notes involve risk of loss. Review the prospectus before investing. Past performance is not indicative of future results. © Prudent Prosperity</div>
   `;
   document.getElementById("snapshot-overlay").classList.add("open");
@@ -632,6 +944,7 @@ function closeSnapshot(e) {
 let ALL_NOTES     = [];
 let currentFilter = "all";
 let currentIssuer = "all";
+let currentTerm   = "all";
 let currentSort   = "featured-first";
 let currentView   = "grid";
 
@@ -680,6 +993,19 @@ function buildIssuerFilters(notes) {
   });
 }
 
+function buildTermFilters(notes) {
+  const cont = document.getElementById("term-filters");
+  [...cont.querySelectorAll(".term-pill:not([data-term='all'])")].forEach(p=>p.remove());
+  TERM_BANDS.forEach(b=>{
+    const c = notes.filter(n=>b.test(termMo(n.term))).length;
+    if(!c) return;
+    const btn=document.createElement("button");
+    btn.className="term-pill"; btn.dataset.term=b.key;
+    btn.innerHTML=`${b.label}<span class="tcount">${c}</span>`;
+    cont.appendChild(btn);
+  });
+}
+
 function updateStats(list) {
   document.getElementById("stat-total").textContent   = list.length;
   document.getElementById("stat-issuers").textContent = new Set(list.map(n=>n.issuer)).size;
@@ -690,7 +1016,9 @@ function render() {
   let list = ALL_NOTES.filter(n=>{
     const typeOk   = currentFilter==="all"?true:currentFilter==="featured"?n.status==="Featured":n.type===currentFilter;
     const issuerOk = currentIssuer==="all"||n.issuer===currentIssuer;
-    return typeOk&&issuerOk;
+    const band = TERM_BANDS.find(b=>b.key===currentTerm);
+    const termOk = currentTerm==="all" || (band && band.test(termMo(n.term)));
+    return typeOk&&issuerOk&&termOk;
   });
   list = sortNotes(list,currentSort);
 
@@ -727,6 +1055,7 @@ async function loadNotes() {
 
     buildTypeFilters(ALL_NOTES);
     buildIssuerFilters(ALL_NOTES);
+    buildTermFilters(ALL_NOTES);
     document.getElementById("loading-wrap").style.display="none";
     document.getElementById("controls").style.display="flex";
     render();
@@ -757,6 +1086,14 @@ document.getElementById("issuer-filters").addEventListener("click",e=>{
 });
 document.getElementById("sort-select").addEventListener("change",e=>{currentSort=e.target.value; render();});
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.getElementById("snapshot-overlay").classList.remove("open"); });
+
+document.getElementById("term-filters").addEventListener("click",e=>{
+  const b = e.target.closest(".term-pill"); if(!b) return;
+  document.querySelectorAll(".term-pill").forEach(p=>p.classList.remove("active"));
+  b.classList.add("active");
+  currentTerm=b.dataset.term; render();
+});
+document.querySelectorAll(".js-disc-link").forEach(a=>a.href=DISCLOSURES_URL);
 
 loadNotes();
 </script>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Structured Note Disclosures &amp; Risk Factors — Prudent Prosperity</title>
+<meta name="description" content="Important disclosures and risk factors for the structured notes shown on the Prudent Prosperity Structured Notes Calendar."/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#091930;--gold:#d0b689;--gold-lt:#e8d5af;--gold-dk:#b09060;
+  --white:#ffffff;--bg:#f2f0ec;--surface:#ffffff;--surface2:#eeebe4;
+  --border:#e0dbd0;--border2:#c9c2ae;--text:#091930;--text2:#374151;--text3:#7a776f;
+  --sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;--r:10px;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.65;}
+
+/* header */
+.site-header{background:var(--navy);border-bottom:2px solid var(--gold);padding:0 2rem;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:32px;height:32px;border-radius:7px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--navy);}
+.logo-name{font-size:14px;font-weight:600;color:var(--white);display:block;}
+.logo-sub{font-size:10px;color:var(--gold-lt);letter-spacing:.05em;display:block;}
+.header-actions{display:flex;gap:8px;align-items:center;}
+.btn-ghost{font-size:11px;font-weight:500;color:var(--gold-lt);text-decoration:none;padding:5px 12px;border-radius:6px;border:1px solid rgba(208,182,137,.3);background:none;cursor:pointer;font-family:var(--sans);}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold);}
+.btn-gold{font-size:11px;font-weight:600;color:var(--navy);background:var(--gold);padding:5px 14px;border-radius:6px;text-decoration:none;}
+.btn-gold:hover{background:var(--gold-lt);}
+
+/* hero */
+.hero{background:var(--navy);padding:2rem 2rem 2.2rem;text-align:center;border-bottom:1px solid rgba(208,182,137,.2);}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.hero h1{font-size:26px;font-weight:600;color:var(--white);letter-spacing:-.02em;line-height:1.2;margin-bottom:8px;}
+.hero p{font-size:13px;color:var(--gold-lt);max-width:620px;margin:0 auto;line-height:1.7;}
+.hero .upd{font-family:var(--mono);font-size:10px;color:var(--gold-lt);opacity:.7;margin-top:10px;}
+
+/* content */
+.page{max-width:860px;margin:0 auto;padding:2rem 1.5rem 3rem;}
+.notice{background:#fff8f0;border:1px solid #fdd8a0;border-radius:var(--r);padding:14px 16px;margin-bottom:1.5rem;font-size:13px;color:#7a4400;line-height:1.65;}
+.notice strong{color:#5c3200;}
+.sec{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem 1.6rem;margin-bottom:14px;}
+.sec h2{font-size:16px;font-weight:600;color:var(--navy);letter-spacing:-.01em;padding-bottom:8px;margin-bottom:10px;border-bottom:2px solid var(--gold);display:flex;gap:10px;align-items:baseline;}
+.sec h2 .num{font-family:var(--mono);font-size:12px;color:var(--gold-dk);font-weight:500;}
+.sec h3{font-size:13px;font-weight:600;color:var(--navy);margin:14px 0 4px;}
+.sec p{font-size:13px;color:var(--text2);margin-bottom:9px;}
+.sec p:last-child{margin-bottom:0;}
+.sec ul{margin:4px 0 10px 1.2rem;}
+.sec li{font-size:13px;color:var(--text2);margin-bottom:5px;}
+.sec strong{color:var(--navy);font-weight:600;}
+.callout{background:#eef6ff;border:1px solid #c4dcf5;border-radius:8px;padding:10px 13px;margin:10px 0;font-size:12.5px;color:#1a4f7a;}
+.example{background:var(--surface2);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:10px 13px;margin:10px 0;font-size:12px;font-family:var(--mono);line-height:1.8;color:var(--text2);}
+.firm{background:var(--navy);border-radius:var(--r);padding:1.2rem 1.6rem;margin-top:6px;}
+.firm p{font-size:12.5px;color:var(--gold-lt);line-height:1.7;}
+.firm strong{color:var(--white);}
+.cta{text-align:center;margin-top:1.5rem;}
+.cta a{display:inline-block;padding:10px 22px;border-radius:8px;background:var(--navy);color:var(--gold);font-size:13px;font-weight:600;text-decoration:none;}
+.cta a:hover{background:var(--gold);color:var(--navy);}
+
+@media(max-width:640px){
+  .site-header{padding:.7rem 1rem;}
+  .hero{padding:1.5rem 1rem;}
+  .hero h1{font-size:21px;}
+  .page{padding:1.2rem .9rem 2rem;}
+  .sec{padding:1.1rem 1.1rem;}
+}
+@media print{
+  body{background:#fff;}
+  .site-header,.cta,.hero .upd{display:none;}
+  .hero{background:#fff;border-bottom:2px solid var(--gold);padding:0 0 12px;text-align:left;}
+  .hero h1{color:var(--navy);} .hero p,.hero-eyebrow{color:var(--text2);}
+  .sec{border:none;border-bottom:1px solid var(--border);border-radius:0;padding:10px 0;page-break-inside:avoid;}
+  .firm{background:#fff;border:1px solid var(--navy);} .firm p{color:var(--text);} .firm strong{color:var(--navy);}
+  .page{max-width:none;padding:12px 0;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="#">
+    <div class="logo-mark">PP</div>
+    <div><span class="logo-name">Prudent Prosperity</span><span class="logo-sub">Important Disclosures</span></div>
+  </a>
+  <div class="header-actions">
+    <button class="btn-ghost" onclick="window.print()">🖨 Print / Save as PDF</button>
+    <a class="btn-ghost" href="https://portal.prudentwealthsolutions.com/i/StructuredNotes" target="_top">← Notes Calendar</a>
+    <a class="btn-gold" href="https://calendly.com/prudentprosperity/30min" target="_blank" rel="noopener">Speak to Advisor</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">For Institutional Use Only</div>
+  <h1>Structured Note Disclosures &amp; Risk Factors</h1>
+  <p>Please read this page carefully before considering any structured note shown on the Prudent Prosperity Structured Notes Calendar. Structured notes are complex, can lose value, and are not suitable for every investor.</p>
+  <div class="upd">Last updated: November 2026</div>
+</div>
+
+<main class="page">
+
+  <div class="notice">
+    <strong>Important:</strong> The information on this site is provided for informational and educational purposes only. It is <strong>not</strong> an offer to sell, or a solicitation of an offer to buy, any security, and it is not investment, legal, or tax advice or a recommendation. The prospectus or offering documents for each note are the only authoritative source of its terms.
+  </div>
+
+  <section class="sec" id="about-info">
+    <h2><span class="num">1</span>About the information on this site</h2>
+    <p>The structured notes shown on the Structured Notes Calendar are compiled from issuer offerings made available through a third-party structured products platform. Prudent Prosperity does not issue, guarantee, or underwrite any of these notes.</p>
+    <ul>
+      <li><strong>Indicative terms.</strong> Participation rates, caps, coupons, barriers, buffers, call levels, and other terms shown are indicative and may change, or the offering may be withdrawn, before the note prices. Final terms are set in the final pricing supplement or offering documents.</li>
+      <li><strong>Availability.</strong> Offerings are subject to availability, allocation, minimums, and increments, and may close earlier than the displayed close date if fully subscribed.</li>
+      <li><strong>Model information.</strong> Information provided represents model or sample structured notes. It does not reflect actual trading and does not reflect the impact that material economic and market factors may have on the pricing or performance of any note. Actual notes may differ materially.</li>
+      <li><strong>Simplified descriptions.</strong> The “How it works” explanations, tags, labels, and any payoff illustrations are simplified summaries for education. They do not describe every condition of a note — observation dates, call levels, averaging, calculation conventions, and other terms vary by note and are controlled by the prospectus.</li>
+      <li><strong>Accuracy.</strong> We work to keep the calendar current but cannot guarantee that every figure is complete, accurate, or up to date. Always verify against the prospectus before making any decision.</li>
+    </ul>
+  </section>
+
+  <section class="sec" id="what-are">
+    <h2><span class="num">2</span>What are structured notes?</h2>
+    <p>Structured notes are securities issued by financial institutions whose returns are based on, among other things, equity indexes, a single equity security, a basket of equity securities, exchange-traded funds, interest rates, commodities, and/or foreign currencies. Your return is “linked” to the performance of a reference asset or index.</p>
+    <p>Structured notes have a fixed maturity and combine two components: a <strong>bond component</strong> and an <strong>embedded derivative</strong>. Common types include principal protected notes, reverse convertible notes, enhanced participation or leveraged notes, income (contingent coupon) notes, and hybrid notes that combine several characteristics.</p>
+    <p>Structured notes are unsecured debt obligations of the issuer. They are not shares of the underlying asset, and holding a note does not give you ownership of, or the right to dividends or voting rights in, the underlying.</p>
+  </section>
+
+  <section class="sec" id="risks">
+    <h2><span class="num">3</span>Key risks</h2>
+
+    <h3>Complexity</h3>
+    <p>You and your advisor should take the time to fully understand how the return on a note is calculated. The payoff may include leverage applied to the performance of the underlying, protection from losses if the underlying declines, conditions that must be met for coupons to be paid, early-redemption features, and embedded fees. Read the prospectus to understand how the note’s payoff incorporates the underlying.</p>
+
+    <h3>Market risk and possible loss of principal</h3>
+    <p>Some notes provide for repayment of principal at maturity, often called “principal protection.” Many notes do not offer this feature, or offer only partial protection. For notes without full principal protection, the performance of the underlying may cause you to lose some or all of your principal. Depending on the underlying, market risk may include changes in equity or commodity prices, interest rates, foreign exchange rates, and market volatility.</p>
+
+    <h3>Principal protection depends on the issuer</h3>
+    <p>Any principal protection is subject to the credit risk of the issuer. See “Credit risk of the issuer” below. Principal-protected notes are <strong>not</strong> bank deposits and are generally not FDIC-insured. Market-linked CDs may be eligible for FDIC insurance up to applicable limits; confirm eligibility and limits in the issuer’s disclosures.</p>
+
+    <h3>Buffer versus barrier</h3>
+    <p>Notes with partial protection generally use one of two designs, and the difference matters:</p>
+    <ul>
+      <li><strong>Hard protection (buffer).</strong> The note absorbs the first X% of any decline in the underlying. If the decline exceeds X%, you lose only the portion beyond X%.</li>
+      <li><strong>Soft protection (barrier).</strong> You are protected only if the underlying does not fall below the barrier level (as measured under the note’s terms). If it does, protection is lost and you may bear the full decline from the starting level — not just the amount below the barrier.</li>
+    </ul>
+    <div class="example">Example (hypothetical): underlying declines 35%<br>20% buffer  → loss of 15% (35% − 20%)<br>30% barrier → barrier breached → loss of 35%</div>
+
+    <h3>Knock-in / barrier feature</h3>
+    <p>If the underlying falls below a pre-specified level (a barrier, trigger, or knock-in) at the time or times specified in the note’s terms, you may lose some or all of your principal and may also lose coupon payments scheduled during the term. When the level is breached, the payout changes: instead of a return of principal you may receive an amount that reflects the decline in value of the underlying. For certain notes you may even receive the underlying asset itself, which will have declined in value.</p>
+
+    <h3>Contingent coupons and memory features</h3>
+    <p>On income notes, coupons are generally <strong>contingent</strong>: a coupon is paid only if the underlying is at or above a specified level on the relevant observation date. If it is not, that coupon is not paid, and you may receive little or no income. A “memory” feature, where present, may pay previously missed coupons if the underlying later recovers above the coupon level, but it does not guarantee that any coupon will be paid.</p>
+
+    <h3>Participation rates, caps, and digital returns</h3>
+    <p>A participation rate determines how much of an increase in the underlying is paid to you. For example, at 50% participation, a 20% increase in the underlying produces a 10% return. Rates above 100% amplify gains but do not apply to losses unless the note says so.</p>
+    <p>Some notes <strong>cap</strong> the maximum return; once the cap is reached you do not participate in further gains. Digital notes pay a fixed return if specified conditions are met, regardless of how much the underlying gained, and pay nothing extra for outperformance. Absolute-return features generally apply only within a stated protection range.</p>
+
+    <h3>Call risk and reinvestment risk</h3>
+    <p>Some notes can be redeemed before maturity. <strong>Autocallable</strong> notes are redeemed automatically if the underlying meets a specified condition on an observation date. <strong>Issuer callable</strong> notes may be redeemed at the issuer’s sole discretion, which the issuer is more likely to exercise when it benefits the issuer. If a note is called, you may not be able to reinvest your proceeds at the same rate of return, you stop receiving any further coupons or participation, and early redemption may occur at a time that is unfavorable to you.</p>
+
+    <h3>Worst-of baskets, single stocks, and specialized underlyings</h3>
+    <ul>
+      <li><strong>Worst-of baskets.</strong> When a note references several underlyings, the result is typically determined by the <em>worst-performing</em> one. Poor performance of a single underlying can determine the outcome even if the others perform well.</li>
+      <li><strong>Single stocks and concentrated baskets.</strong> Notes linked to individual stocks or small baskets are generally more volatile than notes linked to broad indexes. Higher stated yields or participation typically reflect higher risk.</li>
+      <li><strong>Sector, thematic, commodity, and digital-asset-linked exposures.</strong> These can be especially volatile and may be subject to risks specific to the sector or asset.</li>
+      <li><strong>Proprietary, rules-based, or futures-based indices.</strong> Some indices apply fees, volatility controls, or synthetic dividend assumptions that can cause them to perform differently from the market they appear to track. Index methodologies can change.</li>
+    </ul>
+
+    <h3>Credit risk of the issuer</h3>
+    <p>Structured notes are unsecured debt obligations of the issuer. The issuer’s promises to pay — including any principal protection and any coupons — are only as good as its financial health. If the issuer defaults or becomes subject to resolution proceedings, you may lose some or all of your principal and any other payments due, even if the underlying performs well. Changes in the issuer’s credit rating or credit spreads can also reduce the market value of the note before maturity.</p>
+
+    <h3>Issue price versus estimated value</h3>
+    <p>The price you pay at issuance will likely be higher than the fair value of the note on the issue date. Issuers disclose an estimated value on the cover page of the prospectus; it is typically lower than the issue price because the issue price includes costs for selling, structuring, and hedging the note. These embedded costs reduce the economic terms of the note compared with what might otherwise be offered.</p>
+
+    <h3>Liquidity and secondary market</h3>
+    <p>Notes (other than exchange-traded notes) are not listed on securities exchanges and typically have little or no secondary market. The only potential buyer may be the issuer’s broker-dealer affiliate or the distributor, and issuers often disclaim any obligation to repurchase or make a market. You should be prepared to hold a note to maturity; if you sell earlier you may receive significantly less than your principal, or may be unable to sell at all. Investors could lose a significant portion of their investment if principal is needed before maturity.</p>
+
+    <h3>Valuation and daily pricing</h3>
+    <p>Because most notes rarely trade after issuance, prices shown on account statements are usually calculated using models or matrix pricing rather than observable market prices. These values represent a best estimate by the pricing source, are not net asset values, and may differ from the price at which you could actually sell.</p>
+
+    <h3>No dividends or ownership of the underlying</h3>
+    <p>Returns on most notes are based on the price return of the underlying and do not include dividends. You will not have any rights in the underlying securities.</p>
+
+    <h3>Conflicts of interest</h3>
+    <p>The issuer and its affiliates may act in multiple capacities — such as hedging counterparty, calculation agent, and distributor — and may hold or trade the underlying assets. The issuer’s interests may differ from yours, and determinations made by the calculation agent could affect the amounts you receive.</p>
+    <!-- COMPLIANCE: add Prudent Prosperity's own conflict-of-interest / compensation disclosure for structured note recommendations here, per Form ADV Part 2A. -->
+
+    <h3>Tax considerations</h3>
+    <p>The tax treatment of structured notes is complicated and, in some cases, uncertain. Depending on the note, returns may be taxed as ordinary income rather than capital gains, income may be taxable before you receive cash (for example, imputed interest), and foreign tax consequences may apply. Read the tax disclosures in the prospectus and consult a qualified tax advisor before investing.</p>
+  </section>
+
+  <section class="sec" id="illustrations">
+    <h2><span class="num">4</span>Hypothetical illustrations</h2>
+    <p>Any example, scenario, or payoff illustration on this site is <strong>hypothetical</strong>, is provided solely to help explain how a type of note works, and is <strong>not</strong> a prediction or projection of actual results. Illustrations are simplified and may not reflect all terms of a particular note — such as observation dates, averaging, call schedules, memory features, fees, or the effect of an early call — or the credit risk of the issuer. Actual outcomes can be materially different. Past performance of any underlying is not indicative of future results.</p>
+  </section>
+
+  <section class="sec" id="before-investing">
+    <h2><span class="num">5</span>Before investing in any structured note</h2>
+    <ul>
+      <li>Read the prospectus and offering documents in full, including the risk factors, the estimated value, and the tax disclosures.</li>
+      <li>Make sure you can explain, in your own words, how the payoff is calculated and what could cause a loss.</li>
+      <li>Understand the fees and costs, including the premium of the issue price above the issuer’s estimated value.</li>
+      <li>Consider whether a note is suitable given your investment objectives, financial circumstances, risk tolerance, time horizon, and liquidity needs — including whether you could need the money before maturity.</li>
+      <li>Understand any call features: what triggers a call, the earliest date it can occur, and how a call could limit your return.</li>
+      <li>Consider alternatives that may provide similar exposure with different return, fee, liquidity, and risk characteristics.</li>
+      <li>Review the financial condition and credit ratings of the issuer as carefully as you would for any other investment.</li>
+      <li>Consult your tax advisor about the consequences of a particular note.</li>
+    </ul>
+    <div class="callout">Purchasing a structured note does not guarantee positive returns. The underlying may not increase in value — and even if it does, conditions in the note may limit your return. Interest rates, volatility, price movements, or other market variables may negatively affect your principal and performance. Investing involves risk, including loss of principal.</div>
+  </section>
+
+  <section class="sec" id="confidentiality">
+    <h2><span class="num">6</span>Confidentiality and use of these materials</h2>
+    <p>These materials are confidential and intended solely for the recipient. They may not be copied, redistributed, or shared with any other person or entity without the written consent of Prudent Prosperity of Texas, LLC.</p>
+  </section>
+
+  <div class="firm" id="firm">
+    <p><strong>Securities offered through Prudent Prosperity of Texas, LLC, a Texas Registered Investment Advisor.</strong></p>
+    <p style="margin-top:6px;">Nothing on this page should be considered an investment recommendation or advice; all investment decisions should be made in consultation with an experienced investment professional.</p>
+    <!-- COMPLIANCE: add links to Form ADV Part 2A / Form CRS and any required state-specific language here. -->
+  </div>
+
+  <div class="cta"><a href="https://calendly.com/prudentprosperity/30min" target="_blank" rel="noopener">Questions? Speak to an Advisor →</a></div>
+
+</main>
+</body>
+</html>
