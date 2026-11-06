@@ -208,6 +208,30 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .term-tile{min-height:0;}
 .issuer-logo{display:inline-flex;align-items:center;background:#fff;border:1px solid var(--border);border-radius:5px;padding:2px 7px;height:22px;flex-shrink:0;}
 .issuer-logo img{height:16px;width:auto;max-width:76px;object-fit:contain;display:block;}
+/* ─── TOP ROW: dark type box + one consistent tag style + star ─── */
+.top-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:9px 12px 0;}
+.top-tags{display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-width:0;}
+.type-box{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:3px 10px;border-radius:5px;white-space:nowrap;line-height:1.5;}
+.star-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--navy);flex-shrink:0;box-shadow:0 0 0 2px rgba(208,182,137,.28);}
+.char-tag,.char-tag.tag-auto,.char-tag.tag-issuer,.char-tag.tag-memory,.char-tag.tag-full,.char-tag.tag-hard,.char-tag.tag-soft{background:#f5f5f5;color:#555;border-color:#ddd;}
+
+/* grid: tickers + term share one row */
+.card-top-grid{padding-top:10px;}
+.card-top-grid .card-top-row{margin-bottom:0;align-items:center;}
+.card-top-grid .underlying-chips{margin-bottom:0;}
+
+/* list: tickers on top, "Issued by" pinned to the bottom-left */
+.card-identity{justify-content:space-between;gap:8px;}
+.list-underlying{font-size:15px;}
+
+/* ─── ISSUED BY ─── */
+.issued-row{display:flex;align-items:center;gap:8px;}
+.card-grid-inner > .issued-row{padding:7px 12px;border-bottom:1px solid var(--border);}
+.issued-lbl{font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);}
+.issued-row .issuer-logo{height:28px;padding:3px 8px;}
+.issued-row .issuer-logo img{height:20px;max-width:100px;}
+.issued-row .issuer-badge{font-size:11px;font-weight:600;color:var(--navy);padding:4px 10px;}
+
 /* ─── ICONS ─── */
 .ic{width:11px;height:11px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;color:var(--gold-dk);}
 .bar-label.bl-ic{display:inline-flex;align-items:center;gap:4px;}
@@ -263,12 +287,81 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .disc-link-row{margin-top:8px;}
 .disc-link-row a{font-size:10px;font-weight:600;color:var(--navy);}
 
+/* ─── FAVORITES ─── */
+.fav-wrap{position:relative;display:inline-flex;flex-shrink:0;}
+.fav-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text3);transition:all .13s;padding:0;}
+.fav-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.fav-btn:hover{border-color:#c2415d;color:#c2415d;}
+.fav-btn.on{background:#fdeef2;border-color:#e8a3b5;color:#c2415d;}
+.fav-btn.on svg{fill:#c2415d;}
+.cta-icons{display:flex;gap:6px;justify-content:center;}
+.pill.fav-pill{display:inline-flex;align-items:center;gap:5px;}
+.pill.fav-pill .ic{color:#c2415d;fill:currentColor;width:11px;height:11px;}
+.pill.fav-pill .fcount{font-family:var(--mono);font-size:9px;opacity:.7;}
+.pill.fav-pill.active{background:#c2415d;color:#fff;border-color:#c2415d;}
+.pill.fav-pill.active .ic{color:#fff;}
+.fav-bubble{position:absolute;bottom:calc(100% + 9px);right:-6px;width:224px;background:var(--navy);color:#fff;font-size:10.5px;line-height:1.5;padding:8px 10px;border-radius:8px;z-index:450;box-shadow:0 6px 20px rgba(9,25,48,.3);border:1px solid rgba(208,182,137,.35);font-weight:400;text-align:left;cursor:pointer;}
+.fav-bubble strong{color:var(--gold);font-weight:600;}
+.fav-bubble::after{content:"";position:absolute;top:100%;right:14px;border:5px solid transparent;border-top-color:var(--navy);}
+
+.fav-banner{background:#fbf6ea;border:1px solid var(--gold);border-radius:var(--r);padding:11px 14px;margin-bottom:1rem;display:flex;gap:12px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+.fav-banner[hidden]{display:none;}
+.fb-main{display:flex;gap:10px;align-items:flex-start;flex:1;min-width:260px;font-size:11.5px;line-height:1.55;color:var(--text2);}
+.fb-main strong{color:var(--navy);}
+.fb-ic .ic{width:16px;height:16px;color:var(--gold-dk);margin-top:1px;}
+.fb-actions{display:flex;gap:8px;flex-shrink:0;}
+.fb-btn{font-family:var(--sans);font-size:11px;font-weight:600;padding:6px 12px;border-radius:7px;border:1px solid var(--border2);background:var(--surface);color:var(--navy);cursor:pointer;}
+.fb-btn.primary{background:var(--navy);color:var(--gold);border-color:var(--navy);}
+.fb-btn:disabled{opacity:.45;cursor:not-allowed;}
+.fb-warn{flex-basis:100%;font-size:11px;line-height:1.5;color:#7a4400;background:#fff3e0;border:1px solid #f3d9a8;border-radius:7px;padding:6px 10px;}
+.fb-link{background:none;border:none;color:var(--navy);font-weight:600;text-decoration:underline;cursor:pointer;font-family:var(--sans);font-size:11px;padding:0;}
+
+/* ─── PDF DOCUMENT (hidden on screen, shown only when exporting) ─── */
+#fav-print{display:none;font-family:var(--sans);color:var(--navy);}
+#fav-print,#fav-print *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box;}
+.fp-head{background:var(--navy);border-bottom:3px solid var(--gold);border-radius:8px 8px 0 0;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff;}
+.fp-brand{display:flex;align-items:center;gap:10px;}
+.fp-mark{width:30px;height:30px;border-radius:6px;background:var(--gold);color:var(--navy);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;}
+.fp-name{font-size:14px;font-weight:700;color:#fff;}
+.fp-sub{font-size:8px;color:var(--gold-lt);letter-spacing:.08em;}
+.fp-meta{text-align:right;font-size:9px;color:var(--gold-lt);line-height:1.6;font-family:var(--mono);}
+.fp-title{margin:14px 0 4px;font-size:19px;font-weight:700;letter-spacing:-.01em;}
+.fp-intro{font-size:10px;color:#4a5568;line-height:1.6;margin-bottom:10px;}
+.fp-table{width:100%;border-collapse:collapse;}
+.fp-table thead{display:table-header-group;}
+.fp-table th{background:#0f2647;color:var(--gold);font-size:8px;letter-spacing:.07em;text-transform:uppercase;text-align:left;padding:6px 8px;}
+.fp-table td{padding:8px;border-bottom:1px solid #e0dbd0;vertical-align:top;font-size:10px;line-height:1.45;}
+.fp-table tr{page-break-inside:avoid;break-inside:avoid;}
+.fp-table tbody tr:nth-child(even) td{background:#f8f6f1;}
+.fp-type{display:inline-block;color:#fff;font-size:8px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:4px;}
+.fp-und{font-size:12px;font-weight:700;}
+.fp-iss{font-size:9px;color:#6b6960;margin-top:1px;}
+.fp-term b{display:block;font-size:11px;}
+.fp-term span,.fp-prot span,.fp-close span{display:block;font-size:8.5px;color:#6b6960;}
+.fp-headline b{font-size:13px;}
+.fp-headline span{font-size:8px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a8780;}
+.fp-fact{font-size:9.5px;color:#374151;}
+.fp-fact span{color:#8a8780;}
+.fp-prot b{display:block;font-size:10.5px;}
+.fp-close b{display:block;font-size:10.5px;}
+.fp-h{font-size:10.5px;font-weight:700;margin-bottom:4px;padding-bottom:3px;border-bottom:1px solid var(--gold);}
+.fp-about{margin-top:14px;font-size:9px;line-height:1.55;color:#4a5568;page-break-inside:avoid;}
+.fp-about p{margin-bottom:3px;}
+.fp-cta{margin-top:12px;padding:9px 12px;background:#fbf6ea;border:1px solid var(--gold);border-radius:6px;font-size:9.5px;page-break-inside:avoid;}
+.fp-disc{margin-top:14px;page-break-inside:avoid;}
+.fp-disc p{font-size:7.5px;line-height:1.55;color:#6a6762;margin-bottom:5px;text-align:justify;}
+.fp-firm{color:#3d3a35 !important;}
+
 /* ─── PRINT STYLES ─── */
+@page{size:letter;margin:.45in;}
 @media print{
-  body>*:not(.snapshot-overlay){display:none!important;}
-  .snapshot-overlay{position:static!important;background:white!important;display:block!important;}
+  body.print-snap>*:not(.snapshot-overlay){display:none!important;}
+  body.print-snap .snapshot-overlay{position:static!important;background:white!important;display:block!important;}
   .snap-controls,.snap-close,.snap-print-btn{display:none!important;}
   .snapshot-modal{box-shadow:none!important;max-height:none!important;}
+  body.print-favs{background:#fff!important;}
+  body.print-favs>*:not(#fav-print){display:none!important;}
+  body.print-favs #fav-print{display:block!important;}
 }
 
 /* ─── RESPONSIVE ─── */
@@ -323,6 +416,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
       <div class="pill-group" id="type-filters">
         <button class="pill active" data-filter="all">All</button>
         <button class="pill featured-pill" data-filter="featured">⭐ Featured</button>
+        <button class="pill fav-pill" data-filter="favorites"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>My Favorites <span class="fcount" id="fav-count">0</span></button>
       </div>
     </div>
     <div class="control-row">
@@ -361,6 +455,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
     </div>
   </div>
 
+  <div id="fav-banner" class="fav-banner" hidden></div>
+
   <div id="loading-wrap" class="loading-wrap">
     <div class="spinner"></div>
     <div class="loading-text">Fetching live offerings…</div>
@@ -375,6 +471,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 
 </main>
 
+<!-- FAVORITES PDF DOCUMENT (print only) -->
+<div id="fav-print"></div>
+
 <!-- SNAPSHOT MODAL -->
 <div class="snapshot-overlay" id="snapshot-overlay" onclick="closeSnapshot(event)">
   <div class="snapshot-modal" id="snapshot-modal">
@@ -384,7 +483,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
         <span class="snap-firm">Prudent Prosperity</span>
       </div>
       <div class="snap-controls">
-        <button class="snap-print-btn" onclick="window.print()">🖨 Print</button>
+        <button class="snap-print-btn" onclick="printSnapshot()">🖨 Print</button>
         <button class="snap-close" onclick="document.getElementById('snapshot-overlay').classList.remove('open')">✕</button>
       </div>
     </div>
@@ -501,6 +600,26 @@ function logoHTML(issuer, textFallback = true) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// CARD PIECES SHARED BY GRID + LIST
+// ─────────────────────────────────────────────────────────────
+const STAR_SVG = '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.2 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg>';
+
+// Note type (dark box) first, then the tags, with a star at the far right when featured
+function topRowHTML(n, s, tags, isFeat) {
+  return `<div class="top-row">
+    <div class="top-tags">
+      <span class="type-box" style="background:${s.text}">${esc(n.type)}</span>
+      ${tags.map(t => `<span class="char-tag ${t.cls}">${t.label}</span>`).join("")}
+    </div>
+    ${isFeat ? `<span class="star-badge" title="Featured" aria-label="Featured">${STAR_SVG}</span>` : ""}
+  </div>`;
+}
+
+function issuedByHTML(n) {
+  return `<div class="issued-row"><span class="issued-lbl">Issued by</span>${logoHTML(n.issuer)}</div>`;
+}
+
+// ─────────────────────────────────────────────────────────────
 // INLINE ICONS — no external library; they inherit text color
 // ─────────────────────────────────────────────────────────────
 const IC = {
@@ -508,7 +627,8 @@ const IC = {
   shield: '<path d="M12 2.8l7.5 3v5.7c0 4.6-3.1 8.3-7.5 9.7-4.4-1.4-7.5-5.1-7.5-9.7V5.8z"/>',
   coupon: '<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/>',
   trend:  '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
-  clock:  '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+  clock:  '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  device: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'
 };
 const icon = k => IC[k] ? `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>` : "";
 function iconFor(label) {
@@ -785,8 +905,6 @@ function charTags(n) {
   const hasMemory = fr.includes("memory");
   const daysLeft = closing(n.calendarStart, n.closeDate).daysLeft;
 
-  if (daysLeft > 0 && daysLeft <= 3) tags.push({label:"Closes Soon!",cls:"tag-urgent"});
-
   if (["Income","Snowball"].includes(n.type)) {
     tags.push({label:"Contingent",cls:""});
     if (ct.includes("issuer")) tags.push({label:"Issuer Callable",cls:"tag-issuer"});
@@ -802,6 +920,7 @@ function charTags(n) {
   if (n.protectionType==="Full") tags.push({label:"100% Protected",cls:"tag-full"});
   else if (n.protectionType==="Hard") tags.push({label:"Hard Buffer",cls:"tag-hard"});
   else if (n.protectionType==="Soft") tags.push({label:"Soft Barrier",cls:"tag-soft"});
+  if (daysLeft > 0 && daysLeft <= 3) tags.push({label:"Closes Soon!",cls:"tag-urgent"});
   return tags;
 }
 
@@ -875,6 +994,247 @@ function barsHTML(n) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// FAVORITES — saved in the viewer's own browser (localStorage).
+// Device-bound by design: nothing is sent to a server, and it
+// does not follow the person to another device or browser.
+// ─────────────────────────────────────────────────────────────
+const FAV_KEY      = "pp_notes_favs_v1";
+const FAV_SEEN_KEY = "pp_notes_fav_notice_v1";
+let FAVS   = {};     // fingerprint -> small summary (kept so we can tell when a saved note has closed)
+let FAV_OK = true;   // false when the browser blocks storage (private window, blocked cookies in an iframe…)
+
+const HEART_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+function cyrb53(str, seed = 0) {
+  let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+  for (let i = 0, ch; i < str.length; i++) {
+    ch = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761);
+    h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+}
+
+// A note is identified by its own terms (not the Airtable record ID), so a favorite
+// survives a corrected re-import. If an issuer changes a rate it counts as a new note.
+function noteFp(n) {
+  const keys = ["type","issuer","underlying","term","participation","maxReturn","protection","protectionType",
+    "annualizedYield","frequency","couponProtection","nonCallPeriod","callPremium","upsideParticipation",
+    "downsideParticipation","firstCallDate","autocall","digitalReturn","callType","closeDate"];
+  return cyrb53(keys.map(k => String(n[k] == null ? "" : n[k]).toLowerCase().replace(/\s+/g, "")).join("|"));
+}
+
+function favLoad() {
+  try {
+    const raw = localStorage.getItem(FAV_KEY);
+    const obj = raw ? JSON.parse(raw) : {};
+    FAVS = (obj && typeof obj === "object" && !Array.isArray(obj)) ? obj : {};
+    FAV_OK = true;
+  } catch (e) { FAVS = {}; FAV_OK = false; }
+}
+function favSave() {
+  try { localStorage.setItem(FAV_KEY, JSON.stringify(FAVS)); return true; }
+  catch (e) { FAV_OK = false; return false; }
+}
+const favNotes = () => ALL_NOTES.filter(n => FAVS[n.fp]);
+
+function favBtnHTML(n) {
+  const on = !!FAVS[n.fp];
+  return `<span class="fav-wrap"><button class="fav-btn${on ? " on" : ""}" data-fp="${n.fp}" aria-pressed="${on}"
+    aria-label="${on ? "Remove from My Favorites" : "Save to My Favorites"}"
+    title="${on ? "Saved — click to remove (saved on this device only)" : "Save to My Favorites (saved on this device only)"}"
+    onclick="toggleFav('${n.fp}',this)">${HEART_SVG}</button></span>`;
+}
+
+function toggleFav(fp, btn) {
+  const n = ALL_NOTES.find(x => x.fp === fp);
+  if (!n) return;
+  const adding = !FAVS[fp];
+  if (adding) FAVS[fp] = { t: n.type, i: n.issuer, u: n.underlying, m: n.term, c: n.closeDate };
+  else delete FAVS[fp];
+  const saved = favSave();
+  document.querySelectorAll(`.fav-btn[data-fp="${fp}"]`).forEach(b => {
+    b.classList.toggle("on", adding);
+    b.setAttribute("aria-pressed", adding ? "true" : "false");
+    b.setAttribute("aria-label", adding ? "Remove from My Favorites" : "Save to My Favorites");
+    b.title = adding ? "Saved — click to remove (saved on this device only)" : "Save to My Favorites (saved on this device only)";
+  });
+  updateFavCount();
+  if (adding) showFavBubble(btn, saved);
+  if (currentFilter === "favorites") render(); else renderFavBanner();
+}
+
+// Small bubble next to the heart: first save ever (or every time if saving is blocked)
+function showFavBubble(btn, saved) {
+  let seen = false;
+  try { seen = localStorage.getItem(FAV_SEEN_KEY) === "1"; } catch (e) {}
+  if (saved && seen) return;
+  const wrap = btn && btn.closest(".fav-wrap");
+  if (!wrap) return;
+  wrap.querySelectorAll(".fav-bubble").forEach(b => b.remove());
+  const b = document.createElement("div");
+  b.className = "fav-bubble";
+  b.innerHTML = saved
+    ? "<strong>Saved to My Favorites</strong> — on this device only. It won’t sync to your other devices or browsers."
+    : "<strong>Heads up:</strong> your browser is blocking saved favorites here, so this will only last until you refresh the page.";
+  b.onclick = () => b.remove();
+  wrap.appendChild(b);
+  setTimeout(() => b.remove(), 7500);
+  if (saved) { try { localStorage.setItem(FAV_SEEN_KEY, "1"); } catch (e) {} }
+}
+
+function updateFavCount() {
+  const el = document.getElementById("fav-count");
+  if (el) el.textContent = favNotes().length;
+}
+
+function favMissing() {
+  const live = new Set(ALL_NOTES.map(n => n.fp));
+  return Object.keys(FAVS).filter(fp => !live.has(fp));
+}
+
+let _clearArmed = null;
+function clearFavorites() {
+  const btn = document.getElementById("fav-clear");
+  if (!_clearArmed) {
+    _clearArmed = setTimeout(() => { _clearArmed = null; if (btn) btn.textContent = "Clear all"; }, 4000);
+    if (btn) btn.textContent = "Click again to confirm";
+    return;
+  }
+  clearTimeout(_clearArmed); _clearArmed = null;
+  FAVS = {}; favSave(); updateFavCount(); render();
+}
+function removeMissingFavs() {
+  favMissing().forEach(fp => delete FAVS[fp]);
+  favSave(); updateFavCount(); render();
+}
+
+// The notice that makes the device-bound limit impossible to miss
+function renderFavBanner() {
+  const el = document.getElementById("fav-banner");
+  if (!el) return;
+  if (currentFilter !== "favorites") { el.hidden = true; return; }
+  const live = favNotes(), miss = favMissing();
+  const names = miss.slice(0, 3).map(fp => { const s = FAVS[fp] || {}; return esc(`${s.t || "Note"} · ${s.i || ""} · ${s.u || ""}`); }).join("; ");
+  el.hidden = false;
+  el.innerHTML = `
+    <div class="fb-main">
+      <span class="fb-ic">${icon("device")}</span>
+      <div><strong>Saved on this device only.</strong> Your favorites are stored in this browser, on this computer or phone. They won’t appear on your other devices, and clearing your browsing data or using a private window will erase them. <strong>Export to PDF to keep a copy.</strong></div>
+    </div>
+    <div class="fb-actions">
+      <button class="fb-btn primary" onclick="exportFavoritesPDF()" ${live.length ? "" : "disabled"}>Export PDF (${live.length})</button>
+      <button class="fb-btn" id="fav-clear" onclick="clearFavorites()" ${Object.keys(FAVS).length ? "" : "disabled"}>Clear all</button>
+    </div>
+    ${FAV_OK ? "" : `<div class="fb-warn">⚠ Your browser is blocking saved favorites here (this can happen in private windows or with strict cookie settings), so they will only last until you close or refresh this page. You can still export them to PDF now.</div>`}
+    ${miss.length ? `<div class="fb-warn soft">${miss.length} saved note${miss.length > 1 ? "s are" : " is"} no longer on the calendar (closed or withdrawn): ${names}${miss.length > 3 ? "…" : ""}. <button class="fb-link" onclick="removeMissingFavs()">Remove</button></div>` : ""}`;
+}
+
+// ─────────────────────────────────────────────────────────────
+// PDF EXPORT — builds a clean, branded document and uses the
+// browser's "Save as PDF". Works the same way on every device.
+// ─────────────────────────────────────────────────────────────
+function keyFacts(n) {
+  const f = [];
+  const add = (l, v) => { if (v && String(v).trim() && !/^n\/a$/i.test(String(v).trim())) f.push([l, String(v)]); };
+  switch (n.type) {
+    case "Growth":   add("Max return", n.maxReturn || "Uncapped"); break;
+    case "Income": case "Snowball":
+      add("Frequency", n.frequency); add("Coupon protection", n.couponProtection);
+      add("Non-call", n.nonCallPeriod); add("Call type", n.callType); break;
+    case "Absolute":
+      add("Downside participation", n.downsideParticipation); add("Max return", n.maxReturn || "Uncapped"); break;
+    case "Catapult":
+      add("Upside participation", n.upsideParticipation); add("First call", n.firstCallDate); add("Call type", n.callType); break;
+    case "Call Premium":
+      add("Upside participation", n.upsideParticipation); add("Autocall", n.autocall); add("Non-call", n.nonCallPeriod); break;
+    case "Digital": case "Digital Plus":
+      add("Participation plus", n.participation); add("Coupon protection", n.couponProtection); break;
+    case "PPN": case "MLCD": add("Max return", n.maxReturn || "Uncapped"); break;
+    default: add("Max return", n.maxReturn);
+  }
+  return f;
+}
+
+function protPlain(n) {
+  const p = Number(n.protection) || 0;
+  if (n.protectionType === "Full") return ["100% principal protection", "Full — subject to issuer credit"];
+  if (n.protectionType === "Hard") return [`${p}% hard buffer`, `Absorbs the first ${p}% of any decline`];
+  if (n.protectionType === "Soft") return [`${p}% soft barrier`, "Protection is lost if the underlying finishes below the barrier"];
+  return [`${p}%`, ""];
+}
+
+function buildFavPrint(list) {
+  const sorted = [...list].sort((a, b) => new Date(a.closeDate) - new Date(b.closeDate) || String(a.type).localeCompare(String(b.type)));
+  const today  = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const discUrl = (() => { try { return new URL(DISCLOSURES_URL, location.href).href; } catch (e) { return DISCLOSURES_URL; } })();
+
+  const rows = sorted.map(n => {
+    const s  = TS[n.type] || { text: "var(--text2)" };
+    const pm = primaryMetric(n);
+    const t  = termInfo(n.term);
+    const pr = protPlain(n);
+    const facts = keyFacts(n);
+    return `<tr>
+      <td class="fp-note"><span class="fp-type" style="background:${s.text}">${esc(n.type)}</span>
+        <div class="fp-und">${esc(n.underlying)}</div><div class="fp-iss">${esc(n.issuer)}</div></td>
+      <td class="fp-term">${t.months ? `<b>${t.months} months</b>${t.years ? `<span>${t.years} year${t.years > 1 ? "s" : ""}</span>` : ""}` : esc(n.term)}</td>
+      <td class="fp-key"><div class="fp-headline"><b>${esc(pm.value || "—")}</b> <span>${esc(pm.label)}</span></div>
+        ${facts.map(([l, v]) => `<div class="fp-fact"><span>${esc(l)}:</span> ${esc(v)}</div>`).join("")}</td>
+      <td class="fp-prot"><b>${esc(pr[0])}</b><span>${esc(pr[1])}</span></td>
+      <td class="fp-close"><b>${fmtDate(n.closeDate)}</b><span>10:00 AM ${etLabel(n.closeDate)}</span></td>
+    </tr>`;
+  }).join("");
+
+  const types = [...new Set(sorted.map(n => n.type))].filter(t => TYPE_BLURB[t]);
+
+  document.getElementById("fav-print").innerHTML = `
+    <div class="fp-head">
+      <div class="fp-brand"><div class="fp-mark">PP</div><div><div class="fp-name">Prudent Prosperity</div><div class="fp-sub">STRUCTURED NOTES CALENDAR</div></div></div>
+      <div class="fp-meta">Generated ${today}<br>${sorted.length} note${sorted.length !== 1 ? "s" : ""} selected</div>
+    </div>
+    <div class="fp-title">My Selected Structured Notes</div>
+    <div class="fp-intro">These are notes you saved from the Prudent Prosperity Structured Notes Calendar. This list was selected by you and is <strong>not a recommendation</strong>. Terms shown are indicative, may change or be withdrawn before pricing, and are controlled by each note’s prospectus. Sorted by close date.</div>
+    <table class="fp-table">
+      <thead><tr><th style="width:24%">Note</th><th style="width:12%">Term</th><th style="width:30%">Key terms</th><th style="width:20%">Principal protection</th><th style="width:14%">Closes</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    ${types.length ? `<div class="fp-about"><div class="fp-h">About these note types</div>${types.map(t => `<p><b>${esc(t)}.</b> ${TYPE_BLURB[t]}</p>`).join("")}</div>` : ""}
+    <div class="fp-cta">Questions about any of these notes? Schedule a call: <b>${esc(CALENDLY_LINK)}</b></div>
+    <div class="fp-disc">
+      <div class="fp-h">Important disclosures</div>
+      <p>This document is for informational and educational purposes only. It is not an offer to sell, or a solicitation of an offer to buy, any security, and it is not investment, legal or tax advice or a recommendation. Terms are indicative, may change or be withdrawn before pricing, and are controlled by the prospectus or offering documents, which you should read before investing.</p>
+      <p>Structured notes are complex, unsecured debt obligations of the issuer. You can lose some or all of your principal unless a note provides full principal protection, and any protection depends on the issuer’s credit. Soft protection (a barrier) can be lost entirely if the underlying finishes below the barrier; hard protection (a buffer) absorbs only the first stated percentage of losses. Contingent coupons are not guaranteed, notes may be called early, returns may be capped, and notes linked to several underlyings are typically driven by the worst performer. Notes are generally illiquid and should be held to maturity, the price you pay is typically higher than the issuer’s estimated value, and tax treatment can be complex. Past performance is not indicative of future results.</p>
+      <p>Full disclosures and risk factors: ${esc(discUrl)}</p>
+      <p class="fp-firm"><b>Securities offered through Prudent Prosperity of Texas, LLC, a Texas Registered Investment Advisor.</b></p>
+    </div>`;
+}
+
+// Print helpers: the class tells the print stylesheet which document to show
+function printWith(mode, after) {
+  document.body.classList.add("print-" + mode);
+  const done = () => {
+    document.body.classList.remove("print-" + mode);
+    window.removeEventListener("afterprint", done);
+    if (after) after();
+  };
+  window.addEventListener("afterprint", done);
+  window.print();
+}
+function printSnapshot() { printWith("snap"); }
+
+function exportFavoritesPDF() {
+  const list = favNotes();
+  if (!list.length) return;
+  buildFavPrint(list);
+  const oldTitle = document.title;
+  document.title = "Prudent Prosperity – My Structured Notes – " + new Date().toISOString().slice(0, 10);
+  printWith("favs", () => { document.title = oldTitle; });
+}
+
+// ─────────────────────────────────────────────────────────────
 // RENDER CARD — GRID (Halo-inspired, vertical)
 // ─────────────────────────────────────────────────────────────
 function renderGridCard(n) {
@@ -885,18 +1245,13 @@ function renderGridCard(n) {
 
   return `
   <div class="card${isFeat?" is-featured":""}">
-    ${tags.length?`<div class="char-tags">${tags.map(t=>`<span class="char-tag ${t.cls}">${t.label}</span>`).join("")}</div>`:""}
+    ${topRowHTML(n, s, tags, isFeat)}
     <div class="card-grid-inner">
       <div class="card-top-grid">
         <div class="card-top-row">
-          <div class="card-badges">
-                ${isFeat ? `<span class="feat-badge">⭐ Featured</span>` : ""}
-                <span class="type-badge" style="background:${s.bg};color:${s.text}">${n.type}</span>
-                ${logoHTML(n.issuer)}
-          </div>
+          <div class="underlying-chips">${underlyingChips(n.underlying)}</div>
           ${termBlockHTML(n)}
         </div>
-        <div class="underlying-chips">${underlyingChips(n.underlying)}</div>
       </div>
       <div class="primary-metric">
         <div class="primary-value">${pm.value||"—"}</div>
@@ -904,6 +1259,7 @@ function renderGridCard(n) {
       </div>
       <div class="secondary-metrics">${secondaryMetrics(n)}</div>
       <div class="card-bars">${barsHTML(n)}</div>
+      ${issuedByHTML(n)}
       <div class="explain-row">
         <button class="explain-toggle" aria-expanded="false" onclick="toggleExplain('${n.id}',this)">
           <span class="ex-l"><span class="ex-i">i</span>How it works</span><span class="chev">▾</span>
@@ -912,6 +1268,7 @@ function renderGridCard(n) {
       <div class="expl-panel" hidden></div>
       <div class="card-footer-grid">
         <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
+        ${favBtnHTML(n)}
         <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
@@ -933,15 +1290,11 @@ function renderListCard(n) {
 
   return `
   <div class="card${isFeat?" is-featured":""}" style="border-left-color:${s.bar};border-left-width:3px">
-    ${tags.length?`<div class="list-tags">${tags.map(t=>`<span class="char-tag ${t.cls}">${t.label}</span>`).join("")}</div>`:""}
+    ${topRowHTML(n, s, tags, isFeat)}
     <div class="card-list-inner">
       <div class="card-identity">
-        <div class="id-badges">
-          ${isFeat?`<span class="feat-badge">⭐ Featured</span>`:""}
-          <span class="type-badge" style="background:${s.bg};color:${s.text}">${n.type}</span>
-          ${logoHTML(n.issuer)}
-        </div>
         <div class="list-underlying">${n.underlying}</div>
+        ${issuedByHTML(n)}
       </div>
       <div class="card-list-metrics">
         <div class="metric" style="background:var(--navy);flex-shrink:0;min-width:90px;text-align:center">
@@ -954,11 +1307,14 @@ function renderListCard(n) {
       <div class="card-list-bars">${barsHTML(n)}</div>
       <div class="card-list-cta">
         <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
+        <div class="cta-icons">
+          ${favBtnHTML(n)}
         <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
           <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
           </svg>
         </button>
+        </div>
       </div>
     </div>
     <div class="explain-row list">
@@ -984,7 +1340,7 @@ function openSnapshot(n) {
   document.getElementById("snap-body").innerHTML = `
     <div class="snap-type-row">
       <div>
-        <span class="type-badge" style="background:${s.bg};color:${s.text};font-size:10px;padding:3px 10px;border-radius:99px;">${n.type}</span>
+        <span class="type-box" style="background:${s.text}">${esc(n.type)}</span>
       </div>
       ${termBlockHTML(n)}
     </div>
@@ -1056,7 +1412,7 @@ function sortNotes(arr, key) {
 function buildTypeFilters(notes) {
   const types = [...new Set(notes.map(n=>n.type))].filter(Boolean).sort();
   const cont  = document.getElementById("type-filters");
-  [...cont.querySelectorAll(".pill:not([data-filter='all']):not([data-filter='featured'])")].forEach(p=>p.remove());
+  [...cont.querySelectorAll(".pill:not([data-filter='all']):not([data-filter='featured']):not([data-filter='favorites'])")].forEach(p=>p.remove());
   types.forEach(t=>{
     const b=document.createElement("button");
     b.className="pill"; b.dataset.filter=t; b.textContent=t;
@@ -1096,8 +1452,9 @@ function updateStats(list) {
 }
 
 function render() {
+  renderFavBanner(); updateFavCount();
   let list = ALL_NOTES.filter(n=>{
-    const typeOk   = currentFilter==="all"?true:currentFilter==="featured"?n.status==="Featured":n.type===currentFilter;
+    const typeOk   = currentFilter==="all"?true:currentFilter==="featured"?n.status==="Featured":currentFilter==="favorites"?!!FAVS[n.fp]:n.type===currentFilter;
     const issuerOk = currentIssuer==="all"||n.issuer===currentIssuer;
     const band = TERM_BANDS.find(b=>b.key===currentTerm);
     const termOk = currentTerm==="all" || (band && band.test(termMo(n.term)));
@@ -1106,7 +1463,7 @@ function render() {
   list = sortNotes(list,currentSort);
 
   const out = document.getElementById("output");
-  if (!list.length) { out.innerHTML=`<div class="empty">No notes match your current filters.</div>`; updateStats([]); document.getElementById("count-badge").textContent=""; return; }
+  if (!list.length) { out.innerHTML=`<div class="empty">${currentFilter==="favorites" ? "No favorites to show here yet — tap the heart on any note to save it." : "No notes match your current filters."}</div>`; updateStats([]); document.getElementById("count-badge").textContent=""; return; }
 
   if (currentView==="grid") {
     out.innerHTML=`<div class="card-grid">${list.map(renderGridCard).join("")}</div>`;
@@ -1133,6 +1490,7 @@ async function loadNotes() {
     if(data.error) throw new Error(data.error);
 
     ALL_NOTES = data.notes||[];
+    ALL_NOTES.forEach(n=>{ n.fp = noteFp(n); });
     await preloadLogos(ALL_NOTES);
     const dates = ALL_NOTES.map(n=>n.closeDate).filter(Boolean).sort();
     if(dates.length) document.getElementById("header-date").textContent=`Latest close ${fmtDate(dates[dates.length-1])}`;
@@ -1179,6 +1537,7 @@ document.getElementById("term-filters").addEventListener("click",e=>{
 });
 document.querySelectorAll(".js-disc-link").forEach(a=>a.href=DISCLOSURES_URL);
 
+favLoad();
 loadNotes();
 </script>
 </body>
