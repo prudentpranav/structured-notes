@@ -316,6 +316,17 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .fb-warn{flex-basis:100%;font-size:11px;line-height:1.5;color:#7a4400;background:#fff3e0;border:1px solid #f3d9a8;border-radius:7px;padding:6px 10px;}
 .fb-link{background:none;border:none;color:var(--navy);font-weight:600;text-decoration:underline;cursor:pointer;font-family:var(--sans);font-size:11px;padding:0;}
 
+/* ─── EXPORT-ALL BUTTON + full-calendar PDF extras ─── */
+.export-all-btn{font-family:var(--sans);font-size:11px;font-weight:600;padding:5px 12px;border-radius:7px;border:1px solid var(--navy);background:var(--navy);color:var(--gold);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .13s,color .13s;}
+.export-all-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold-dk);}
+.export-all-btn:disabled{opacity:.45;cursor:not-allowed;}
+.export-all-btn svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.fp-sub2{font-size:11px;font-weight:600;color:#8a6d3b;margin-bottom:5px;}
+.fp-table + .fp-table{margin-top:14px;}
+.fp-table tr.fp-group th{background:#091930;color:#fff;font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:7px 8px;border-bottom:2px solid var(--gold);}
+.fp-gname{font-weight:800;}
+.fp-gcount{margin-left:10px;font-size:8.5px;font-weight:500;color:var(--gold-lt);letter-spacing:.06em;}
+.fp-table tr.fp-blurb td{background:#fbf6ea !important;font-size:9px;color:#6b5a35;font-style:italic;padding:5px 8px;border-bottom:1px solid #eadfc5;}
 /* ─── PDF DOCUMENT (hidden on screen, shown only when exporting) ─── */
 #fav-print{display:none;font-family:var(--sans);color:var(--navy);}
 #fav-print,#fav-print *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box;}
@@ -444,6 +455,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
         <option value="yield-desc">Yield — highest</option>
       </select>
       <span class="count-badge" id="count-badge"></span>
+      <button class="export-all-btn" id="export-all" onclick="exportCalendarPDF()" title="Save the notes currently shown as a PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 19h16"/></svg><span>Export PDF</span><span class="ex-n"></span></button>
       <div class="view-toggle">
         <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="Grid view">
           <svg viewBox="0 0 14 14"><rect x="0" y="0" width="6" height="6" rx="1"/><rect x="8" y="0" width="6" height="6" rx="1"/><rect x="0" y="8" width="6" height="6" rx="1"/><rect x="8" y="8" width="6" height="6" rx="1"/></svg>
@@ -1166,43 +1178,37 @@ function protPlain(n) {
   return [`${p}%`, ""];
 }
 
-function buildFavPrint(list) {
-  const sorted = [...list].sort((a, b) => new Date(a.closeDate) - new Date(b.closeDate) || String(a.type).localeCompare(String(b.type)));
-  const today  = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-  const discUrl = (() => { try { return new URL(DISCLOSURES_URL, location.href).href; } catch (e) { return DISCLOSURES_URL; } })();
+// One table row (used by both the favorites PDF and the full-calendar PDF)
+function fpRowHTML(n, showType) {
+  const s  = TS[n.type] || { text: "var(--text2)" };
+  const pm = primaryMetric(n);
+  const t  = termInfo(n.term);
+  const pr = protPlain(n);
+  const facts = keyFacts(n);
+  return `<tr>
+    <td class="fp-note">${showType ? `<span class="fp-type" style="background:${s.text}">${esc(n.type)}</span>` : ""}
+      <div class="fp-und">${esc(n.underlying)}</div><div class="fp-iss">${esc(n.issuer)}</div></td>
+    <td class="fp-term">${t.months ? `<b>${t.months} months</b>${t.years ? `<span>${t.years} year${t.years > 1 ? "s" : ""}</span>` : ""}` : esc(n.term)}</td>
+    <td class="fp-key"><div class="fp-headline"><b>${esc(pm.value || "—")}</b> <span>${esc(pm.label)}</span></div>
+      ${facts.map(([l, v]) => `<div class="fp-fact"><span>${esc(l)}:</span> ${esc(v)}</div>`).join("")}</td>
+    <td class="fp-prot"><b>${esc(pr[0])}</b><span>${esc(pr[1])}</span></td>
+    <td class="fp-close"><b>${fmtDate(n.closeDate)}</b><span>10:00 AM ${etLabel(n.closeDate)}</span></td>
+  </tr>`;
+}
 
-  const rows = sorted.map(n => {
-    const s  = TS[n.type] || { text: "var(--text2)" };
-    const pm = primaryMetric(n);
-    const t  = termInfo(n.term);
-    const pr = protPlain(n);
-    const facts = keyFacts(n);
-    return `<tr>
-      <td class="fp-note"><span class="fp-type" style="background:${s.text}">${esc(n.type)}</span>
-        <div class="fp-und">${esc(n.underlying)}</div><div class="fp-iss">${esc(n.issuer)}</div></td>
-      <td class="fp-term">${t.months ? `<b>${t.months} months</b>${t.years ? `<span>${t.years} year${t.years > 1 ? "s" : ""}</span>` : ""}` : esc(n.term)}</td>
-      <td class="fp-key"><div class="fp-headline"><b>${esc(pm.value || "—")}</b> <span>${esc(pm.label)}</span></div>
-        ${facts.map(([l, v]) => `<div class="fp-fact"><span>${esc(l)}:</span> ${esc(v)}</div>`).join("")}</td>
-      <td class="fp-prot"><b>${esc(pr[0])}</b><span>${esc(pr[1])}</span></td>
-      <td class="fp-close"><b>${fmtDate(n.closeDate)}</b><span>10:00 AM ${etLabel(n.closeDate)}</span></td>
-    </tr>`;
-  }).join("");
+const FP_COLS = '<th style="width:24%">Note</th><th style="width:12%">Term</th><th style="width:30%">Key terms</th><th style="width:20%">Principal protection</th><th style="width:14%">Closes</th>';
 
-  const types = [...new Set(sorted.map(n => n.type))].filter(t => TYPE_BLURB[t]);
-
-  document.getElementById("fav-print").innerHTML = `
-    <div class="fp-head">
+function fpHeadHTML(count, noun) {
+  const today = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  return `<div class="fp-head">
       <div class="fp-brand"><div class="fp-mark">PP</div><div><div class="fp-name">Prudent Prosperity</div><div class="fp-sub">STRUCTURED NOTES CALENDAR</div></div></div>
-      <div class="fp-meta">Generated ${today}<br>${sorted.length} note${sorted.length !== 1 ? "s" : ""} selected</div>
-    </div>
-    <div class="fp-title">My Selected Structured Notes</div>
-    <div class="fp-intro">These are notes you saved from the Prudent Prosperity Structured Notes Calendar. This list was selected by you and is <strong>not a recommendation</strong>. Terms shown are indicative, may change or be withdrawn before pricing, and are controlled by each note’s prospectus. Sorted by close date.</div>
-    <table class="fp-table">
-      <thead><tr><th style="width:24%">Note</th><th style="width:12%">Term</th><th style="width:30%">Key terms</th><th style="width:20%">Principal protection</th><th style="width:14%">Closes</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    ${types.length ? `<div class="fp-about"><div class="fp-h">About these note types</div>${types.map(t => `<p><b>${esc(t)}.</b> ${TYPE_BLURB[t]}</p>`).join("")}</div>` : ""}
-    <div class="fp-cta">Questions about any of these notes? Schedule a call: <b>${esc(CALENDLY_LINK)}</b></div>
+      <div class="fp-meta">Generated ${today}<br>${count} ${noun}${count !== 1 ? "s" : ""}</div>
+    </div>`;
+}
+
+function fpTailHTML() {
+  const discUrl = (() => { try { return new URL(DISCLOSURES_URL, location.href).href; } catch (e) { return DISCLOSURES_URL; } })();
+  return `<div class="fp-cta">Questions about any of these notes? Schedule a call: <b>${esc(CALENDLY_LINK)}</b></div>
     <div class="fp-disc">
       <div class="fp-h">Important disclosures</div>
       <p>This document is for informational and educational purposes only. It is not an offer to sell, or a solicitation of an offer to buy, any security, and it is not investment, legal or tax advice or a recommendation. Terms are indicative, may change or be withdrawn before pricing, and are controlled by the prospectus or offering documents, which you should read before investing.</p>
@@ -1210,6 +1216,70 @@ function buildFavPrint(list) {
       <p>Full disclosures and risk factors: ${esc(discUrl)}</p>
       <p class="fp-firm"><b>Securities offered through Prudent Prosperity of Texas, LLC, a Texas Registered Investment Advisor.</b></p>
     </div>`;
+}
+
+// FAVORITES PDF: one table sorted by close date
+function buildFavPrint(list) {
+  const sorted = [...list].sort((a, b) => new Date(a.closeDate) - new Date(b.closeDate) || String(a.type).localeCompare(String(b.type)));
+  const types = [...new Set(sorted.map(n => n.type))].filter(t => TYPE_BLURB[t]);
+  document.getElementById("fav-print").innerHTML = `
+    ${fpHeadHTML(sorted.length, "note")}
+    <div class="fp-title">My Selected Structured Notes</div>
+    <div class="fp-intro">These are notes you saved from the Prudent Prosperity Structured Notes Calendar. This list was selected by you and is <strong>not a recommendation</strong>. Terms shown are indicative, may change or be withdrawn before pricing, and are controlled by each note’s prospectus. Sorted by close date.</div>
+    <table class="fp-table">
+      <thead><tr>${FP_COLS}</tr></thead>
+      <tbody>${sorted.map(n => fpRowHTML(n, true)).join("")}</tbody>
+    </table>
+    ${types.length ? `<div class="fp-about"><div class="fp-h">About these note types</div>${types.map(t => `<p><b>${esc(t)}.</b> ${TYPE_BLURB[t]}</p>`).join("")}</div>` : ""}
+    ${fpTailHTML()}`;
+}
+
+// FULL-CALENDAR PDF: whatever is currently shown, grouped by note type, shortest term first
+const FP_TYPE_ORDER = ["Growth", "Absolute", "Income", "Snowball", "Catapult", "Call Premium", "Digital", "Digital Plus", "PPN", "MLCD"];
+let LAST_LIST = [];
+
+function _fmtShort(d) { return new Date(d + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }); }
+function _closeRangeLabel(list) {
+  const ds = list.map(n => n.closeDate).filter(Boolean).sort();
+  if (!ds.length) return "";
+  const a = new Date(ds[0] + "T12:00:00"), b = new Date(ds[ds.length - 1] + "T12:00:00");
+  if (a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth())
+    return a.toLocaleDateString("en-US", { month: "long", year: "numeric" }) + " offerings";
+  return `Offerings closing ${_fmtShort(ds[0])} – ${_fmtShort(ds[ds.length - 1])}, ${b.getFullYear()}`;
+}
+function _filterLabel() {
+  const parts = [];
+  if (currentFilter !== "all") parts.push(currentFilter === "featured" ? "Featured" : currentFilter === "favorites" ? "My Favorites" : currentFilter);
+  if (currentIssuer !== "all") parts.push(currentIssuer);
+  if (currentTerm !== "all") { const b = TERM_BANDS.find(x => x.key === currentTerm); if (b) parts.push(b.label); }
+  return parts.join(" · ");
+}
+
+function buildCalendarPrint(list) {
+  const groups = {};
+  list.forEach(n => { (groups[n.type || "Other"] = groups[n.type || "Other"] || []).push(n); });
+  const order = [...FP_TYPE_ORDER.filter(t => groups[t]), ...Object.keys(groups).filter(t => !FP_TYPE_ORDER.includes(t)).sort()];
+  const filt = _filterLabel();
+  const tables = order.map(t => {
+    const rows = groups[t].sort((a, b) => termMo(a.term) - termMo(b.term) || new Date(a.closeDate) - new Date(b.closeDate) || String(a.issuer).localeCompare(String(b.issuer)));
+    return `<table class="fp-table">
+      <thead>
+        <tr class="fp-group"><th colspan="5"><span class="fp-gname">${esc(t)}</span><span class="fp-gcount">${rows.length} note${rows.length !== 1 ? "s" : ""}</span></th></tr>
+        <tr>${FP_COLS}</tr>
+      </thead>
+      <tbody>
+        ${rows.map(n => fpRowHTML(n, false)).join("")}
+      </tbody>
+    </table>`;
+  }).join("");
+  document.getElementById("fav-print").innerHTML = `
+    ${fpHeadHTML(list.length, "note")}
+    <div class="fp-title">Structured Notes Calendar</div>
+    <div class="fp-sub2">${esc(_closeRangeLabel(list))}${filt ? ` &nbsp;·&nbsp; Filtered: ${esc(filt)}` : ""}</div>
+    <div class="fp-intro">Structured note offerings currently available through Prudent Prosperity, grouped by note type and sorted by term, shortest to longest. Terms shown are indicative, may change or be withdrawn before pricing, and are controlled by each note’s prospectus. This list is for information only and is not a recommendation.</div>
+    ${tables}
+    ${order.filter(x => TYPE_BLURB[x]).length ? `<div class="fp-about"><div class="fp-h">About these note types</div>${order.filter(x => TYPE_BLURB[x]).map(x => `<p><b>${esc(x)}.</b> ${TYPE_BLURB[x]}</p>`).join("")}</div>` : ""}
+    ${fpTailHTML()}`;
 }
 
 // Print helpers: the class tells the print stylesheet which document to show
@@ -1234,6 +1304,19 @@ function exportFavoritesPDF() {
   printWith("favs", () => { document.title = oldTitle; });
 }
 
+function exportCalendarPDF() {
+  if (!LAST_LIST.length) return;
+  buildCalendarPrint([...LAST_LIST]);
+  const oldTitle = document.title;
+  document.title = "Prudent Prosperity – Structured Notes Calendar – " + new Date().toISOString().slice(0, 10);
+  printWith("favs", () => { document.title = oldTitle; });
+}
+function updateExportBtn() {
+  const b = document.getElementById("export-all");
+  if (!b) return;
+  b.disabled = !LAST_LIST.length;
+  b.querySelector(".ex-n").textContent = LAST_LIST.length ? ` (${LAST_LIST.length})` : "";
+}
 // ─────────────────────────────────────────────────────────────
 // RENDER CARD — GRID (Halo-inspired, vertical)
 // ─────────────────────────────────────────────────────────────
@@ -1461,6 +1544,7 @@ function render() {
     return typeOk&&issuerOk&&termOk;
   });
   list = sortNotes(list,currentSort);
+  LAST_LIST = list; updateExportBtn();
 
   const out = document.getElementById("output");
   if (!list.length) { out.innerHTML=`<div class="empty">${currentFilter==="favorites" ? "No favorites to show here yet — tap the heart on any note to save it." : "No notes match your current filters."}</div>`; updateStats([]); document.getElementById("count-badge").textContent=""; return; }
