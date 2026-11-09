@@ -559,7 +559,7 @@ function probeFirst(urls) {
 }
 
 const TICKER_MAP = {};   // ticker -> tile image (data URL), or null when there is no icon
-const NON_STOCK  = new Set(["SPX", "NDX", "RUT", "DJI", "NDXT", "SX5E", "SPXFP", "BCOM", "INDU", "MAX"]);
+const NON_STOCK  = new Set(["DJI", "NDXT", "SX5E", "SPXFP", "BCOM", "INDU", "MAX"]);
 const tickerList = u => String(u || "").split(",").map(s => s.trim()).filter(Boolean);
 const isStockTicker = s => /^[A-Z]{1,5}$/.test(s) && !NON_STOCK.has(s);
 
