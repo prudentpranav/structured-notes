@@ -78,127 +78,139 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .view-btn.active{background:var(--navy);color:var(--gold);}
 .view-btn svg{width:14px;height:14px;fill:currentColor;}
 
-/* ─── GRID LAYOUT ─── */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;}
-.card-list-wrap{display:flex;flex-direction:column;gap:10px;}
+/* ─── LAYOUT ─── */
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;grid-auto-flow:row dense;}
+.card-list-wrap{display:flex;flex-direction:column;gap:22px;}
 
-/* ─── BASE CARD ─── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);position:relative;transition:box-shadow .18s,transform .18s;}
-.card:hover{box-shadow:0 4px 22px rgba(9,25,48,.09);transform:translateY(-1px);}
+/* ─── CARD SHELL ─── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s;}
+.card:hover{box-shadow:0 10px 32px rgba(9,25,48,.10);}
 .card.is-featured{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
-.card.is-featured:hover{box-shadow:0 4px 22px rgba(208,182,137,.28);}
-.feat-badge{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--gold);color:var(--navy);white-space:nowrap;}
-  
-/* ─── CHARACTERISTIC TAGS ─── */
-.char-tags{display:flex;flex-wrap:wrap;gap:4px;padding:8px 12px 0;}
-.char-tag{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--surface2);color:#2b3440;border:1px solid var(--border);white-space:nowrap;}
-.char-tag.tag-auto{background:#eaf5ec;color:#1a5c2a;border-color:#c3e8cc;}
-.char-tag.tag-issuer{background:#fff4e6;color:#7a3d00;border-color:#fdd9a0;}
-.char-tag.tag-memory{background:#f0ecfb;color:#3d2080;border-color:#d4c8f0;}
-.char-tag.tag-full{background:#e6f8f4;color:#0d5c4a;border-color:#b8e8df;}
-.char-tag.tag-hard{background:#e8f4fb;color:#1a4f7a;border-color:#b8d8f0;}
-.char-tag.tag-soft{background:#f5f5f5;color:#555;border-color:#ddd;}
-.char-tag.tag-urgent{background:#fff0f0;color:#c0392b;border-color:#f5c0b8;animation:pulse 1.5s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+.card.open{border-color:var(--gold-dk);box-shadow:0 0 0 1px var(--gold-dk);}
 
-/* ─── GRID CARD LAYOUT ─── */
-.card-grid-inner{display:flex;flex-direction:column;}
-.card-top-grid{padding:10px 12px 8px;border-bottom:1px solid var(--border);}
-.card-top-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:6px;}
-.card-badges{display:flex;gap:4px;flex-wrap:wrap;align-items:center;}
-.type-badge{font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:99px;white-space:nowrap;}
-.issuer-badge{font-size:10px;font-weight:700;font-family:var(--mono);padding:2px 7px;border-radius:4px;background:var(--surface2);color:var(--text2);}
-.term-chip{font-size:10px;font-family:var(--mono);color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;}
-.underlying-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;}
-.underlying-chip{font-size:11px;font-weight:600;font-family:var(--mono);color:var(--navy);background:var(--navy-dim);padding:2px 7px;border-radius:4px;border:1px solid rgba(9,25,48,.08);}
-.underlying-chip{display:inline-flex;align-items:center;min-height:26px;font-size:12px;font-weight:700;}
-.underlying-chip.has-icon{display:inline-flex;align-items:center;gap:6px;padding:2px 9px 2px 3px;}
-.tk-ic{width:20px;height:20px;border-radius:22%;flex-shrink:0;display:block;background-size:cover;background-repeat:no-repeat;box-shadow:0 0 0 1px rgba(9,25,48,.14);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-.issued-row{flex-wrap:wrap;row-gap:4px;}
-.issued-lbl,.issued-row .issuer-badge{white-space:nowrap;}
-.list-und{gap:5px;margin-bottom:0;}
-.snap-und{gap:6px;margin-bottom:8px;}
-.snap-und .underlying-chip{font-size:15px;padding:3px 10px;min-height:34px;}
-.snap-und .underlying-chip.has-icon{padding:3px 10px 3px 4px;gap:7px;}
-.snap-und .tk-ic{width:26px;height:26px;}
-.card-close-line{font-size:10px;color:var(--text3);}
+/* ─── CARD HEADER BAND: note type, actions, reference-asset tiles ─── */
+.chero{position:relative;background:var(--navy);padding:22px 24px 34px;min-height:210px;display:flex;flex-direction:column;gap:22px;box-shadow:inset 0 -4px 0 var(--accent,var(--gold));}
+.chero-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.chero-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.chero .fav-btn{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.30);color:#fff;}
+.chero .fav-btn:hover{border-color:#ff9bb3;color:#ff9bb3;}
+.chero .fav-btn.on{background:#c2415d;border-color:#c2415d;color:#fff;}
+.chero .fav-btn.on svg{fill:#fff;}
 
-/* primary metric (grid) */
-.primary-metric{padding:10px 12px 8px;text-align:center;border-bottom:1px solid var(--border);}
-.primary-value{font-size:28px;font-weight:600;color:var(--navy);line-height:1;letter-spacing:-0.02em;font-family:var(--mono);}
-.primary-label{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);margin-top:3px;}
+.assets{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:14px;}
+.assets-lbl{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-lt);}
+.assets-row{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 18px;--ts:64px;}
+.assets-row.s1{--ts:80px;}
+.assets-row.s3{--ts:64px;}
+.assets-row.s5{--ts:54px;}
+.assets-row.s6{--ts:46px;}
+.asset{display:flex;flex-direction:column;align-items:center;gap:9px;}
+.asset-tk{font-size:12px;font-weight:800;letter-spacing:.08em;color:#fff;}
+.atile{display:block;width:var(--ts);height:var(--ts);border-radius:22%;background-size:cover;background-repeat:no-repeat;box-shadow:0 0 0 1px rgba(255,255,255,.22);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.atile.mono{display:flex;align-items:center;justify-content:center;background:#17294a;color:var(--gold);font-weight:800;font-size:calc(var(--ts) * .30);letter-spacing:.01em;}
+.atile.mono.m4{font-size:calc(var(--ts) * .25);}
+.atile.mono.m5{font-size:calc(var(--ts) * .21);}
+.assets.light{align-items:flex-start;}
+.assets.light .assets-lbl{color:var(--text3);}
+.assets.light .assets-row{justify-content:flex-start;--ts:50px;}
+.assets.light .assets-row.s6{--ts:42px;}
+.assets.light .asset-tk{color:var(--navy);}
+.assets.light .atile{box-shadow:0 0 0 1px rgba(9,25,48,.16);}
 
-/* secondary metrics (grid) */
-.secondary-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px 12px;border-bottom:1px solid var(--border);}
-.metric{background:var(--surface2);border-radius:6px;padding:6px 9px;}
-.metric-label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);margin-bottom:2px;display:flex;align-items:center;gap:3px;}
-.metric-value{font-size:14px;font-weight:700;color:var(--navy);line-height:1.2;}
-.metric.span2{grid-column:span 2;}
+/* ─── CARD BODY ─── */
+.cbody{padding:30px 30px 28px;display:flex;flex-direction:column;gap:32px;flex:1;}
+.tags{display:flex;flex-wrap:wrap;gap:6px 0;font-size:13px;font-weight:700;color:var(--text2);}
+.tags span + span::before{content:"·";margin:0 11px;color:#9aa3af;}
+.headline{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;padding:2px 0 32px;border-bottom:1px solid var(--border);}
+.hl-main{flex:1;min-width:0;}
+.hl-term{text-align:right;padding-left:24px;border-left:1px solid var(--border);}
+.big{font-size:42px;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--navy);}
+.hl-term .big{font-size:28px;}
+.k{margin-top:9px;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:26px 16px;}
+.fact .v{margin-top:8px;font-size:18px;font-weight:700;line-height:1.25;color:var(--navy);}
+.fact .v small{display:block;margin-top:3px;font-size:12.5px;font-weight:600;color:var(--text3);}
+.fact .k{margin-top:0;}
+.closing{display:flex;flex-direction:column;gap:12px;}
+.closing-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 14px;font-size:13.5px;font-weight:600;color:var(--text2);}
+.closing-row b{font-size:14px;font-weight:800;}
+.cline{height:4px;background:var(--surface2);border-radius:4px;overflow:hidden;}
+.cline i{display:block;height:100%;border-radius:4px;}
+.cfoot{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:4px;}
+.issued{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;}
+.issued-lbl{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+.cfoot-actions{display:flex;align-items:center;gap:18px;}
+.card-grid .cfoot{flex-direction:column;align-items:stretch;gap:22px;padding-top:6px;border-top:1px solid var(--border);}
+.card-grid .cfoot .issued{flex-direction:row;align-items:center;gap:14px;}
+.card-grid .cfoot-actions{justify-content:space-between;}
 
-/* bars (shared) */
-.card-bars{padding:8px 12px;border-bottom:1px solid var(--border);}
-.bar-block{margin-bottom:6px;}
-.bar-block:last-child{margin-bottom:0;}
-.bar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
-.bar-label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);}
-.bar-value{font-size:11px;font-weight:700;font-family:var(--mono);}
-.bar-track{height:4px;background:var(--surface2);border-radius:99px;overflow:hidden;}
-.bar-fill{height:100%;border-radius:99px;transition:width .5s ease;}
-.bar-sub{font-size:10.5px;color:var(--text2);font-family:var(--mono);display:flex;justify-content:space-between;margin-top:2px;}
-
-/* card footer */
-.card-footer-grid{padding:8px 12px;display:flex;align-items:center;gap:6px;}
-.cta-btn{flex:1;text-align:center;padding:7px 10px;border-radius:7px;background:var(--navy);color:var(--gold);font-size:11px;font-weight:600;font-family:var(--sans);text-decoration:none;border:1px solid var(--navy);transition:background .13s,color .13s;white-space:nowrap;}
+/* ─── BUTTONS, BADGES, TAGS ─── */
+.cta-btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:10px;background:var(--navy);color:var(--gold);border:1px solid var(--navy);font-family:var(--sans);font-size:13.5px;font-weight:700;text-decoration:none;white-space:nowrap;transition:background .14s,color .14s;}
 .cta-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold-dk);}
-.snapshot-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .13s;color:var(--text3);}
-.snapshot-btn:hover{background:var(--navy);color:var(--gold);border-color:var(--navy);}
+.btn-link{background:none;border:none;padding:6px 2px;font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--navy);cursor:pointer;text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:5px;white-space:nowrap;}
+.btn-ghost{background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:12px 18px;font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--navy);cursor:pointer;white-space:nowrap;}
+.btn-ghost:hover{border-color:var(--gold-dk);}
+.type-box{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#fff;padding:4px 11px;border-radius:6px;white-space:nowrap;}
+.star-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy);flex-shrink:0;box-shadow:0 0 0 3px rgba(208,182,137,.28);}
+.issuer-logo{display:inline-flex;align-items:center;height:34px;padding:4px 11px;background:#fff;border:1px solid var(--border);border-radius:7px;flex-shrink:0;}
+.issuer-logo img{display:block;height:22px;width:auto;max-width:120px;object-fit:contain;}
+.issuer-badge{display:inline-block;padding:6px 12px;border-radius:7px;background:var(--surface2);font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap;}
 
-/* ─── LIST CARD LAYOUT ─── */
-.card-list-inner{display:flex;align-items:stretch;}
-.card-identity{padding:10px 14px;width:200px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;gap:5px;border-right:1px solid var(--border);}
-.id-badges{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
-.list-underlying{font-size:14px;font-weight:600;color:var(--navy);letter-spacing:-0.01em;line-height:1.3;}
-.list-meta{font-size:10px;color:var(--text3);font-family:var(--mono);}
-.card-list-metrics{flex:1;padding:10px 12px;display:flex;align-items:center;gap:6px;border-right:1px solid var(--border);min-width:0;flex-wrap:wrap;align-content:center;row-gap:6px;}
-.card-list-bars{width:245px;flex-shrink:0;padding:10px 12px;display:flex;flex-direction:column;justify-content:center;gap:8px;border-right:1px solid var(--border);}
-.card-list-cta{width:140px;flex-shrink:0;padding:10px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
-.list-tags{display:flex;flex-wrap:wrap;gap:3px;padding:6px 12px 0;}
+/* ─── LIST ROWS ─── */
+.card.lrow{padding:30px 36px 26px;gap:30px;}
+.lrow-top{display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.ltags{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;}
+.lrow-main{display:grid;grid-template-columns:minmax(190px,1.1fr) minmax(150px,.8fr) minmax(0,2.6fr) minmax(210px,1.1fr);gap:40px;align-items:center;}
+.lhead .big{font-size:38px;}
+.lfacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:26px 30px;}
+.lfact{display:flex;align-items:flex-start;gap:12px;}
+.lfact .ic{width:22px;height:22px;margin-top:1px;}
+.lfact b{display:block;font-size:18px;font-weight:700;line-height:1.2;color:var(--navy);}
+.lfact .l{display:block;margin-top:5px;font-size:12px;font-weight:700;color:var(--text3);}
+.lrow-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:24px;border-top:1px solid var(--border);}
+.lrow-foot .issued{flex-direction:row;align-items:center;gap:14px;}
 
-/* ─── TOOLTIPS ─── */
-.info-wrap{position:relative;display:inline-flex;}
-.info-icon{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--gold-lt);color:var(--navy);font-size:10px;font-weight:700;cursor:default;flex-shrink:0;font-style:normal;}
-.info-wrap:hover .tooltip{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
-.tooltip{position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--navy);color:#fff;font-size:11px;line-height:1.5;padding:6px 10px;border-radius:6px;min-width:170px;max-width:240px;white-space:normal;pointer-events:none;opacity:0;transition:opacity .14s,transform .14s;z-index:300;font-weight:400;text-transform:none;font-family:var(--sans);box-shadow:0 4px 14px rgba(9,25,48,.22);border:1px solid rgba(208,182,137,.25);}
-.tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:var(--navy);}
+/* ─── DETAILS PANEL (opens in place below the card) ─── */
+.details-row{grid-column:1 / -1;background:var(--surface);border:1px solid var(--gold-dk);border-radius:16px;padding:36px 38px 30px;}
+.details{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;}
+.dcol h4{margin-bottom:16px;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--bronze);}
+.details .expl-lead{font-size:16px;line-height:1.55;margin-bottom:16px;}
+.details .expl-rows{gap:16px;}
+.details .expl-h{font-size:10.5px;margin-bottom:4px;}
+.details .expl-row p{font-size:14px;line-height:1.7;}
+.kt{width:100%;border-collapse:collapse;}
+.kt td{padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.45;vertical-align:top;}
+.kt td:first-child{width:42%;padding-right:14px;font-weight:600;color:var(--text3);}
+.kt td:last-child{font-weight:700;color:var(--navy);}
+.dfoot{display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px;margin-top:34px;padding-top:26px;border-top:1px solid var(--border);}
+.dlink{font-size:13.5px;font-weight:700;color:var(--navy);}
+.dfine{margin-top:16px;font-size:12px;line-height:1.6;color:var(--text3);}
 
-/* ─── SNAPSHOT MODAL ─── */
-.snapshot-overlay{display:none;position:fixed;inset:0;background:rgba(9,25,48,.7);z-index:500;align-items:center;justify-content:center;padding:1rem;}
-.snapshot-overlay.open{display:flex;}
-.snapshot-modal{background:var(--surface);border-radius:12px;width:380px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(9,25,48,.35);}
-.snap-header{background:var(--navy);border-radius:12px 12px 0 0;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--gold);}
-.snap-logo{display:flex;align-items:center;gap:8px;}
-.snap-logo-mark{width:26px;height:26px;border-radius:5px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--navy);}
-.snap-firm{font-size:12px;font-weight:600;color:var(--white);}
-.snap-controls{display:flex;gap:6px;}
-.snap-print-btn{font-size:10px;padding:4px 10px;border-radius:5px;background:var(--gold);color:var(--navy);border:none;cursor:pointer;font-weight:600;font-family:var(--sans);}
-.snap-close{width:24px;height:24px;border-radius:5px;background:rgba(255,255,255,.12);border:none;cursor:pointer;color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;}
-.snap-body{padding:16px;}
-.snap-type-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.snap-term{font-size:11px;font-family:var(--mono);color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:4px;}
-.snap-underlying{font-size:20px;font-weight:600;color:var(--navy);letter-spacing:-0.02em;margin-bottom:4px;}
-.snap-issuer{font-size:12px;color:var(--text2);margin-bottom:12px;}
-.snap-primary{text-align:center;background:var(--navy);border-radius:8px;padding:14px;margin-bottom:12px;}
-.snap-primary-value{font-size:32px;font-weight:600;color:var(--gold);font-family:var(--mono);line-height:1;}
-.snap-primary-label{font-size:10px;color:var(--gold-lt);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;}
-.snap-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;}
-.snap-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
-.snap-metric{background:var(--surface2);border-radius:6px;padding:7px 10px;}
-.snap-metric-label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);margin-bottom:2px;}
-.snap-metric-value{font-size:13px;font-weight:600;color:var(--navy);}
-.snap-bars{margin-bottom:12px;}
-.snap-cta{display:block;width:100%;text-align:center;padding:9px;border-radius:8px;background:var(--navy);color:var(--gold);font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--navy);}
-.snap-close-date{font-size:11px;color:var(--text2);text-align:center;margin-top:8px;font-family:var(--mono);}
-.snap-disclaimer{font-size:10px;color:var(--text2);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+/* ─── PAYOFF SLIDER ─── */
+.po{background:#faf8f3;border:1px solid var(--border);border-radius:14px;padding:20px 20px 18px;}
+.po svg{display:block;width:100%;height:auto;overflow:visible;}
+.po-read{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0 4px;}
+.po-read .v{font-size:23px;font-weight:700;color:var(--navy);line-height:1.1;}
+.po-read .k{margin-top:5px;}
+.po-slider{width:100%;margin:16px 0 10px;accent-color:var(--navy);}
+.po-btns{display:flex;flex-wrap:wrap;gap:7px;}
+.po-btn{padding:7px 12px;border-radius:99px;border:1px solid var(--border2);background:var(--surface);font-family:var(--sans);font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;}
+.po-btn:hover{border-color:var(--gold-dk);color:var(--navy);}
+.po-note{margin-top:14px;font-size:13.5px;line-height:1.55;font-weight:600;color:var(--text2);}
+.po-fine{margin-top:12px;font-size:11.5px;line-height:1.6;color:var(--text3);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1000px){
+  .card-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .lrow-main{grid-template-columns:1fr 1fr;gap:30px;}
+}
+@media(max-width:640px){
+  .card-grid{grid-template-columns:1fr;}
+  .card.lrow{padding:24px 22px 22px;}
+  .lrow-main{grid-template-columns:1fr;}
+  .details-row{padding:26px 22px;}
+  .cbody{padding:26px 22px 24px;}
+}
 
 /* ─── LOADING / ERROR / EMPTY ─── */
 .loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 2rem;gap:12px;}
@@ -214,111 +226,36 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .disclosure{margin-top:2rem;padding:1.1rem 1.4rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;}
 .disclosure p{font-size:11px;line-height:1.75;color:var(--text2);}
 
-.cta-btn{display:flex;align-items:center;justify-content:center;}
-.term-block{min-height:36px;}
-.term-tile{min-height:0;}
-.issuer-logo{display:inline-flex;align-items:center;background:#fff;border:1px solid var(--border);border-radius:5px;padding:2px 7px;height:22px;flex-shrink:0;}
-.issuer-logo img{height:16px;width:auto;max-width:76px;object-fit:contain;display:block;}
-/* ─── TOP ROW: type box, tags, featured star ─── */
-.top-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:9px 12px 0;}
-.top-tags{display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-width:0;}
-.type-box{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:3px 10px;border-radius:5px;white-space:nowrap;line-height:1.5;}
-.star-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--navy);flex-shrink:0;box-shadow:0 0 0 2px rgba(208,182,137,.28);}
-.char-tag,.char-tag.tag-auto,.char-tag.tag-issuer,.char-tag.tag-memory,.char-tag.tag-full,.char-tag.tag-hard,.char-tag.tag-soft{background:#f3f4f6;color:#2b3440;border-color:#bcc2cc;}
-
-/* grid: tickers + term share one row */
-.card-top-grid{padding-top:10px;}
-.card-top-grid .card-top-row{margin-bottom:0;align-items:center;}
-.card-top-grid .underlying-chips{margin-bottom:0;}
-
-/* list: tickers on top, "Issued by" pinned to the bottom-left */
-.card-identity{justify-content:space-between;gap:8px;width:200px;}
-.list-underlying{font-size:15px;}
-
-/* ─── ISSUED BY ─── */
-.issued-row{display:flex;align-items:center;gap:8px;}
-.card-grid-inner > .issued-row{padding:7px 12px;border-bottom:1px solid var(--border);}
-.issued-lbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);}
-.issued-row .issuer-logo{height:28px;padding:3px 8px;}
-.issued-row .issuer-logo img{height:20px;max-width:100px;}
-.issued-row .issuer-badge{font-size:11px;font-weight:600;color:var(--navy);padding:4px 10px;}
-
 /* ─── ICONS ─── */
 .ic{width:11px;height:11px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;color:var(--bronze);}
-.bar-label.bl-ic{display:inline-flex;align-items:center;gap:4px;}
-.primary-label{display:flex;align-items:center;justify-content:center;gap:4px;font-size:10px;font-weight:700;color:var(--text2);}
-.primary-label .ic{width:12px;height:12px;}
-.snap-primary-label{display:flex;align-items:center;justify-content:center;gap:4px;}
-.snap-primary-label .ic{color:var(--gold-lt);}
-.snap-metric-label{display:flex;align-items:center;gap:3px;font-size:10px;font-weight:700;}
-.term-block .ic{width:15px;height:15px;color:var(--gold-lt);margin-right:-1px;}
-
-/* ─── CLOSE-DATE PILL (date and time, filled to show time elapsed) ─── */
-.close-pill{position:relative;overflow:hidden;border:1px solid var(--bc,var(--border2));border-radius:99px;padding:5px 10px;text-align:center;font-size:11px;font-weight:700;color:var(--navy);background:var(--surface);line-height:1.3;margin-top:1px;}
-.close-pill::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--p,0%);background:var(--fc,rgba(176,144,96,.2));}
-.close-pill span{position:relative;}
-
-/* ─── EQUAL-HEIGHT METRIC TILES ─── */
-.card-list-metrics > .metric,.card-list-metrics > .term-tile{height:68px;display:flex;flex-direction:column;justify-content:center;flex:0 0 auto;}
-.card-list-metrics .metric-label{white-space:nowrap;}
-.secondary-metrics .metric{min-height:54px;display:flex;flex-direction:column;justify-content:center;}
 
 /* ─── TERM (prominent) ─── */
 .term-pill{font-size:12px;font-weight:600;font-family:var(--sans);padding:4px 12px;border-radius:99px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .13s;white-space:nowrap;line-height:1.5;}
 .term-pill:hover{border-color:var(--gold-dk);color:var(--navy);}
 .term-pill.active{background:var(--navy);color:var(--gold);border-color:var(--navy);}
 .term-pill .tcount{font-family:var(--mono);font-size:10px;opacity:.6;margin-left:5px;}
-.term-block{display:inline-flex;align-items:center;gap:7px;background:var(--navy);border-radius:8px;padding:4px 10px 4px 9px;flex-shrink:0;}
-.term-num{font-family:var(--mono);font-size:21px;font-weight:600;color:var(--gold);line-height:1;}
-.term-meta{display:flex;flex-direction:column;line-height:1.25;}
-.term-unit{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--white);}
-.term-yrs{font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--gold-lt);}
-.term-tile{background:#fbf6ea;border:1.5px solid var(--gold);border-radius:6px;padding:6px 11px;flex-shrink:0;min-width:86px;text-align:center;}
-.term-tile .metric-label{justify-content:center;color:var(--bronze);}
-.term-tile-val{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--navy);line-height:1.1;}
-.term-tile-val small{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.08em;margin-left:4px;}
-.term-tile-sub{font-size:9px;color:var(--text3);font-weight:600;letter-spacing:.05em;margin-top:1px;}
-
-/* ─── HOW IT WORKS ─── */
-.card-grid.has-open{align-items:start;}
-.explain-row{padding:4px 8px;border-bottom:1px solid var(--border);}
-.explain-row.list{border-bottom:none;border-top:1px solid var(--border);}
-.explain-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:6px;background:none;border:none;cursor:pointer;padding:6px 6px;font-family:var(--sans);font-size:12px;font-weight:600;color:var(--navy);border-radius:6px;transition:background .13s;}
-.explain-toggle:hover{background:var(--surface2);}
-.explain-toggle .ex-l{display:flex;align-items:center;gap:7px;}
-.explain-toggle .ex-i{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;font-style:normal;}
-.explain-toggle .chev{font-size:10px;color:var(--text3);transition:transform .18s;}
-.explain-toggle[aria-expanded="true"] .chev{transform:rotate(180deg);}
-.expl-panel{padding:10px 14px 12px;background:#faf8f3;border-bottom:1px solid var(--border);}
-.card-list-wrap .expl-panel{border-bottom:none;border-top:1px solid var(--border);border-radius:0 0 var(--r) var(--r);}
 .expl-lead{font-size:13px;line-height:1.55;color:var(--navy);font-weight:600;margin-bottom:9px;}
 .expl-rows{display:flex;flex-direction:column;gap:9px;}
-.card-list-wrap .expl-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
 .expl-h{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--bronze);margin-bottom:2px;}
 .expl-row p{font-size:12px;line-height:1.55;color:var(--text2);}
-.expl-foot{margin-top:10px;padding-top:8px;border-top:1px dashed var(--border2);font-size:10.5px;line-height:1.5;color:var(--text2);}
-.expl-foot a{color:var(--navy);font-weight:600;}
-.snap-expl{margin-bottom:12px;}
-.snap-expl .expl{background:#faf8f3;border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
 .disc-link-row{margin-top:8px;}
 .disc-link-row a{font-size:11px;font-weight:600;color:var(--navy);}
 
 /* ─── FAVORITES ─── */
 .fav-wrap{position:relative;display:inline-flex;flex-shrink:0;}
-.fav-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text3);transition:all .13s;padding:0;}
+.fav-btn{width:34px;height:34px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text3);transition:all .13s;padding:0;}
 .fav-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .fav-btn:hover{border-color:#c2415d;color:#c2415d;}
 .fav-btn.on{background:#fdeef2;border-color:#e8a3b5;color:#c2415d;}
 .fav-btn.on svg{fill:#c2415d;}
-.cta-icons{display:flex;gap:6px;justify-content:center;}
 .pill.fav-pill{display:inline-flex;align-items:center;gap:5px;}
 .pill.fav-pill .ic{color:#c2415d;fill:currentColor;width:11px;height:11px;}
 .pill.fav-pill .fcount{font-family:var(--mono);font-size:10px;opacity:.7;}
 .pill.fav-pill.active{background:#c2415d;color:#fff;border-color:#c2415d;}
 .pill.fav-pill.active .ic{color:#fff;}
-.fav-bubble{position:absolute;bottom:calc(100% + 9px);right:-6px;width:224px;background:var(--navy);color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:8px;z-index:450;box-shadow:0 6px 20px rgba(9,25,48,.3);border:1px solid rgba(208,182,137,.35);font-weight:400;text-align:left;cursor:pointer;}
+.fav-bubble{position:absolute;top:calc(100% + 9px);right:-6px;width:224px;background:var(--navy);color:#fff;font-size:11.5px;line-height:1.5;padding:8px 10px;border-radius:8px;z-index:450;box-shadow:0 6px 20px rgba(9,25,48,.3);border:1px solid rgba(208,182,137,.35);font-weight:400;text-align:left;cursor:pointer;}
 .fav-bubble strong{color:var(--gold);font-weight:600;}
-.fav-bubble::after{content:"";position:absolute;top:100%;right:14px;border:5px solid transparent;border-top-color:var(--navy);}
+.fav-bubble::after{content:"";position:absolute;bottom:100%;right:14px;border:5px solid transparent;border-bottom-color:var(--navy);}
 
 .fav-banner{background:#fbf6ea;border:1px solid var(--gold);border-radius:var(--r);padding:11px 14px;margin-bottom:1rem;display:flex;gap:12px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
 .fav-banner[hidden]{display:none;}
@@ -344,8 +281,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .fp-gcount{margin-left:10px;font-size:8.5px;font-weight:500;color:var(--gold-lt);letter-spacing:.06em;}
 .fp-table tr.fp-blurb td{background:#fbf6ea !important;font-size:9px;color:#6b5a35;font-style:italic;padding:5px 8px;border-bottom:1px solid #eadfc5;}
 /* ─── PDF DOCUMENT (hidden on screen, shown only when exporting) ─── */
-#fav-print{display:none;font-family:var(--sans);color:var(--navy);}
-#fav-print,#fav-print *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box;}
+#print-doc{display:none;font-family:var(--sans);color:var(--navy);}
+#print-doc,#print-doc *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box;}
 .fp-head{background:var(--navy);border-bottom:3px solid var(--gold);border-radius:8px 8px 0 0;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff;}
 .fp-brand{display:flex;align-items:center;gap:10px;}
 .fp-mark{width:30px;height:30px;border-radius:6px;background:var(--gold);color:var(--navy);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;}
@@ -379,33 +316,66 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .fp-disc p{font-size:8.5px;line-height:1.55;color:#3f4652;margin-bottom:5px;text-align:justify;}
 .fp-firm{color:#3d3a35 !important;}
 
+/* ─── HEADER BAND THEMES (HERO_THEME and HERO_IMAGE are set in the script) ─── */
+:root{--gui-gold:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20640%20300%22%20preserveAspectRatio=%22xMidYMid%20slice%22%3E%3Cg%20fill=%22none%22%20stroke=%22%23d0b689%22%20stroke-opacity=%220.3%22%20stroke-width=%220.9%22%3E%3Cpolyline%20points=%220,6%2012,15%2024,16%2036,12%2048,10%2060,12%2072,14%2084,10%2096,1%20108,-6%20120,-5%20132,1%20144,3%20156,1%20168,0%20180,6%20192,15%20204,19%20216,15%20228,9%20240,7%20252,9%20264,8%20276,1%20288,-6%20300,-7%20312,-1%20324,6%20336,7%20348,5%20360,7%20372,14%20384,20%20396,17%20408,9%20420,3%20432,3%20444,4%20456,2%20468,-4%20480,-7%20492,-2%20504,8%20516,12%20528,11%20540,9%20552,12%20564,17%20576,17%20588,9%20600,-0%20612,-3%20624,0%20636,2%22/%3E%3Cpolyline%20points=%220,25%2012,32%2024,30%2036,26%2048,25%2060,27%2072,25%2084,17%2096,7%20108,3%20120,7%20132,13%20144,14%20156,13%20168,17%20180,26%20192,34%20204,34%20216,27%20228,21%20240,20%20252,20%20264,15%20276,7%20288,2%20300,6%20312,14%20324,20%20336,20%20348,21%20360,26%20372,33%20384,34%20396,27%20408,18%20420,13%20432,14%20444,13%20456,8%20468,4%20480,6%20492,15%20504,25%20516,27%20528,25%20540,26%20552,30%20564,32%20576,26%20588,15%20600,8%20612,8%20624,11%20636,11%22/%3E%3Cpolyline%20points=%220,44%2012,47%2024,43%2036,39%2048,39%2060,39%2072,33%2084,22%2096,14%20108,14%20120,21%20132,26%20144,27%20156,28%20168,36%20180,46%20192,50%20204,45%20216,37%20228,32%20240,31%20252,29%20264,21%20276,13%20288,13%20300,21%20312,31%20324,35%20336,35%20348,38%20360,45%20372,49%20384,45%20396,35%20408,26%20420,23%20432,24%20444,21%20456,16%20468,15%20480,22%20492,34%20504,42%20516,42%20528,40%20540,42%20552,45%20564,43%20576,33%20588,21%20600,16%20612,19%20624,22%20636,21%22/%3E%3Cpolyline%20points=%220,62%2012,60%2024,54%2036,51%2048,51%2060,48%2072,38%2084,27%2096,24%20108,29%20120,37%20132,40%20144,41%20156,46%20168,55%20180,63%20192,63%20204,54%20216,45%20228,42%20240,41%20252,36%20264,28%20276,23%20288,28%20300,39%20312,48%20324,50%20336,51%20348,55%20360,61%20372,61%20384,53%20396,41%20408,34%20420,34%20432,34%20444,30%20456,27%20468,31%20480,42%20492,53%20504,57%20516,56%20528,54%20540,56%20552,57%20564,50%20576,37%20588,28%20600,27%20612,32%20624,34%20636,33%22/%3E%3Cpolyline%20points=%220,75%2012,70%2024,64%2036,62%2048,61%2060,54%2072,44%2084,36%2096,38%20108,46%20120,53%20132,55%20144,57%20156,64%20168,73%20180,77%20192,71%20204,61%20216,54%20228,52%20240,50%20252,44%20264,37%20276,38%20288,47%20300,58%20312,64%20324,64%20336,66%20348,71%20360,74%20372,70%20384,58%20396,47%20408,44%20420,45%20432,45%20444,41%20456,41%20468,50%20480,62%20492,71%20504,71%20516,68%20528,67%20540,69%20552,65%20564,55%20576,43%20588,38%20600,41%20612,46%20624,48%20636,48%22/%3E%3Cpolyline%20points=%220,85%2012,78%2024,73%2036,72%2048,69%2060,61%2072,52%2084,49%2096,55%20108,64%20120,69%20132,70%20144,73%20156,81%20168,88%20180,86%20192,77%20204,67%20216,63%20228,63%20240,60%20252,53%20264,50%20276,56%20288,67%20300,76%20312,78%20324,77%20336,80%20348,84%20360,84%20372,75%20384,63%20396,56%20408,57%20420,59%20432,57%20444,55%20456,59%20468,70%20480,81%20492,85%20504,81%20516,78%20528,79%20540,78%20552,72%20564,60%20576,51%20588,52%20600,58%20612,62%20624,62%20636,64%22/%3E%3Cpolyline%20points=%220,92%2012,85%2024,82%2036,82%2048,78%2060,70%2072,63%2084,66%2096,75%20108,82%20120,84%20132,84%20144,88%20156,96%20168,98%20180,92%20192,82%20204,75%20216,75%20228,75%20240,71%20252,66%20264,67%20276,76%20288,86%20300,91%20312,90%20324,89%20336,92%20348,95%20360,91%20372,80%20384,70%20396,68%20408,72%20420,73%20432,71%20444,71%20456,78%20468,89%20480,96%20492,95%20504,90%20516,88%20528,89%20540,87%20552,78%20564,68%20576,64%20588,69%20600,75%20612,77%20624,77%20636,81%22/%3E%3Cpolyline%20points=%220,98%2012,93%2024,93%2036,93%2048,88%2060,81%2072,79%2084,85%2096,94%20108,98%20120,96%20132,97%20144,102%20156,108%20168,106%20180,97%20192,89%20204,87%20216,89%20228,88%20240,84%20252,81%20264,85%20276,95%20288,103%20300,102%20312,99%20324,100%20336,104%20348,104%20360,97%20372,87%20384,82%20396,84%20408,88%20420,88%20432,85%20444,87%20456,96%20468,105%20480,107%20492,102%20504,98%20516,98%20528,99%20540,95%20552,86%20564,79%20576,81%20588,88%20600,92%20612,92%20624,91%20636,97%22/%3E%3Cpolyline%20points=%220,105%2012,104%2024,106%2036,105%2048,99%2060,94%2072,96%2084,104%2096,110%20108,110%20120,107%20132,109%20144,115%20156,118%20168,113%20180,104%20192,99%20204,101%20216,104%20228,102%20240,97%20252,97%20264,104%20276,113%20288,115%20300,111%20312,109%20324,111%20336,114%20348,112%20360,104%20372,97%20384,97%20396,102%20408,104%20420,102%20432,100%20444,104%20456,113%20468,118%20480,115%20492,109%20504,107%20516,109%20528,110%20540,104%20552,96%20564,94%20576,99%20588,106%20600,107%20612,105%20624,105%20636,112%22/%3E%3Cpolyline%20points=%220,115%2012,117%2024,120%2036,118%2048,112%2060,109%2072,115%2084,122%2096,124%20108,120%20120,118%20132,121%20144,127%20156,126%20168,119%20180,113%20192,113%20204,117%20216,119%20228,115%20240,111%20252,114%20264,121%20276,126%20288,124%20300,120%20312,119%20324,123%20336,125%20348,121%20360,113%20372,110%20384,114%20396,119%20408,119%20420,115%20432,114%20444,120%20456,127%20468,127%20480,122%20492,117%20504,118%20516,122%20528,121%20540,114%20552,109%20564,111%20576,118%20588,122%20600,119%20612,116%20624,119%20636,125%22/%3E%3Cpolyline%20points=%220,128%2012,132%2024,134%2036,129%2048,124%2060,125%2072,132%2084,137%2096,135%20108,130%20120,130%20132,135%20144,138%20156,135%20168,128%20180,125%20192,128%20204,133%20216,132%20228,127%20240,125%20252,130%20264,137%20276,138%20288,133%20300,129%20312,131%20324,136%20336,136%20348,130%20360,124%20372,125%20384,131%20396,134%20408,131%20420,127%20432,129%20444,135%20456,139%20468,136%20480,130%20492,128%20504,132%20516,135%20528,132%20540,125%20552,124%20564,128%20576,134%20588,134%20600,130%20612,128%20624,133%20636,138%22/%3E%3Cpolyline%20points=%220,142%2012,147%2024,145%2036,140%2048,137%2060,141%2072,148%2084,149%2096,144%20108,141%20120,143%20132,149%20144,149%20156,144%20168,138%20180,139%20192,144%20204,147%20216,143%20228,139%20240,140%20252,146%20264,150%20276,148%20288,142%20300,141%20312,145%20324,149%20336,146%20348,139%20360,137%20372,141%20384,146%20396,146%20408,142%20420,139%20432,144%20444,150%20456,150%20468,145%20480,140%20492,142%20504,146%20516,147%20528,142%20540,137%20552,139%20564,145%20576,148%20588,145%20600,141%20612,142%20624,147%20636,151%22/%3E%3Cpolyline%20points=%220,157%2012,159%2024,155%2036,150%2048,151%2060,157%2072,162%2084,160%2096,155%20108,154%20120,159%20132,162%20144,160%20156,153%20168,150%20180,153%20192,158%20204,158%20216,153%20228,151%20240,155%20252,162%20264,163%20276,158%20288,153%20300,155%20312,160%20324,161%20336,155%20348,150%20360,150%20372,156%20384,160%20396,157%20408,153%20420,154%20432,160%20444,164%20456,161%20468,154%20480,152%20492,156%20504,160%20516,157%20528,151%20540,149%20552,154%20564,160%20576,160%20588,156%20600,153%20612,157%20624,162%20636,162%22/%3E%3Cpolyline%20points=%220,169%2012,169%2024,164%2036,161%2048,166%2060,173%2072,176%2084,172%2096,168%20108,169%20120,174%20132,175%20144,169%20156,162%20168,162%20180,167%20192,170%20204,168%20216,164%20228,165%20240,172%20252,177%20264,175%20276,169%20288,167%20300,170%20312,173%20324,170%20336,163%20348,160%20360,164%20372,170%20384,171%20396,168%20408,166%20420,170%20432,176%20444,177%20456,171%20468,165%20480,166%20492,170%20504,171%20516,166%20528,161%20540,162%20552,169%20564,174%20576,172%20588,168%20600,168%20612,174%20624,177%20636,173%22/%3E%3Cpolyline%20points=%220,180%2012,177%2024,173%2036,175%2048,183%2060,189%2072,189%2084,184%2096,182%20108,186%20120,188%20132,184%20144,176%20156,171%20168,174%20180,179%20192,181%20204,178%20216,177%20228,182%20240,190%20252,192%20264,187%20276,181%20288,181%20300,184%20312,184%20324,177%20336,171%20348,171%20360,178%20372,183%20384,183%20396,180%20408,182%20420,188%20432,192%20444,189%20456,181%20468,177%20480,179%20492,181%20504,179%20516,173%20528,171%20540,177%20552,185%20564,187%20576,184%20588,182%20600,185%20612,190%20624,189%20636,182%22/%3E%3Cpolyline%20points=%220,189%2012,186%2024,185%2036,191%2048,201%2060,206%2072,203%2084,198%2096,198%20108,201%20120,199%20132,191%20144,183%20156,181%20168,186%20180,191%20192,191%20204,189%20216,193%20228,201%20240,207%20252,206%20264,199%20276,194%20288,194%20300,195%20312,191%20324,183%20336,180%20348,184%20360,193%20372,197%20384,195%20396,195%20408,200%20420,206%20432,207%20444,199%20456,191%20468,188%20480,190%20492,190%20504,186%20516,181%20528,184%20540,193%20552,201%20564,201%20576,198%20588,198%20600,203%20612,205%20624,199%20636,189%22/%3E%3Cpolyline%20points=%220,198%2012,197%2024,200%2036,210%2048,219%2060,221%2072,216%2084,212%2096,212%20108,213%20120,207%20132,197%20144,190%20156,193%20168,200%20180,204%20192,203%20204,204%20216,211%20228,220%20240,223%20252,217%20264,209%20276,206%20288,206%20300,204%20312,197%20324,190%20336,191%20348,200%20360,208%20372,211%20384,210%20396,212%20408,219%20420,222%20432,217%20444,207%20456,200%20468,199%20480,200%20492,198%20504,193%20516,193%20528,201%20540,211%20552,217%20564,216%20576,213%20588,215%20600,218%20612,215%20624,206%20636,196%22/%3E%3Cpolyline%20points=%220,209%2012,211%2024,219%2036,231%2048,236%2060,234%2072,227%2084,225%2096,225%20108,221%20120,212%20132,202%20144,200%20156,207%20168,214%20180,217%20192,218%20204,222%20216,231%20228,238%20240,236%20252,226%20264,219%20276,216%20288,216%20300,211%20312,203%20324,200%20336,206%20348,217%20360,224%20372,225%20384,226%20396,230%20408,236%20420,235%20432,225%20444,214%20456,209%20468,210%20480,210%20492,206%20504,204%20516,208%20528,220%20540,230%20552,232%20564,229%20576,228%20588,230%20600,230%20612,223%20624,211%20636,203%22/%3E%3Cpolyline%20points=%220,223%2012,228%2024,239%2036,249%2048,250%2060,244%2072,238%2084,236%2096,235%20108,228%20120,217%20132,211%20144,214%20156,223%20168,230%20180,231%20192,234%20204,241%20216,249%20228,252%20240,244%20252,234%20264,228%20276,227%20288,224%20300,218%20312,212%20324,214%20336,225%20348,236%20360,240%20372,240%20384,242%20396,247%20408,249%20420,243%20432,230%20444,221%20456,219%20468,221%20480,220%20492,217%20504,218%20516,227%20528,240%20540,247%20552,246%20564,242%20576,242%20588,243%20600,239%20612,228%20624,217%20636,213%22/%3E%3Cpolyline%20points=%220,239%2012,247%2024,259%2036,264%2048,260%2060,252%2072,248%2084,246%2096,243%20108,234%20120,225%20132,224%20144,231%20156,241%20168,245%20180,247%20192,251%20204,259%20216,264%20228,261%20240,250%20252,241%20264,237%20276,237%20288,233%20300,227%20312,225%20324,233%20336,245%20348,253%20360,254%20372,254%20384,257%20396,261%20408,258%20420,248%20432,236%20444,230%20456,231%20468,233%20480,231%20492,230%20504,236%20516,248%20528,258%20540,261%20552,257%20564,254%20576,254%20588,253%20600,245%20612,233%20624,225%20636,227%22/%3E%3Cpolyline%20points=%220,256%2012,266%2024,275%2036,275%2048,268%2060,260%2072,257%2084,256%2096,251%20108,242%20120,237%20132,241%20144,251%20156,258%20168,260%20180,261%20192,267%20204,274%20216,275%20228,267%20240,256%20252,249%20264,249%20276,248%20288,244%20300,239%20312,242%20324,253%20336,264%20348,268%20360,267%20372,267%20384,270%20396,271%20408,265%20420,253%20432,243%20444,242%20456,245%20468,247%20480,245%20492,246%20504,255%20516,267%20528,274%20540,271%20552,266%20564,264%20576,264%20588,261%20600,250%20612,240%20624,238%20636,243%22/%3E%3Cpolyline%20points=%220,273%2012,283%2024,287%2036,282%2048,273%2060,268%2072,268%2084,266%2096,260%20108,253%20120,252%20132,260%20144,270%20156,274%20168,273%20180,275%20192,281%20204,286%20216,282%20228,272%20240,263%20252,260%20264,262%20276,261%20288,256%20300,254%20312,261%20324,273%20336,280%20348,280%20360,277%20372,278%20384,281%20396,279%20408,270%20420,259%20432,255%20444,257%20456,261%20468,261%20480,260%20492,264%20504,274%20516,284%20528,285%20540,279%20552,275%20564,274%20576,274%20588,268%20600,258%20612,252%20624,254%20636,262%22/%3E%3Cpolyline%20points=%220,289%2012,296%2024,295%2036,288%2048,280%2060,279%2072,280%2084,278%2096,271%20108,267%20120,271%20132,280%20144,287%20156,287%20168,285%20180,288%20192,293%20204,295%20216,288%20228,278%20240,273%20252,275%20264,276%20276,274%20288,270%20300,272%20312,281%20324,290%20336,292%20348,289%20360,287%20372,289%20384,291%20396,286%20408,277%20420,269%20432,270%20444,275%20456,277%20468,275%20480,275%20492,282%20504,291%20516,296%20528,292%20540,286%20552,284%20564,285%20576,284%20588,276%20600,268%20612,267%20624,273%20636,280%22/%3E%3Cpolyline%20points=%220,303%2012,306%2024,302%2036,294%2048,290%2060,292%2072,293%2084,290%2096,284%20108,283%20120,290%20132,298%20144,300%20156,297%20168,296%20180,300%20192,304%20204,302%20216,294%20228,287%20240,287%20252,291%20264,291%20276,287%20288,285%20300,290%20312,299%20324,304%20336,302%20348,297%20360,297%20372,300%20384,301%20396,294%20408,286%20420,283%20432,287%20444,292%20456,292%20468,289%20480,291%20492,298%20504,305%20516,305%20528,299%20540,294%20552,295%20564,297%20576,294%20588,286%20600,282%20612,285%20624,292%20636,296%22/%3E%3C/g%3E%3C/svg%3E");--gui-bronze:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20640%20300%22%20preserveAspectRatio=%22xMidYMid%20slice%22%3E%3Cg%20fill=%22none%22%20stroke=%22%23b09060%22%20stroke-opacity=%220.32%22%20stroke-width=%220.9%22%3E%3Cpolyline%20points=%220,6%2012,15%2024,16%2036,12%2048,10%2060,12%2072,14%2084,10%2096,1%20108,-6%20120,-5%20132,1%20144,3%20156,1%20168,0%20180,6%20192,15%20204,19%20216,15%20228,9%20240,7%20252,9%20264,8%20276,1%20288,-6%20300,-7%20312,-1%20324,6%20336,7%20348,5%20360,7%20372,14%20384,20%20396,17%20408,9%20420,3%20432,3%20444,4%20456,2%20468,-4%20480,-7%20492,-2%20504,8%20516,12%20528,11%20540,9%20552,12%20564,17%20576,17%20588,9%20600,-0%20612,-3%20624,0%20636,2%22/%3E%3Cpolyline%20points=%220,25%2012,32%2024,30%2036,26%2048,25%2060,27%2072,25%2084,17%2096,7%20108,3%20120,7%20132,13%20144,14%20156,13%20168,17%20180,26%20192,34%20204,34%20216,27%20228,21%20240,20%20252,20%20264,15%20276,7%20288,2%20300,6%20312,14%20324,20%20336,20%20348,21%20360,26%20372,33%20384,34%20396,27%20408,18%20420,13%20432,14%20444,13%20456,8%20468,4%20480,6%20492,15%20504,25%20516,27%20528,25%20540,26%20552,30%20564,32%20576,26%20588,15%20600,8%20612,8%20624,11%20636,11%22/%3E%3Cpolyline%20points=%220,44%2012,47%2024,43%2036,39%2048,39%2060,39%2072,33%2084,22%2096,14%20108,14%20120,21%20132,26%20144,27%20156,28%20168,36%20180,46%20192,50%20204,45%20216,37%20228,32%20240,31%20252,29%20264,21%20276,13%20288,13%20300,21%20312,31%20324,35%20336,35%20348,38%20360,45%20372,49%20384,45%20396,35%20408,26%20420,23%20432,24%20444,21%20456,16%20468,15%20480,22%20492,34%20504,42%20516,42%20528,40%20540,42%20552,45%20564,43%20576,33%20588,21%20600,16%20612,19%20624,22%20636,21%22/%3E%3Cpolyline%20points=%220,62%2012,60%2024,54%2036,51%2048,51%2060,48%2072,38%2084,27%2096,24%20108,29%20120,37%20132,40%20144,41%20156,46%20168,55%20180,63%20192,63%20204,54%20216,45%20228,42%20240,41%20252,36%20264,28%20276,23%20288,28%20300,39%20312,48%20324,50%20336,51%20348,55%20360,61%20372,61%20384,53%20396,41%20408,34%20420,34%20432,34%20444,30%20456,27%20468,31%20480,42%20492,53%20504,57%20516,56%20528,54%20540,56%20552,57%20564,50%20576,37%20588,28%20600,27%20612,32%20624,34%20636,33%22/%3E%3Cpolyline%20points=%220,75%2012,70%2024,64%2036,62%2048,61%2060,54%2072,44%2084,36%2096,38%20108,46%20120,53%20132,55%20144,57%20156,64%20168,73%20180,77%20192,71%20204,61%20216,54%20228,52%20240,50%20252,44%20264,37%20276,38%20288,47%20300,58%20312,64%20324,64%20336,66%20348,71%20360,74%20372,70%20384,58%20396,47%20408,44%20420,45%20432,45%20444,41%20456,41%20468,50%20480,62%20492,71%20504,71%20516,68%20528,67%20540,69%20552,65%20564,55%20576,43%20588,38%20600,41%20612,46%20624,48%20636,48%22/%3E%3Cpolyline%20points=%220,85%2012,78%2024,73%2036,72%2048,69%2060,61%2072,52%2084,49%2096,55%20108,64%20120,69%20132,70%20144,73%20156,81%20168,88%20180,86%20192,77%20204,67%20216,63%20228,63%20240,60%20252,53%20264,50%20276,56%20288,67%20300,76%20312,78%20324,77%20336,80%20348,84%20360,84%20372,75%20384,63%20396,56%20408,57%20420,59%20432,57%20444,55%20456,59%20468,70%20480,81%20492,85%20504,81%20516,78%20528,79%20540,78%20552,72%20564,60%20576,51%20588,52%20600,58%20612,62%20624,62%20636,64%22/%3E%3Cpolyline%20points=%220,92%2012,85%2024,82%2036,82%2048,78%2060,70%2072,63%2084,66%2096,75%20108,82%20120,84%20132,84%20144,88%20156,96%20168,98%20180,92%20192,82%20204,75%20216,75%20228,75%20240,71%20252,66%20264,67%20276,76%20288,86%20300,91%20312,90%20324,89%20336,92%20348,95%20360,91%20372,80%20384,70%20396,68%20408,72%20420,73%20432,71%20444,71%20456,78%20468,89%20480,96%20492,95%20504,90%20516,88%20528,89%20540,87%20552,78%20564,68%20576,64%20588,69%20600,75%20612,77%20624,77%20636,81%22/%3E%3Cpolyline%20points=%220,98%2012,93%2024,93%2036,93%2048,88%2060,81%2072,79%2084,85%2096,94%20108,98%20120,96%20132,97%20144,102%20156,108%20168,106%20180,97%20192,89%20204,87%20216,89%20228,88%20240,84%20252,81%20264,85%20276,95%20288,103%20300,102%20312,99%20324,100%20336,104%20348,104%20360,97%20372,87%20384,82%20396,84%20408,88%20420,88%20432,85%20444,87%20456,96%20468,105%20480,107%20492,102%20504,98%20516,98%20528,99%20540,95%20552,86%20564,79%20576,81%20588,88%20600,92%20612,92%20624,91%20636,97%22/%3E%3Cpolyline%20points=%220,105%2012,104%2024,106%2036,105%2048,99%2060,94%2072,96%2084,104%2096,110%20108,110%20120,107%20132,109%20144,115%20156,118%20168,113%20180,104%20192,99%20204,101%20216,104%20228,102%20240,97%20252,97%20264,104%20276,113%20288,115%20300,111%20312,109%20324,111%20336,114%20348,112%20360,104%20372,97%20384,97%20396,102%20408,104%20420,102%20432,100%20444,104%20456,113%20468,118%20480,115%20492,109%20504,107%20516,109%20528,110%20540,104%20552,96%20564,94%20576,99%20588,106%20600,107%20612,105%20624,105%20636,112%22/%3E%3Cpolyline%20points=%220,115%2012,117%2024,120%2036,118%2048,112%2060,109%2072,115%2084,122%2096,124%20108,120%20120,118%20132,121%20144,127%20156,126%20168,119%20180,113%20192,113%20204,117%20216,119%20228,115%20240,111%20252,114%20264,121%20276,126%20288,124%20300,120%20312,119%20324,123%20336,125%20348,121%20360,113%20372,110%20384,114%20396,119%20408,119%20420,115%20432,114%20444,120%20456,127%20468,127%20480,122%20492,117%20504,118%20516,122%20528,121%20540,114%20552,109%20564,111%20576,118%20588,122%20600,119%20612,116%20624,119%20636,125%22/%3E%3Cpolyline%20points=%220,128%2012,132%2024,134%2036,129%2048,124%2060,125%2072,132%2084,137%2096,135%20108,130%20120,130%20132,135%20144,138%20156,135%20168,128%20180,125%20192,128%20204,133%20216,132%20228,127%20240,125%20252,130%20264,137%20276,138%20288,133%20300,129%20312,131%20324,136%20336,136%20348,130%20360,124%20372,125%20384,131%20396,134%20408,131%20420,127%20432,129%20444,135%20456,139%20468,136%20480,130%20492,128%20504,132%20516,135%20528,132%20540,125%20552,124%20564,128%20576,134%20588,134%20600,130%20612,128%20624,133%20636,138%22/%3E%3Cpolyline%20points=%220,142%2012,147%2024,145%2036,140%2048,137%2060,141%2072,148%2084,149%2096,144%20108,141%20120,143%20132,149%20144,149%20156,144%20168,138%20180,139%20192,144%20204,147%20216,143%20228,139%20240,140%20252,146%20264,150%20276,148%20288,142%20300,141%20312,145%20324,149%20336,146%20348,139%20360,137%20372,141%20384,146%20396,146%20408,142%20420,139%20432,144%20444,150%20456,150%20468,145%20480,140%20492,142%20504,146%20516,147%20528,142%20540,137%20552,139%20564,145%20576,148%20588,145%20600,141%20612,142%20624,147%20636,151%22/%3E%3Cpolyline%20points=%220,157%2012,159%2024,155%2036,150%2048,151%2060,157%2072,162%2084,160%2096,155%20108,154%20120,159%20132,162%20144,160%20156,153%20168,150%20180,153%20192,158%20204,158%20216,153%20228,151%20240,155%20252,162%20264,163%20276,158%20288,153%20300,155%20312,160%20324,161%20336,155%20348,150%20360,150%20372,156%20384,160%20396,157%20408,153%20420,154%20432,160%20444,164%20456,161%20468,154%20480,152%20492,156%20504,160%20516,157%20528,151%20540,149%20552,154%20564,160%20576,160%20588,156%20600,153%20612,157%20624,162%20636,162%22/%3E%3Cpolyline%20points=%220,169%2012,169%2024,164%2036,161%2048,166%2060,173%2072,176%2084,172%2096,168%20108,169%20120,174%20132,175%20144,169%20156,162%20168,162%20180,167%20192,170%20204,168%20216,164%20228,165%20240,172%20252,177%20264,175%20276,169%20288,167%20300,170%20312,173%20324,170%20336,163%20348,160%20360,164%20372,170%20384,171%20396,168%20408,166%20420,170%20432,176%20444,177%20456,171%20468,165%20480,166%20492,170%20504,171%20516,166%20528,161%20540,162%20552,169%20564,174%20576,172%20588,168%20600,168%20612,174%20624,177%20636,173%22/%3E%3Cpolyline%20points=%220,180%2012,177%2024,173%2036,175%2048,183%2060,189%2072,189%2084,184%2096,182%20108,186%20120,188%20132,184%20144,176%20156,171%20168,174%20180,179%20192,181%20204,178%20216,177%20228,182%20240,190%20252,192%20264,187%20276,181%20288,181%20300,184%20312,184%20324,177%20336,171%20348,171%20360,178%20372,183%20384,183%20396,180%20408,182%20420,188%20432,192%20444,189%20456,181%20468,177%20480,179%20492,181%20504,179%20516,173%20528,171%20540,177%20552,185%20564,187%20576,184%20588,182%20600,185%20612,190%20624,189%20636,182%22/%3E%3Cpolyline%20points=%220,189%2012,186%2024,185%2036,191%2048,201%2060,206%2072,203%2084,198%2096,198%20108,201%20120,199%20132,191%20144,183%20156,181%20168,186%20180,191%20192,191%20204,189%20216,193%20228,201%20240,207%20252,206%20264,199%20276,194%20288,194%20300,195%20312,191%20324,183%20336,180%20348,184%20360,193%20372,197%20384,195%20396,195%20408,200%20420,206%20432,207%20444,199%20456,191%20468,188%20480,190%20492,190%20504,186%20516,181%20528,184%20540,193%20552,201%20564,201%20576,198%20588,198%20600,203%20612,205%20624,199%20636,189%22/%3E%3Cpolyline%20points=%220,198%2012,197%2024,200%2036,210%2048,219%2060,221%2072,216%2084,212%2096,212%20108,213%20120,207%20132,197%20144,190%20156,193%20168,200%20180,204%20192,203%20204,204%20216,211%20228,220%20240,223%20252,217%20264,209%20276,206%20288,206%20300,204%20312,197%20324,190%20336,191%20348,200%20360,208%20372,211%20384,210%20396,212%20408,219%20420,222%20432,217%20444,207%20456,200%20468,199%20480,200%20492,198%20504,193%20516,193%20528,201%20540,211%20552,217%20564,216%20576,213%20588,215%20600,218%20612,215%20624,206%20636,196%22/%3E%3Cpolyline%20points=%220,209%2012,211%2024,219%2036,231%2048,236%2060,234%2072,227%2084,225%2096,225%20108,221%20120,212%20132,202%20144,200%20156,207%20168,214%20180,217%20192,218%20204,222%20216,231%20228,238%20240,236%20252,226%20264,219%20276,216%20288,216%20300,211%20312,203%20324,200%20336,206%20348,217%20360,224%20372,225%20384,226%20396,230%20408,236%20420,235%20432,225%20444,214%20456,209%20468,210%20480,210%20492,206%20504,204%20516,208%20528,220%20540,230%20552,232%20564,229%20576,228%20588,230%20600,230%20612,223%20624,211%20636,203%22/%3E%3Cpolyline%20points=%220,223%2012,228%2024,239%2036,249%2048,250%2060,244%2072,238%2084,236%2096,235%20108,228%20120,217%20132,211%20144,214%20156,223%20168,230%20180,231%20192,234%20204,241%20216,249%20228,252%20240,244%20252,234%20264,228%20276,227%20288,224%20300,218%20312,212%20324,214%20336,225%20348,236%20360,240%20372,240%20384,242%20396,247%20408,249%20420,243%20432,230%20444,221%20456,219%20468,221%20480,220%20492,217%20504,218%20516,227%20528,240%20540,247%20552,246%20564,242%20576,242%20588,243%20600,239%20612,228%20624,217%20636,213%22/%3E%3Cpolyline%20points=%220,239%2012,247%2024,259%2036,264%2048,260%2060,252%2072,248%2084,246%2096,243%20108,234%20120,225%20132,224%20144,231%20156,241%20168,245%20180,247%20192,251%20204,259%20216,264%20228,261%20240,250%20252,241%20264,237%20276,237%20288,233%20300,227%20312,225%20324,233%20336,245%20348,253%20360,254%20372,254%20384,257%20396,261%20408,258%20420,248%20432,236%20444,230%20456,231%20468,233%20480,231%20492,230%20504,236%20516,248%20528,258%20540,261%20552,257%20564,254%20576,254%20588,253%20600,245%20612,233%20624,225%20636,227%22/%3E%3Cpolyline%20points=%220,256%2012,266%2024,275%2036,275%2048,268%2060,260%2072,257%2084,256%2096,251%20108,242%20120,237%20132,241%20144,251%20156,258%20168,260%20180,261%20192,267%20204,274%20216,275%20228,267%20240,256%20252,249%20264,249%20276,248%20288,244%20300,239%20312,242%20324,253%20336,264%20348,268%20360,267%20372,267%20384,270%20396,271%20408,265%20420,253%20432,243%20444,242%20456,245%20468,247%20480,245%20492,246%20504,255%20516,267%20528,274%20540,271%20552,266%20564,264%20576,264%20588,261%20600,250%20612,240%20624,238%20636,243%22/%3E%3Cpolyline%20points=%220,273%2012,283%2024,287%2036,282%2048,273%2060,268%2072,268%2084,266%2096,260%20108,253%20120,252%20132,260%20144,270%20156,274%20168,273%20180,275%20192,281%20204,286%20216,282%20228,272%20240,263%20252,260%20264,262%20276,261%20288,256%20300,254%20312,261%20324,273%20336,280%20348,280%20360,277%20372,278%20384,281%20396,279%20408,270%20420,259%20432,255%20444,257%20456,261%20468,261%20480,260%20492,264%20504,274%20516,284%20528,285%20540,279%20552,275%20564,274%20576,274%20588,268%20600,258%20612,252%20624,254%20636,262%22/%3E%3Cpolyline%20points=%220,289%2012,296%2024,295%2036,288%2048,280%2060,279%2072,280%2084,278%2096,271%20108,267%20120,271%20132,280%20144,287%20156,287%20168,285%20180,288%20192,293%20204,295%20216,288%20228,278%20240,273%20252,275%20264,276%20276,274%20288,270%20300,272%20312,281%20324,290%20336,292%20348,289%20360,287%20372,289%20384,291%20396,286%20408,277%20420,269%20432,270%20444,275%20456,277%20468,275%20480,275%20492,282%20504,291%20516,296%20528,292%20540,286%20552,284%20564,285%20576,284%20588,276%20600,268%20612,267%20624,273%20636,280%22/%3E%3Cpolyline%20points=%220,303%2012,306%2024,302%2036,294%2048,290%2060,292%2072,293%2084,290%2096,284%20108,283%20120,290%20132,298%20144,300%20156,297%20168,296%20180,300%20192,304%20204,302%20216,294%20228,287%20240,287%20252,291%20264,291%20276,287%20288,285%20300,290%20312,299%20324,304%20336,302%20348,297%20360,297%20372,300%20384,301%20396,294%20408,286%20420,283%20432,287%20444,292%20456,292%20468,289%20480,291%20492,298%20504,305%20516,305%20528,299%20540,294%20552,295%20564,297%20576,294%20588,286%20600,282%20612,285%20624,292%20636,296%22/%3E%3C/g%3E%3C/svg%3E");}
+.hero-engraved .chero{background:var(--navy) var(--gui-gold) center/cover;}
+.hero-paper .chero{background:#f5efe2 var(--gui-bronze) center/cover;}
+.hero-paper .assets-lbl{color:var(--bronze);}
+.hero-paper .asset-tk{color:var(--navy);}
+.hero-paper .atile{box-shadow:0 0 0 1px rgba(9,25,48,.18);}
+.hero-paper .chero .fav-btn{background:rgba(255,255,255,.75);border-color:var(--border2);color:var(--text2);}
+.hero-paper .chero .fav-btn:hover{border-color:#c2415d;color:#c2415d;}
+.hero-image .chero{background:linear-gradient(rgba(9,25,48,.80),rgba(9,25,48,.90)),var(--hero-img) center/cover;}
+
+/* ─── FACT SHEET (PDF) ─── */
+.ns-title{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;margin:14px 0 10px;}
+.ns-tags{margin-left:10px;font-size:10.5px;font-weight:700;color:#2b3440;}
+.ns-close{font-size:10.5px;font-weight:700;color:#2b3440;}
+.ns-hero{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:18px 22px 20px;border-radius:10px;background:var(--navy) var(--gui-gold) center/cover;box-shadow:inset 0 -4px 0 var(--accent,var(--gold));color:#fff;}
+.ns-hero .assets{align-items:flex-start;gap:9px;}
+.ns-hero .assets-row{justify-content:flex-start;gap:10px 12px;--ts:46px;}
+.ns-hero .assets-row.s1{--ts:58px;}
+.ns-hero .assets-row.s6{--ts:38px;}
+.ns-hl{text-align:right;flex-shrink:0;}
+.ns-hl .big{font-size:34px;color:#fff;}
+.ns-hl .k{margin-top:6px;color:var(--gold-lt);}
+.ns-term{margin-top:12px;font-size:18px;font-weight:700;color:#fff;}
+.ns-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:16px;}
+.ns h3{margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--gold);font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);}
+.ns-kt{width:100%;border-collapse:collapse;}
+.ns-kt td{padding:5px 0;border-bottom:1px solid #e7e2d6;font-size:10.5px;line-height:1.4;vertical-align:top;}
+.ns-kt td:first-child{width:42%;padding-right:8px;font-weight:600;color:#4a5360;}
+.ns-kt td:last-child{font-weight:700;color:var(--navy);}
+.ns .expl-lead{margin-bottom:8px;font-size:11px;line-height:1.5;}
+.ns .expl-rows{gap:7px;}
+.ns .expl-h{font-size:8.5px;}
+.ns .expl-row p{font-size:10.5px;line-height:1.5;}
+.ns-list{margin:0 0 0 14px;padding:0;font-size:10.5px;line-height:1.5;color:#2b3440;}
+.ns-list li{margin-bottom:5px;}
+.ns-p2{break-before:page;page-break-before:always;padding-top:4px;}
+.ns-run{margin-bottom:4px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4a5360;}
+.ns-p2 .ns-list{font-size:11.5px;line-height:1.6;}
+.ns-box{margin-top:18px;padding:11px 14px;background:#fbf6ea;border:1px solid var(--gold);border-radius:8px;font-size:10.5px;line-height:1.55;color:#2b3440;break-inside:avoid;}
+
+
+
 /* ─── PRINT STYLES ─── */
 @page{size:letter;margin:.45in;}
 @media print{
-  body.print-snap>*:not(.snapshot-overlay){display:none!important;}
-  body.print-snap .snapshot-overlay{position:static!important;background:white!important;display:block!important;}
-  .snap-controls,.snap-close,.snap-print-btn{display:none!important;}
-  .snapshot-modal{box-shadow:none!important;max-height:none!important;}
-  body.print-favs{background:#fff!important;}
-  body.print-favs>*:not(#fav-print){display:none!important;}
-  body.print-favs #fav-print{display:block!important;}
+  body.print-doc{background:#fff!important;}
+  body.print-doc>*:not(#print-doc){display:none!important;}
+  body.print-doc #print-doc{display:block!important;}
 }
 
-/* ─── RESPONSIVE ─── */
 @media(max-width:900px){
   .page{padding:1rem;}
   .site-header{padding:0 1rem;}
-  .card-list-inner{flex-direction:column;}
-  .card-identity,.card-list-metrics,.card-list-bars{width:100%;border-right:none;border-bottom:1px solid var(--border);}
-  .card-list-cta{width:100%;padding:.75rem 1rem;}
   .hero{flex-direction:column;gap:1rem;}
   .hero-stats{justify-content:center;}
 }
 @media(max-width:600px){
-  .card-grid{grid-template-columns:1fr;}
-  .count-badge,.view-toggle{display:none;}
-}
-</style>
+  .count-badge,.view-toggle,.header-right{display:none;}
+}</style>
 </head>
 <body>
 
@@ -499,25 +469,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 
 </main>
 
-<!-- FAVORITES PDF DOCUMENT (print only) -->
-<div id="fav-print"></div>
+<!-- PDF DOCUMENT (print only) -->
+<div id="print-doc"></div>
 
-<!-- SNAPSHOT MODAL -->
-<div class="snapshot-overlay" id="snapshot-overlay" onclick="closeSnapshot(event)">
-  <div class="snapshot-modal" id="snapshot-modal">
-    <div class="snap-header">
-      <div class="snap-logo">
-        <div class="snap-logo-mark">PP</div>
-        <span class="snap-firm">Prudent Prosperity</span>
-      </div>
-      <div class="snap-controls">
-        <button class="snap-print-btn" onclick="printSnapshot()">🖨 Print</button>
-        <button class="snap-close" onclick="document.getElementById('snapshot-overlay').classList.remove('open')">✕</button>
-      </div>
-    </div>
-    <div class="snap-body" id="snap-body"><!-- filled by JS --></div>
-  </div>
-</div>
 
 <script>
 // ─────────────────────────────────────────────────────────────
@@ -527,13 +481,22 @@ const WORKER_URL    = "https://structured-notes-api.pranav-a05.workers.dev";
 const CALENDLY_LINK = "https://calendly.com/prudentprosperity/30min";
 // Address of the full disclosures page (a portal page URL works too).
 const DISCLOSURES_URL = "disclosures.html";
+// Header band behind each card's reference assets in the grid view: "engraved" (navy) or "paper" (cream).
+// To use a picture instead, put the file in the logos folder and set HERO_IMAGE to its path (for example "logos/hero.jpg").
+const HERO_THEME = "engraved";
+const HERO_IMAGE = "";
+// Payoff sliders (Growth, PPN and MLCD notes) inside the Details panel. Off until each note's slider has been checked.
+const SHOW_PAYOFF_SLIDER = false;
 // Folder of issuer logos. Each file is named after the issuer in lowercase with no
 // spaces, accents or punctuation (jpmorgan.png, bankofamerica.png). Issuers without
 // a file show a text badge.
 const LOGO_PATH = "logos/";
-// Public repository of stock ticker icons: one PNG per ticker, named in capitals (NVDA.png).
-// The commit hash in the address pins the files; replace it with "main" to always use the latest.
-// Tickers without a file show as plain text chips.
+// Stock ticker icons, one PNG per ticker named in capitals (NVDA.png). The page looks in its own
+// folder first and falls back to the public repository below. Files in the local folder are used
+// as they are (finished tiles); icons from the repository are turned into tiles in the browser.
+// The commit hash in the repository address pins its files; use "main" to always take the latest.
+// Tickers without an icon show as monogram tiles.
+const TICKER_LOCAL_PATH = "logos/tickers/";
 const TICKER_LOGO_BASE = "https://raw.githubusercontent.com/davidepalazzo/ticker-logos/5cc9f9073a4f2f0140cb00f106076e42fe17acf3/ticker_icons/";
 
 // ─────────────────────────────────────────────────────────────
@@ -555,12 +518,6 @@ const TS = {
 // ─────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────
-const barTextColor = (_type, pt) => pt === "Full" ? "#17653a" : pt === "Hard" ? "#1d5d91" : "#8f4d00";
-const barColor = (_type, pt) => {
-  if (pt === "Full") return "#2aaa6a";   // green  — full principal protection
-  if (pt === "Hard") return "#4a9fd4";   // blue   — hard buffer absorbs first X%
-  return "#e8830a";                       // amber  — soft barrier (conditional)
-};
 const termMo   = t => { const m=String(t||"").match(/(\d+)/); return m?+m[1]:0; };
 const fmtDate  = d => { if(!d)return"—"; return new Date(d+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}); };
 const esc      = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -580,24 +537,8 @@ function urgencyColor(daysLeft) {
   return daysLeft===0?"#4a5360":daysLeft<=3?"#b3261e":daysLeft<=7?"#a35200":"var(--text3)";
 }
 
-function infoIcon(tip) {
-  if(!tip) return "";
-  return `<span class="info-wrap"><span class="info-icon">i</span><span class="tooltip">${esc(tip)}</span></span>`;
-}
 
-function metric(label, value, tip) {
-  if(!value) return "";
-  return `<div class="metric"><div class="metric-label">${iconFor(label)}${label}${infoIcon(tip)}</div><div class="metric-value">${value}</div></div>`;
-}
 
-// Underlying → one chip per ticker, with the ticker's icon when one exists
-function underlyingChips(u) {
-  return tickerList(u).map(tk => {
-    return (TICKER_MAP[tk] && isStockTicker(tk))
-      ? `<span class="underlying-chip has-icon"><span class="tk-ic tk-${tk}" aria-hidden="true"></span>${esc(tk)}</span>`
-      : `<span class="underlying-chip">${esc(tk)}</span>`;
-  }).join("");
-}
 
 // ─────────────────────────────────────────────────────────────
 // ISSUER LOGOS — found by file name, with automatic text fallback
@@ -623,13 +564,17 @@ const tickerList = u => String(u || "").split(",").map(s => s.trim()).filter(Boo
 const isStockTicker = s => /^[A-Z]{1,5}$/.test(s) && !NON_STOCK.has(s);
 
 // Tiles are remembered in the visitor's browser so repeat visits make no requests
-const TK_CACHE_KEY = "pp_tk_tiles_" + cyrb53(TICKER_LOGO_BASE);
-const TK_TTL_FOUND = 7 * 24 * 3600 * 1000;
-const TK_TTL_MISSING = 24 * 3600 * 1000;
-function tkCacheRead() { try { return JSON.parse(localStorage.getItem(TK_CACHE_KEY) || "{}") || {}; } catch (e) { return {}; } }
+const TK_CACHE_KEY = "pp_tk_tiles_v2_" + cyrb53(TICKER_LOGO_BASE + TICKER_LOCAL_PATH);
+const TK_TTL_FOUND = 24 * 3600 * 1000;
+const TK_TTL_MISSING = 6 * 3600 * 1000;
+// Adding ?fresh to the address ignores the saved icons for that visit
+function tkCacheRead() {
+  if (/[?&]fresh\b/.test(location.search)) return {};
+  try { return JSON.parse(localStorage.getItem(TK_CACHE_KEY) || "{}") || {}; } catch (e) { return {}; }
+}
 function tkCacheWrite(m) { try { localStorage.setItem(TK_CACHE_KEY, JSON.stringify(m)); } catch (e) {} }
 
-// Draws a rounded 96px tile around a logo: navy behind light logos, white behind the rest
+// Draws a rounded 128px tile around a logo: navy behind light logos, white behind the rest
 function makeTile(img) {
   const w = img.naturalWidth, h = img.naturalHeight;
   if (!w || !h) return null;
@@ -657,7 +602,7 @@ function makeTile(img) {
   const hasOwnBackground = solid / (bw * bh) > .95;
   const fw = onWhite / total, fn = onNavy / total;
   const navy = !hasOwnBackground && fw < .5 && fn > fw + .2;      // navy only when the logo is mostly invisible on white
-  const S = 96, PAD = 13, R = 22, box = S - 2 * PAD, k = Math.min(box / bw, box / bh);
+  const S = 128, PAD = 17, R = 29, box = S - 2 * PAD, k = Math.min(box / bw, box / bh);
   const dw = Math.max(1, Math.round(bw * k)), dh = Math.max(1, Math.round(bh * k));
   const tile = document.createElement("canvas");
   tile.width = tile.height = S;
@@ -672,7 +617,9 @@ function makeTile(img) {
   return tile.toDataURL("image/png");
 }
 
-function loadTickerTile(tk) {
+async function loadTickerTile(tk) {
+  const local = await probeFirst([`${TICKER_LOCAL_PATH}${tk}.png`]);
+  if (local) return local;
   return new Promise(resolve => {
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -719,26 +666,6 @@ function logoHTML(issuer, textFallback = true) {
 }
 
 // ─────────────────────────────────────────────────────────────
-// CARD PIECES SHARED BY GRID + LIST
-// ─────────────────────────────────────────────────────────────
-const STAR_SVG = '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.2 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg>';
-
-// Note type (dark box) first, then the tags, with a star at the far right when featured
-function topRowHTML(n, s, tags, isFeat) {
-  return `<div class="top-row">
-    <div class="top-tags">
-      <span class="type-box" style="background:${s.text}">${esc(n.type)}</span>
-      ${tags.map(t => `<span class="char-tag ${t.cls}">${t.label}</span>`).join("")}
-    </div>
-    ${isFeat ? `<span class="star-badge" title="Featured" aria-label="Featured">${STAR_SVG}</span>` : ""}
-  </div>`;
-}
-
-function issuedByHTML(n) {
-  return `<div class="issued-row"><span class="issued-lbl">Issued by</span>${logoHTML(n.issuer)}</div>`;
-}
-
-// ─────────────────────────────────────────────────────────────
 // INLINE ICONS — no external library; they inherit text color
 // ─────────────────────────────────────────────────────────────
 const IC = {
@@ -746,7 +673,10 @@ const IC = {
   shield: '<path d="M12 2.8l7.5 3v5.7c0 4.6-3.1 8.3-7.5 9.7-4.4-1.4-7.5-5.1-7.5-9.7V5.8z"/>',
   coupon: '<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/>',
   trend:  '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
-  clock:  '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  cap:    '<path d="M5 4h14M12 20V8M7 13l5-5 5 5"/>',
+  repeat: '<path d="M4 10a7 7 0 0 1 12-3l3 3M20 14a7 7 0 0 1-12 3l-3-3M19 4v6h-6M5 20v-6h6"/>',
+  flag:   '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  dot:    '<circle cx="12" cy="12" r="3"/>',
   device: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'
 };
 const icon = k => IC[k] ? `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>` : "";
@@ -760,41 +690,16 @@ function iconFor(label) {
   return "";
 }
 
-// Colors for the close-date pill: gold normally, orange within 7 days, red within 3
-function closeTint(d) {
-  if (d === 0) return { fill: "rgba(160,160,160,.22)", border: "#cfcfcf" };
-  if (d <= 3)  return { fill: "rgba(192,57,43,.16)",  border: "#e3aaa2" };
-  if (d <= 7)  return { fill: "rgba(232,131,10,.18)", border: "#efc48f" };
-  return { fill: "rgba(176,144,96,.22)", border: "var(--border2)" };
-}
 
 // ─────────────────────────────────────────────────────────────
-// TERM — shown prominently on every card, plus a Term filter
+// TERM — helpers and the Term filter bands
 // ─────────────────────────────────────────────────────────────
 function termInfo(t) {
   const m = termMo(t);
   return { months: m, years: (m && m % 12 === 0) ? m / 12 : null };
 }
 
-// Navy block with a big gold number (grid card header + snapshot)
-function termBlockHTML(n) {
-  const { months, years } = termInfo(n.term);
-  if (!months) return `<span class="term-chip">${esc(n.term)}</span>`;
-  return `<div class="term-block" title="Term: ${months} months">
-    ${icon("term")}<span class="term-num">${months}</span>
-    <span class="term-meta"><span class="term-unit">MONTHS</span>${years ? `<span class="term-yrs">${years} YR${years > 1 ? "S" : ""}</span>` : ""}</span>
-  </div>`;
-}
 
-// Gold-outlined tile (list card metrics row)
-function termTileHTML(n) {
-  const { months, years } = termInfo(n.term);
-  if (!months) return "";
-  return `<div class="term-tile" title="Term: ${months} months">
-    <div class="metric-label">${icon("term")}Term${years ? ` · ${years} YR${years > 1 ? "S" : ""}` : ""}</div>
-    <div class="term-tile-val">${months}<small>MONTHS</small></div>
-  </div>`;
-}
 
 const TERM_BANDS = [
   { key: "b1", label: "Up to 2 yrs", test: m => m > 0 && m <= 24 },
@@ -836,11 +741,12 @@ const _num  = s => { const m = String(s == null ? "" : s).match(/-?\d+(\.\d+)?/)
 const _list = a => a.length < 2 ? (a[0] || "") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
 
 function _basket(n) {
-  const u = String(n.underlying || "").split(",").map(s => s.trim()).filter(Boolean);
+  const u = tickerList(n.underlying), info = basisInfo(n), list = esc(_list(u)), first = esc(u[0] || "the underlying");
   return {
-    multi: u.length > 1,
-    one: esc(u[0] || "the underlying"),
-    txt: u.length > 1 ? `the lowest-performing of ${esc(_list(u))}` : esc(u[0] || "the underlying")
+    multi: info.worst,                                                       // the worst performer drives the result
+    one: first,
+    ref: info.worst ? "the lowest-performing underlying" : info.key === "weighted" ? "the basket" : first,
+    txt: info.worst ? `the lowest-performing of ${list}` : info.key === "weighted" ? `the weighted basket of ${list}` : first
   };
 }
 
@@ -869,7 +775,7 @@ function _termTxt(n) {
 function _prot(n, b, early, absRet) {
   const p = Number(n.protection) || 0, t = n.protectionType;
   const lead = early ? "If the note is not called early, at maturity " : "At maturity ";
-  const u = b.multi ? "the lowest-performing underlying" : b.one;
+  const u = b.ref;
   if (t === "Full") return `${lead}your full $100 principal is returned regardless of how the underlying performs — subject to the credit of ${esc(n.issuer || "the issuer")}.`;
   if (t === "Hard") return `${lead}you have a ${p}% downside buffer: the first ${p}% of any decline is absorbed for you. If ${u} finishes more than ${p}% below its starting level, you lose only the amount beyond ${p}% (for example, a ${p + 20}% decline would mean a 20% loss).`;
   if (t === "Soft") return `${lead}you have a ${p}% protection barrier: if ${u} finishes no more than ${p}% below its starting level, ${absRet ? "you keep your principal and the absolute return feature above applies" : "you get your principal back"}. If it finishes lower than that, protection is lost and you bear the full decline (for example, a ${p + 10}% decline means a ${p + 10}% loss).`;
@@ -987,30 +893,14 @@ function explainParts(n) {
   return rows;
 }
 
-function explainHTML(n) {
+function explainBodyHTML(n) {
   const rows = explainParts(n).filter(r => r[1]);
   const lead = TYPE_BLURB[n.type] || "";
-  return `<div class="expl">
-    ${lead ? `<div class="expl-lead">${lead}</div>` : ""}
-    <div class="expl-rows">${rows.map(([h, t]) => `<div class="expl-row"><div class="expl-h">${h}</div><p>${t}</p></div>`).join("")}</div>
-    <div class="expl-foot">A simplified, hypothetical description for education only — not a prediction or an offer. Exact terms (observation dates, call levels, payoff formulas) are set in the prospectus. <a href="${DISCLOSURES_URL}" target="_blank" rel="noopener">Full disclosures &amp; risk factors →</a></div>
-  </div>`;
+  return `${lead ? `<div class="expl-lead">${lead}</div>` : ""}
+    <div class="expl-rows">${rows.map(([h, t]) => `<div class="expl-row"><div class="expl-h">${h}</div><p>${t}</p></div>`).join("")}</div>`;
 }
 
-// Expand / collapse the explainer inside a card (built lazily on first open)
-function toggleExplain(id, btn) {
-  const card  = btn.closest(".card");
-  const panel = card.querySelector(".expl-panel");
-  const open  = card.classList.toggle("open");
-  btn.setAttribute("aria-expanded", open ? "true" : "false");
-  if (open && !panel.dataset.ready) {
-    const n = ALL_NOTES.find(x => x.id === id);
-    if (n) { panel.innerHTML = explainHTML(n); panel.dataset.ready = "1"; }
-  }
-  panel.hidden = !open;
-  const grid = card.closest(".card-grid");
-  if (grid) grid.classList.toggle("has-open", !!grid.querySelector(".card.open"));
-}
+
 
 
 // ─────────────────────────────────────────────────────────────
@@ -1058,58 +948,6 @@ function primaryMetric(n) {
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-// SECONDARY METRICS
-// ─────────────────────────────────────────────────────────────
-function secondaryMetrics(n) {
-  switch(n.type) {
-    case "Growth":
-      return metric("Max Return",n.maxReturn||"Uncapped") + metric("Principal Protection",`${n.protection}% ${n.protectionType}`);
-    case "Income": case "Snowball":
-      return metric("Frequency",n.frequency,n.callType?`Call mechanism: ${n.callType}`:"")
-           + metric("Coupon Protection",n.couponProtection,"Index level required for coupon to be paid")
-           + metric("Non-Call Period",n.nonCallPeriod,"Note cannot be called during this period");
-    case "Absolute":
-      return metric("Downside Participation",n.downsideParticipation)
-           + metric("Max Return",n.maxReturn||"Uncapped");
-    case "Catapult":
-      return metric("Upside Participation",n.upsideParticipation)
-           + metric("First Call",n.firstCallDate);
-    case "Call Premium":
-      return metric("Upside Participation",n.upsideParticipation)
-           + metric("Autocall",n.autocall)
-           + metric("Non-Call",n.nonCallPeriod);
-    case "Digital": case "Digital Plus":
-      return metric("Participation Plus",n.participation||"N/A")
-           + metric("Coupon Protection",n.couponProtection);
-    case "PPN": case "MLCD":
-      return metric("Max Return",n.maxReturn||"Uncapped")
-           + metric("Principal Protection",`100% ${n.protectionType}`);
-    default: return metric("Max Return",n.maxReturn||"—");
-  }
-}
-
-// ─────────────────────────────────────────────────────────────
-// BARS HTML
-// ─────────────────────────────────────────────────────────────
-function barsHTML(n) {
-  const bColor   = barColor(n.type, n.protectionType);
-  const protPct  = Math.min(n.protection,100);
-  const {pct,daysLeft,daysTotal,daysElapsed} = closing(n.calendarStart, n.closeDate);
-  const uc       = urgencyColor(daysLeft);
-  const dlLabel  = daysLeft===0?"Closes today":`${daysLeft}d left`;
-  const protLbl  = n.protection===100?"Full protection":`${n.protection}% ${n.protectionType}`;
-  return `
-  <div class="bar-block">
-    <div class="bar-header"><span class="bar-label bl-ic">${icon("shield")}Principal Protection</span><span class="bar-value" style="color:${barTextColor(n.type, n.protectionType)}">${n.protection}%</span></div>
-    <div class="bar-track"><div class="bar-fill" style="width:${protPct}%;background:${bColor}"></div></div>
-    <div class="bar-sub"><span>${protLbl}</span></div>
-  </div>
-  <div class="bar-block">
-    <div class="bar-header"><span class="bar-label bl-ic">${icon("clock")}Closing</span><span class="bar-value" style="color:${uc}">${dlLabel}</span></div>
-    <div class="close-pill" style="--p:${pct}%;--fc:${closeTint(daysLeft).fill};--bc:${closeTint(daysLeft).border}"><span>Closes ${fmtDate(n.closeDate)} · 10:00 AM ${etLabel(n.closeDate)}</span></div>
-  </div>`;
-}
 
 // ─────────────────────────────────────────────────────────────
 // FAVORITES — saved in the viewer's own browser (localStorage).
@@ -1325,7 +1163,7 @@ function fpTailHTML() {
 function buildFavPrint(list) {
   const sorted = [...list].sort((a, b) => new Date(a.closeDate) - new Date(b.closeDate) || String(a.type).localeCompare(String(b.type)));
   const types = [...new Set(sorted.map(n => n.type))].filter(t => TYPE_BLURB[t]);
-  document.getElementById("fav-print").innerHTML = `
+  document.getElementById("print-doc").innerHTML = `
     ${fpHeadHTML(sorted.length, "note")}
     <div class="fp-title">My Selected Structured Notes</div>
     <div class="fp-intro">These are notes you saved from the Prudent Prosperity Structured Notes Calendar. This list was selected by you and is <strong>not a recommendation</strong>. Terms shown are indicative, may change or be withdrawn before pricing, and are controlled by each note’s prospectus. Sorted by close date.</div>
@@ -1375,7 +1213,7 @@ function buildCalendarPrint(list) {
       </tbody>
     </table>`;
   }).join("");
-  document.getElementById("fav-print").innerHTML = `
+  document.getElementById("print-doc").innerHTML = `
     ${fpHeadHTML(list.length, "note")}
     <div class="fp-title">Structured Notes Calendar</div>
     <div class="fp-sub2">${esc(_closeRangeLabel(list))}${filt ? ` &nbsp;·&nbsp; Filtered: ${esc(filt)}` : ""}</div>
@@ -1396,7 +1234,6 @@ function printWith(mode, after) {
   window.addEventListener("afterprint", done);
   window.print();
 }
-function printSnapshot() { printWith("snap"); }
 
 function exportFavoritesPDF() {
   const list = favNotes();
@@ -1404,7 +1241,7 @@ function exportFavoritesPDF() {
   buildFavPrint(list);
   const oldTitle = document.title;
   document.title = "Prudent Prosperity – My Structured Notes – " + new Date().toISOString().slice(0, 10);
-  printWith("favs", () => { document.title = oldTitle; });
+  printWith("doc", () => { document.title = oldTitle; });
 }
 
 function exportCalendarPDF() {
@@ -1412,7 +1249,7 @@ function exportCalendarPDF() {
   buildCalendarPrint([...LAST_LIST]);
   const oldTitle = document.title;
   document.title = "Prudent Prosperity – Structured Notes Calendar – " + new Date().toISOString().slice(0, 10);
-  printWith("favs", () => { document.title = oldTitle; });
+  printWith("doc", () => { document.title = oldTitle; });
 }
 function updateExportBtn() {
   const b = document.getElementById("export-all");
@@ -1421,147 +1258,499 @@ function updateExportBtn() {
   b.querySelector(".ex-n").textContent = LAST_LIST.length ? ` (${LAST_LIST.length})` : "";
 }
 // ─────────────────────────────────────────────────────────────
-// RENDER CARD — GRID (vertical)
+// REFERENCE ASSETS — a single asset, a worst-of basket or a weighted basket
+// ─────────────────────────────────────────────────────────────
+const ASSET_NAMES = {
+  SPX: "S&P 500", NDX: "Nasdaq-100", RUT: "Russell 2000", DJI: "Dow Jones Industrial Average", NDXT: "Nasdaq-100 Technology Sector", SX5E: "EURO STOXX 50",
+  AAPL: "Apple", ABT: "Abbott Laboratories", ADBE: "Adobe", AMAT: "Applied Materials", AMD: "Advanced Micro Devices", AMZN: "Amazon.com",
+  ARM: "Arm Holdings", ASML: "ASML Holding", AVGO: "Broadcom", BAC: "Bank of America", BX: "Blackstone", C: "Citigroup",
+  CEG: "Constellation Energy", COIN: "Coinbase Global", CRM: "Salesforce", CRWD: "CrowdStrike", ENPH: "Enphase Energy", GEV: "GE Vernova",
+  GOOG: "Alphabet (Class C)", GOOGL: "Alphabet (Class A)", GS: "Goldman Sachs", HOOD: "Robinhood Markets", IBM: "IBM", INTC: "Intel",
+  JPM: "JPMorgan Chase", LLY: "Eli Lilly", LMT: "Lockheed Martin", LRCX: "Lam Research", META: "Meta Platforms", MRNA: "Moderna",
+  MRVL: "Marvell Technology", MS: "Morgan Stanley", MSFT: "Microsoft", MU: "Micron Technology", NOW: "ServiceNow", NRG: "NRG Energy",
+  NVDA: "NVIDIA", ORCL: "Oracle", PANW: "Palo Alto Networks", PFE: "Pfizer", PLTR: "Palantir Technologies", PWR: "Quanta Services",
+  QCOM: "Qualcomm", RKLB: "Rocket Lab", SMCI: "Super Micro Computer", SOFI: "SoFi Technologies", TSLA: "Tesla",
+  TSM: "Taiwan Semiconductor Manufacturing", TTD: "The Trade Desk", TXN: "Texas Instruments", VST: "Vistra", WFC: "Wells Fargo",
+  EEM: "iShares MSCI Emerging Markets ETF", EFA: "iShares MSCI EAFE ETF", ETHA: "iShares Ethereum Trust ETF", GDX: "VanEck Gold Miners ETF",
+  GLD: "SPDR Gold Shares", IBIT: "iShares Bitcoin Trust ETF", KRE: "SPDR S&P Regional Banking ETF", SLV: "iShares Silver Trust",
+  SMH: "VanEck Semiconductor ETF", XLE: "Energy Select Sector SPDR Fund", XLK: "Technology Select Sector SPDR Fund"
+};
+
+// n.basis is an optional Airtable value ("Worst-of" or "Weighted Basket").
+// When it is blank, a note with several assets is treated as worst-of.
+function basisInfo(n) {
+  const count = tickerList(n.underlying).length;
+  const b = String(n.basis || "").toLowerCase();
+  if (count < 2) return { key: "single", label: "Reference asset", worst: false, count };
+  if (/weighted|equal|basket/.test(b) && !/worst/.test(b)) return { key: "weighted", label: "Weighted basket", worst: false, count };
+  return { key: "worst", label: "Worst of", worst: true, count };
+}
+
+// One tile per asset: its logo when there is one, a ticker monogram otherwise
+function assetTile(tk) {
+  if (TICKER_MAP[tk] && isStockTicker(tk)) return `<span class="atile tk-${tk}" aria-hidden="true"></span>`;
+  return `<span class="atile mono m${Math.min(tk.length, 5)}" aria-hidden="true">${esc(tk.slice(0, 5))}</span>`;
+}
+
+function assetsHTML(n, light) {
+  const list = tickerList(n.underlying), info = basisInfo(n);
+  const size = list.length === 1 ? "s1" : list.length <= 3 ? "s3" : list.length <= 5 ? "s5" : "s6";
+  return `<div class="assets${light ? " light" : ""}">
+    <div class="assets-lbl">${info.label}</div>
+    <div class="assets-row ${size}">${list.map(tk => `<div class="asset">${assetTile(tk)}<div class="asset-tk">${esc(tk)}</div></div>`).join("")}</div>
+  </div>`;
+}
+
+// ─────────────────────────────────────────────────────────────
+// CARD PIECES SHARED BY THE GRID AND LIST VIEWS
+// ─────────────────────────────────────────────────────────────
+const STAR_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.2 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg>';
+
+const actionsHTML = (n, isFeat) =>
+  `<span class="chero-actions">${isFeat ? `<span class="star-badge" title="Featured" aria-label="Featured">${STAR_SVG}</span>` : ""}${favBtnHTML(n)}</span>`;
+
+// Structure tags as plain text: "Contingent · Issuer callable · Memory coupon"
+const structTags = n => charTags(n).filter(t => !/tag-(full|hard|soft|urgent)/.test(t.cls)).map(t => t.label);
+const tagsHTML = n => { const t = structTags(n); return t.length ? `<div class="tags">${t.map(x => `<span>${esc(x)}</span>`).join("")}</div>` : ""; };
+
+function protFact(n) {
+  const p = Number(n.protection) || 0;
+  if (n.protectionType === "Full") return ["Protection", "100%", "full principal"];
+  if (n.protectionType === "Hard") return ["Protection", `${p}%`, "hard buffer"];
+  if (n.protectionType === "Soft") return ["Protection", `${p}%`, "soft barrier"];
+  return ["Protection", p ? `${p}%` : "—", ""];
+}
+
+// "Monthly w/ Memory" shows as "Monthly" with "with memory" beneath
+function memoryFact(label, value) {
+  const m = /^(.*?)\s*w\/\s*memory$/i.exec(String(value || ""));
+  return m ? [label, m[1], "with memory"] : [label, value, ""];
+}
+
+// At most three facts per note, in plain label/value form
+function cardFacts(n) {
+  const f = [];
+  const add = (l, v, s) => { if (v && String(v).trim() && !/^n\/a$/i.test(String(v).trim())) f.push([l, String(v), s || ""]); };
+  switch (n.type) {
+    case "Growth": case "PPN": case "MLCD":
+      add("Max return", n.maxReturn || "Uncapped"); f.push(protFact(n)); break;
+    case "Income": case "Snowball":
+      f.push(protFact(n)); add("Coupon protection", n.couponProtection);
+      if (n.frequency) f.push(memoryFact("Frequency", n.frequency)); break;
+    case "Absolute":
+      add("Max return", n.maxReturn || "Uncapped"); f.push(protFact(n)); add("Downside participation", n.downsideParticipation); break;
+    case "Catapult":
+      add("Upside participation", n.upsideParticipation); f.push(protFact(n)); add("First call", n.firstCallDate); break;
+    case "Call Premium":
+      add("Upside participation", n.upsideParticipation); f.push(protFact(n)); add("Autocall", n.autocall); break;
+    case "Digital": case "Digital Plus":
+      f.push(protFact(n)); add("Coupon protection", n.couponProtection); add("Participation plus", n.participation); break;
+    default:
+      add("Max return", n.maxReturn); f.push(protFact(n));
+  }
+  return f.slice(0, 3);
+}
+
+function headlineHTML(n) {
+  const pm = primaryMetric(n), t = termInfo(n.term);
+  return `<div class="headline">
+    <div class="hl-main"><div class="big">${esc(pm.value || "—")}</div><div class="k">${esc(pm.label)}</div></div>
+    ${t.months ? `<div class="hl-term"><div class="big">${t.months} months</div><div class="k">Term${t.years ? ` · ${t.years} yr${t.years > 1 ? "s" : ""}` : ""}</div></div>` : ""}
+  </div>`;
+}
+
+const closeFill = d => d === 0 ? "#9aa3af" : d <= 3 ? "#b3261e" : d <= 7 ? "#d98a2b" : "#b09060";
+
+function closingHTML(n) {
+  const c = closing(n.calendarStart, n.closeDate);
+  const left = c.daysLeft === 0 ? "Closes today" : `${c.daysLeft} day${c.daysLeft === 1 ? "" : "s"} left`;
+  const soon = c.daysLeft > 0 && c.daysLeft <= 3;
+  return `<div class="closing">
+    <div class="closing-row"><b style="color:${urgencyColor(c.daysLeft)}">${soon ? "Closing soon · " : ""}${left}</b><span>Closes ${fmtDate(n.closeDate)} · 10:00 AM ${etLabel(n.closeDate)}</span></div>
+    <div class="cline"><i style="width:${c.pct}%;background:${closeFill(c.daysLeft)}"></i></div>
+  </div>`;
+}
+
+const issuedHTML = n => `<div class="issued"><span class="issued-lbl">Issued by</span>${logoHTML(n.issuer)}</div>`;
+const detailsBtn = n => `<button class="btn-link" aria-expanded="false" onclick="toggleDetails('${n.fp}',this)">Details</button>`;
+const ctaBtn = `<a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor</a>`;
+
+// ─────────────────────────────────────────────────────────────
+// RENDER CARD — GRID
 // ─────────────────────────────────────────────────────────────
 function renderGridCard(n) {
-  const s   = TS[n.type]||{bg:"var(--surface2)",text:"var(--text2)"};
-  const pm  = primaryMetric(n);
-  const tags= charTags(n);
-  const isFeat = n.status==="Featured";
-
+  const s = TS[n.type] || { text: "var(--text2)", bar: "#888" };
+  const isFeat = n.status === "Featured";
   return `
-  <div class="card${isFeat?" is-featured":""}">
-    ${topRowHTML(n, s, tags, isFeat)}
-    <div class="card-grid-inner">
-      <div class="card-top-grid">
-        <div class="card-top-row">
-          <div class="underlying-chips">${underlyingChips(n.underlying)}</div>
-          ${termBlockHTML(n)}
-        </div>
-      </div>
-      <div class="primary-metric">
-        <div class="primary-value">${pm.value||"—"}</div>
-        <div class="primary-label">${iconFor(pm.label)}${pm.label}</div>
-      </div>
-      <div class="secondary-metrics">${secondaryMetrics(n)}</div>
-      <div class="card-bars">${barsHTML(n)}</div>
-      ${issuedByHTML(n)}
-      <div class="explain-row">
-        <button class="explain-toggle" aria-expanded="false" onclick="toggleExplain('${n.id}',this)">
-          <span class="ex-l"><span class="ex-i">i</span>How it works</span><span class="chev">▾</span>
-        </button>
-      </div>
-      <div class="expl-panel" hidden></div>
-      <div class="card-footer-grid">
-        <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
-        ${favBtnHTML(n)}
-        <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
-  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
-  </svg>
-</button>
-      </div>
+  <div class="card${isFeat ? " is-featured" : ""}">
+    <div class="chero" style="--accent:${s.bar}">
+      <div class="chero-top"><span class="type-box" style="background:${s.text}">${esc(n.type)}</span>${actionsHTML(n, isFeat)}</div>
+      ${assetsHTML(n)}
+    </div>
+    <div class="cbody">
+      ${tagsHTML(n)}
+      ${headlineHTML(n)}
+      <div class="facts">${cardFacts(n).map(([l, v, s2]) => `<div class="fact"><div class="k">${esc(l)}</div><div class="v">${esc(v)}${s2 ? `<small>${esc(s2)}</small>` : ""}</div></div>`).join("")}</div>
+      ${closingHTML(n)}
+      <div class="cfoot">${issuedHTML(n)}<div class="cfoot-actions">${detailsBtn(n)}${ctaBtn}</div></div>
     </div>
   </div>`;
 }
 
 // ─────────────────────────────────────────────────────────────
-// RENDER CARD — LIST (horizontal)
+// RENDER CARD — LIST
 // ─────────────────────────────────────────────────────────────
+function factIcon(label) {
+  const base = iconFor(label);
+  if (base) return base;
+  const l = String(label || "").toLowerCase();
+  if (/max return/.test(l)) return icon("cap");
+  if (/frequency/.test(l)) return icon("repeat");
+  if (/call/.test(l)) return icon("flag");
+  return icon("dot");
+}
+
+function listFacts(n) {
+  const t = termInfo(n.term), f = [];
+  if (t.months) f.push(["Term", `${t.months} months`, t.years ? `${t.years} yr${t.years > 1 ? "s" : ""}` : ""]);
+  return f.concat(cardFacts(n)).slice(0, 4);
+}
+
 function renderListCard(n) {
-  const s      = TS[n.type]||{bg:"var(--surface2)",text:"var(--text2)",bar:"#888"};
-  const pm     = primaryMetric(n);
-  const tags   = charTags(n);
-  const isFeat = n.status==="Featured";
-
+  const s = TS[n.type] || { text: "var(--text2)", bar: "#888" };
+  const pm = primaryMetric(n), isFeat = n.status === "Featured";
+  const tags = structTags(n);
   return `
-  <div class="card${isFeat?" is-featured":""}" style="border-left-color:${s.bar};border-left-width:3px">
-    ${topRowHTML(n, s, tags, isFeat)}
-    <div class="card-list-inner">
-      <div class="card-identity">
-        <div class="underlying-chips list-und">${underlyingChips(n.underlying)}</div>
-        ${issuedByHTML(n)}
-      </div>
-      <div class="card-list-metrics">
-        <div class="metric" style="background:var(--navy);flex-shrink:0;min-width:90px;text-align:center">
-          <div class="metric-label" style="color:var(--gold-lt);justify-content:center">${iconFor(pm.label)}${pm.label}</div>
-          <div class="metric-value" style="font-size:18px;color:var(--gold);text-align:center">${pm.value||"—"}</div>
-        </div>
-        ${termTileHTML(n)}
-        ${secondaryMetrics(n)}
-      </div>
-      <div class="card-list-bars">${barsHTML(n)}</div>
-      <div class="card-list-cta">
-        <a class="cta-btn" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to Advisor →</a>
-        <div class="cta-icons">
-          ${favBtnHTML(n)}
-        <button class="snapshot-btn" onclick='openSnapshot(${JSON.stringify(n)})' title="Export / Save card">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6.5 1v7.5M3.5 5l3-4 3 4"/><path d="M1 9.5v2a.5.5 0 00.5.5h10a.5.5 0 00.5-.5v-2"/>
-          </svg>
-        </button>
-        </div>
-      </div>
+  <div class="card lrow${isFeat ? " is-featured" : ""}">
+    <div class="lrow-top">
+      <div class="ltags"><span class="type-box" style="background:${s.text}">${esc(n.type)}</span>${tagsHTML(n)}</div>
+      ${actionsHTML(n, isFeat)}
     </div>
-    <div class="explain-row list">
-      <button class="explain-toggle" aria-expanded="false" onclick="toggleExplain('${n.id}',this)">
-        <span class="ex-l"><span class="ex-i">i</span>How it works</span><span class="chev">▾</span>
-      </button>
+    <div class="lrow-main">
+      ${assetsHTML(n, true)}
+      <div class="lhead"><div class="big">${esc(pm.value || "—")}</div><div class="k">${esc(pm.label)}</div></div>
+      <div class="lfacts">${listFacts(n).map(([l, v, s2]) => `<div class="lfact">${factIcon(l)}<div><b>${esc(v)}</b><span class="l">${esc(l)}${s2 ? ` · ${esc(s2)}` : ""}</span></div></div>`).join("")}</div>
+      ${closingHTML(n)}
     </div>
-    <div class="expl-panel" hidden></div>
+    <div class="lrow-foot">${issuedHTML(n)}<div class="cfoot-actions">${detailsBtn(n)}${ctaBtn}</div></div>
   </div>`;
 }
 
 // ─────────────────────────────────────────────────────────────
-// SNAPSHOT MODAL
+// DETAILS PANEL — contents
 // ─────────────────────────────────────────────────────────────
-function openSnapshot(n) {
-  const s   = TS[n.type]||{bg:"var(--surface2)",text:"var(--text2)"};
-  const pm  = primaryMetric(n);
-  const tags= charTags(n);
-  const bColor = barColor(n.type,n.protectionType);
-  const {pct,daysLeft,daysElapsed,daysTotal} = closing(n.calendarStart,n.closeDate);
-  const uc  = urgencyColor(daysLeft);
-
-  document.getElementById("snap-body").innerHTML = `
-    <div class="snap-type-row">
-      <div>
-        <span class="type-box" style="background:${s.text}">${esc(n.type)}</span>
-      </div>
-      ${termBlockHTML(n)}
-    </div>
-    <div class="underlying-chips snap-und">${underlyingChips(n.underlying)}</div>
-    <div class="snap-issuer" style="display:flex;align-items:center;gap:8px;">${logoHTML(n.issuer,false)}<span>${esc(n.issuer)} · Issued at $100.00 per note</span></div>
-    <div class="snap-primary">
-      <div class="snap-primary-value">${pm.value||"—"}</div>
-      <div class="snap-primary-label">${iconFor(pm.label)}${pm.label}</div>
-    </div>
-    ${tags.length?`<div class="snap-tags">${tags.map(t=>`<span class="char-tag ${t.cls}">${t.label}</span>`).join("")}</div>`:""}
-    <div class="snap-metrics">${secondaryMetrics(n).replace(/class="metric /g,'class="snap-metric ').replace(/class="metric"/g,'class="snap-metric"').replace(/metric-label/g,"snap-metric-label").replace(/metric-value/g,"snap-metric-value")}</div>
-    <div class="snap-bars">
-      <div class="bar-block">
-        <div class="bar-header"><span class="bar-label bl-ic">${icon("shield")}Principal Protection</span><span class="bar-value" style="color:${barTextColor(n.type, n.protectionType)}">${n.protection}%</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:${Math.min(n.protection,100)}%;background:${bColor}"></div></div>
-        <div class="bar-sub"><span>${n.protection===100?"Full protection":`${n.protection}% ${n.protectionType}`}</span></div>
-      </div>
-      <div class="bar-block" style="margin-top:6px">
-        <div class="bar-header"><span class="bar-label bl-ic">${icon("clock")}Closing Window</span><span class="bar-value" style="color:${uc}">${daysLeft===0?"Closes today":`${daysLeft} days left`}</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${uc}"></div></div>
-      </div>
-    </div>
-    <div class="snap-expl">${explainHTML(n)}</div>
-    <a class="snap-cta" href="${CALENDLY_LINK}" target="_blank" rel="noopener">Speak to an Advisor →</a>
-    <div class="snap-close-date">Closes ${fmtDate(n.closeDate)} · 10:00 AM ${etLabel(n.closeDate)}</div>
-    <div class="snap-disclaimer">For Institutional Use Only. Not an offer to buy or sell securities. Structured notes involve risk of loss. Review the prospectus before investing. Past performance is not indicative of future results. © Prudent Prosperity</div>
-  `;
-  document.getElementById("snapshot-overlay").classList.add("open");
+function protLong(n) {
+  const p = Number(n.protection) || 0;
+  if (n.protectionType === "Full") return "100% — full principal, subject to the issuer’s credit";
+  if (n.protectionType === "Hard") return `${p}% hard buffer — absorbs the first ${p}% of any decline`;
+  if (n.protectionType === "Soft") return `${p}% soft barrier — protection is lost if the asset finishes below it`;
+  return p ? `${p}%` : "—";
 }
 
-function closeSnapshot(e) {
-  if (e.target===document.getElementById("snapshot-overlay")) {
-    document.getElementById("snapshot-overlay").classList.remove("open");
+function keyTermRows(n) {
+  const list = tickerList(n.underlying), info = basisInfo(n), t = termInfo(n.term), pm = primaryMetric(n);
+  const assets = list.map(k => ASSET_NAMES[k] ? `${esc(k)} (${esc(ASSET_NAMES[k])})` : esc(k)).join(", ");
+  const rows = [[info.count > 1 ? "Reference assets" : "Reference asset", assets + (info.worst ? " — worst-of" : info.key === "weighted" ? " — weighted basket" : "")]];
+  if (t.months) rows.push(["Term", `${t.months} months${t.years ? ` (${t.years} year${t.years > 1 ? "s" : ""})` : ""}`]);
+  if (pm.value) rows.push([pm.label.charAt(0) + pm.label.slice(1).toLowerCase(), esc(pm.value)]);
+  rows.push(["Principal protection", esc(protLong(n))]);
+  keyFacts(n).forEach(([l, v]) => rows.push([l, esc(v)]));
+  rows.push(["Closes", `${fmtDate(n.closeDate)} · 10:00 AM ${etLabel(n.closeDate)}`]);
+  if (n.price) rows.push(["Issue price", `${esc(n.price)} per note`]);
+  rows.push(["Issuer", esc(n.issuer)]);
+  return rows;
+}
+
+function detailsHTML(n) {
+  const m = SHOW_PAYOFF_SLIDER ? payoffModel(n) : null;
+  return `<div class="details">
+    <div class="dcol"><h4>How it works</h4>${explainBodyHTML(n)}</div>
+    <div class="dcol"><h4>Key terms</h4><table class="kt">${keyTermRows(n).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${v}</td></tr>`).join("")}</table></div>
+    ${m ? `<div class="dcol"><h4>Payoff at maturity</h4>${payoffHTML(n, m)}</div>` : ""}
+  </div>
+  <div class="dfoot">${ctaBtn}<button class="btn-ghost" onclick="exportNotePDF('${n.fp}')">Export to PDF</button><a class="dlink" href="${DISCLOSURES_URL}" target="_blank" rel="noopener">Full disclosures &amp; risk factors →</a></div>
+  <p class="dfine">A simplified, hypothetical description for education only — not a prediction or an offer. Exact terms (observation dates, call levels, payoff formulas) are set in the prospectus.</p>`;
+}
+
+
+
+// ─────────────────────────────────────────────────────────────
+// FACT SHEET (PDF) — a Letter-size, two-page document for one note
+// ─────────────────────────────────────────────────────────────
+function noteRef(n) {
+  const b = basisInfo(n);
+  return b.worst ? "the worst-performing reference asset" : b.key === "weighted" ? "the basket" : "the reference asset";
+}
+
+// "the S&P 500, Russell 2000 and Apple" — names where known, tickers otherwise
+function assetPhrase(n) {
+  const names = tickerList(n.underlying).map(k => esc(ASSET_NAMES[k] || k));
+  return names.length < 2 ? (names[0] || "the reference asset") : names.slice(0, -1).join(", ") + " and " + names[names.length - 1];
+}
+
+// Key features, written from the note's own terms
+function featureList(n) {
+  const ref = noteRef(n), p = Number(n.protection) || 0, f = [];
+  f.push(`Exposure to ${assetPhrase(n)}${basisInfo(n).worst ? ", with the result based on the worst performer" : ""}, without owning them directly.`);
+  const part = esc(n.participation || n.upsideParticipation || "");
+  const cap = _cap(n);
+  const callLine = () => {
+    const ct = String(n.callType || "");
+    if (/issuer/i.test(ct)) f.push("Issuer callable: the issuer may redeem the note early at its option.");
+    else if (/auto/i.test(ct)) f.push(`Autocallable: redeemed early if ${ref} is at or above its call level on an observation date.`);
+  };
+  const protLine = () => {
+    if (n.protectionType === "Hard") f.push(`${p}% downside buffer: the first ${p}% of any decline in ${ref} is absorbed for you.`);
+    if (n.protectionType === "Soft") f.push(`${p}% protection barrier: principal is returned if ${ref} finishes no more than ${p}% below its starting level.`);
+    if (n.protectionType === "Full") f.push("Full return of principal at maturity, subject to the credit of the issuer.");
+  };
+  switch (n.type) {
+    case "Growth":
+      f.push(`${part || "Enhanced"} participation in any gain in ${ref}${cap ? `, ${cap}` : ""}.`); protLine(); break;
+    case "PPN": case "MLCD":
+      f.push(`${part || "Participation"} of any gain in ${ref}${cap ? `, ${cap}` : ""}.`); protLine();
+      if (n.type === "MLCD") f.push("As a market-linked CD, it may be eligible for FDIC insurance up to applicable limits; confirm with the issuer.");
+      break;
+    case "Absolute":
+      f.push(`${part || "Participation"} of any gain in ${ref}${cap ? `, ${cap}` : ""}.`);
+      f.push("Designed to turn a modest decline within the protection level into a positive return; see the prospectus for the exact terms.");
+      protLine(); break;
+    case "Income": case "Snowball": {
+      const fr = _freq(n), cp = _num(n.couponProtection), snow = n.type === "Snowball";
+      f.push(snow ? `Targets ${esc(n.annualizedYield)} annualized; coupons accumulate and are paid when the note is called or matures.`
+                  : `Contingent coupon of ${esc(n.annualizedYield)} annualized${fr ? `, paid ${fr.adv}` : ""}.`);
+      if (!snow && !isNaN(cp)) f.push(`A coupon is paid if ${ref} is no more than ${cp}% below its starting level on the observation date.`);
+      if (/memory/i.test(n.frequency || "")) f.push("Memory feature: a skipped coupon can be paid later if the asset recovers.");
+      callLine(); protLine(); break;
+    }
+    case "Catapult": case "Call Premium":
+      f.push(`${esc(n.callPremium || "A")} call premium if the note is called${n.firstCallDate ? ` on ${esc(n.firstCallDate)}` : ""}${n.type === "Call Premium" ? " (see the prospectus for how it is earned)" : ""}.`);
+      if (n.upsideParticipation) f.push(`${esc(n.upsideParticipation)} participation in any gain in ${ref} if the note is not called.`);
+      callLine(); protLine(); break;
+    case "Digital": case "Digital Plus":
+      f.push(n.type === "Digital" ? `A fixed ${esc(n.digitalReturn || "")} return if ${ref} finishes at or above the required level at maturity.`
+                                  : `The greater of a fixed ${esc(n.digitalReturn || "")} return or ${part || "the stated"} participation if ${ref} finishes at or above the required level.`);
+      protLine(); break;
+    default: protLine();
   }
+  return f;
 }
+
+// Key risks: type-specific points first, then the ones every structured note shares
+function riskList(n) {
+  const ref = noteRef(n), p = Number(n.protection) || 0, b = basisInfo(n), issuer = esc(n.issuer || "the issuer"), r = [];
+  if (n.protectionType === "Full") r.push(`Principal protection applies only at maturity and depends on the credit of ${issuer}. You may receive no return.`);
+  if (n.protectionType === "Hard") r.push(`You can lose part of your principal: if ${ref} falls by more than ${p}%, you lose the amount beyond ${p}%.`);
+  if (n.protectionType === "Soft") r.push(`You can lose some or all of your principal: if ${ref} finishes below the ${p}% barrier, protection is lost and you bear the full decline.`);
+  if (b.worst) r.push("With several reference assets, the worst performer determines the result. One weak asset can drive the outcome even if the others do well.");
+  if (_cap(n) && !/no cap/.test(_cap(n))) r.push(`Returns are capped (${esc(n.maxReturn)}): you do not benefit from gains beyond the cap.`);
+  if (["Growth", "PPN", "MLCD"].includes(n.type)) r.push("No interest or dividends are paid during the term; the outcome is determined at maturity.");
+  if (["Income", "Snowball"].includes(n.type)) r.push("Coupons are contingent and not guaranteed. In a weak market you can receive little or no income.");
+  if (n.callType || ["Catapult", "Call Premium"].includes(n.type)) r.push("The note may be redeemed early. You may not be able to reinvest at a similar return, and coupons or participation stop at redemption.");
+  if (n.type === "Digital" || n.type === "Digital Plus") r.push("Your return is limited to the fixed digital amount, and below the required level you receive no digital return.");
+  if (n.type === "Absolute") r.push("Gains from a decline apply only within the protection level; beyond it, losses begin. Exact mechanics are set in the prospectus.");
+  if (tickerList(n.underlying).some(isStockTicker)) r.push("Single stocks, sector funds and other concentrated exposures can be much more volatile than broad market indexes.");
+  r.push(`Notes are unsecured debt of ${issuer}. All payments, including any principal protection, depend on its ability to pay.`);
+  r.push("There is usually no active secondary market. Plan to hold to maturity; a sale before then may be at a significant discount.");
+  r.push("You do not own the reference assets and receive no dividends or voting rights from them.");
+  return r;
+}
+
+function buildNoteSheet(n) {
+  const s = TS[n.type] || { text: "var(--text2)", bar: "#888" };
+  const today = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const pm = primaryMetric(n), t = termInfo(n.term), tags = structTags(n);
+  const li = a => a.map(x => `<li>${x}</li>`).join("");
+  document.getElementById("print-doc").innerHTML = `
+  <div class="ns">
+    <div class="fp-head">
+      <div class="fp-brand"><div class="fp-mark">PP</div><div><div class="fp-name">Prudent Prosperity</div><div class="fp-sub">STRUCTURED NOTES</div></div></div>
+      <div class="fp-meta">Structured note fact sheet<br>Generated ${today}</div>
+    </div>
+    <div class="ns-title">
+      <div><span class="fp-type" style="background:${s.text}">${esc(n.type)}</span><span class="ns-tags">${tags.map(esc).join(" · ")}</span></div>
+      <div class="ns-close">Offering closes ${fmtDate(n.closeDate)} · 10:00 AM ${etLabel(n.closeDate)}</div>
+    </div>
+    <div class="ns-hero" style="--accent:${s.bar}">
+      ${assetsHTML(n)}
+      <div class="ns-hl">
+        <div class="big">${esc(pm.value || "—")}</div><div class="k">${esc(pm.label)}</div>
+        ${t.months ? `<div class="ns-term">${t.months} months${t.years ? ` (${t.years} yr${t.years > 1 ? "s" : ""})` : ""}</div><div class="k">Term</div>` : ""}
+      </div>
+    </div>
+    <div class="ns-cols">
+      <div><h3>Key terms</h3><table class="ns-kt">${keyTermRows(n).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${v}</td></tr>`).join("")}</table></div>
+      <div><h3>How it works</h3>${explainBodyHTML(n)}</div>
+    </div>
+    <div class="ns-p2">
+      <div class="ns-run">${esc(n.type)} · ${esc(tickerList(n.underlying).join(", "))} · ${esc(n.issuer)}</div>
+      <div class="ns-cols">
+        <div><h3>Key features</h3><ul class="ns-list">${li(featureList(n))}</ul></div>
+        <div><h3>Key risks</h3><ul class="ns-list">${li(riskList(n))}</ul></div>
+      </div>
+      <div class="ns-box"><b>Costs and other considerations.</b> The price you pay at issuance (${esc(n.price || "$100.00")} per note) is typically higher than the issuer’s estimated value of the note, because it includes selling, structuring and hedging costs; the estimated value is disclosed in the prospectus. Notes are generally not listed on an exchange. Tax treatment can be complex, so consult a tax advisor before investing. Terms shown are indicative and may change before the note prices. The prospectus and term sheet for this note are available from your advisor on request.</div>
+      ${fpTailHTML()}
+    </div>
+  </div>`;
+}
+
+function exportNotePDF(fp) {
+  const n = ALL_NOTES.find(x => x.fp === fp);
+  if (!n) return;
+  buildNoteSheet(n);
+  const oldTitle = document.title;
+  document.title = `Prudent Prosperity – ${n.type} – ${tickerList(n.underlying).join("-")} – ${new Date().toISOString().slice(0, 10)}`;
+  printWith("doc", () => { document.title = oldTitle; });
+}
+
+// ─────────────────────────────────────────────────────────────
+// DETAILS PANEL — one open at a time
+// ─────────────────────────────────────────────────────────────
+function closeDetails() {
+  document.querySelectorAll(".details-row").forEach(row => {
+    const card = row.previousElementSibling;
+    if (card && card.classList.contains("card")) {
+      card.classList.remove("open");
+      const b = card.querySelector(".btn-link");
+      if (b) { b.setAttribute("aria-expanded", "false"); b.textContent = "Details"; }
+    }
+    row.remove();
+  });
+}
+
+function toggleDetails(fp, btn) {
+  const card = btn.closest(".card");
+  const wasOpen = card.classList.contains("open");
+  const top = card.getBoundingClientRect().top;
+  closeDetails();
+  if (wasOpen) return;
+  const n = ALL_NOTES.find(x => x.fp === fp);
+  if (!n) return;
+  const row = document.createElement("div");
+  row.className = "details-row";
+  row.innerHTML = detailsHTML(n);
+  card.after(row);
+  card.classList.add("open");
+  btn.setAttribute("aria-expanded", "true");
+  btn.textContent = "Hide details";
+  initPayoff(row, n);
+  const shift = card.getBoundingClientRect().top - top;     // keeps the clicked card in place when a panel above it closed
+  if (shift) window.scrollBy(0, shift);
+}
+
+// ─────────────────────────────────────────────────────────────
+// PAYOFF AT MATURITY
+// Only for notes whose payoff the calendar data fully determines: Growth, PPN and MLCD with
+// one participation rate, no coupon or early-call features, and a numeric cap or "Uncapped".
+// Every other note shows no slider. x is the % change of the reference asset at maturity
+// (the worst performer for a worst-of basket); the result is the % return on principal.
+// ─────────────────────────────────────────────────────────────
+function payoffModel(n) {
+  if (!["Growth", "PPN", "MLCD"].includes(n.type)) return null;
+  const other = ["callType", "callPremium", "firstCallDate", "autocall", "digitalReturn", "annualizedYield", "upsideParticipation", "downsideParticipation"];
+  if (other.some(k => String(n[k] || "").trim())) return null;
+  const pm = /^\s*(\d+(?:\.\d+)?)\s*%\s*$/.exec(String(n.participation || ""));
+  if (!pm) return null;
+  const P = parseFloat(pm[1]) / 100;
+  const capTxt = String(n.maxReturn || "").trim();
+  let cap = Infinity;
+  if (!/^uncapped$/i.test(capTxt)) {
+    const cm = /^(\d+(?:\.\d+)?)\s*%$/.exec(capTxt);
+    if (!cm) return null;
+    cap = parseFloat(cm[1]) / 100;
+  }
+  const kind = { Full: "full", Hard: "hard", Soft: "soft" }[n.protectionType];
+  if (!kind) return null;
+  const b = (Number(n.protection) || 0) / 100;
+  if (kind !== "full" && !(b > 0)) return null;
+  return {
+    P, cap, kind, b,
+    ret(x) {                                         // x and the result are fractions (-0.25 = -25%)
+      if (x > 0) return Math.min(P * x, cap);
+      if (kind === "full" || x >= -b) return 0;      // principal protected, or inside the buffer / above the barrier
+      return kind === "hard" ? x + b : x;            // hard buffer: loss beyond the buffer; soft barrier: the full loss
+    }
+  };
+}
+
+const PO = { xMin: -60, xMax: 60, W: 340, H: 190, L: 46, R: 14, T: 18, B: 32 };
+const poPct = v => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(1)}%`;
+const poX = x => `${x > 0 ? "+" : x < 0 ? "−" : ""}${Math.abs(x)}%`;
+
+function payoffGeometry(m) {
+  const marks = [PO.xMin, -m.b * 100 - 1e-4, -m.b * 100, 0, m.cap === Infinity ? NaN : m.cap / m.P * 100, PO.xMax]
+    .filter(x => !isNaN(x) && x >= PO.xMin && x <= PO.xMax).sort((a, b) => a - b);
+  const pts = marks.map(x => [x, m.ret(x / 100) * 100]);
+  const ys = pts.map(p => p[1]);
+  const dLo = Math.min(...ys, 0), dHi = Math.max(...ys, 0);        // the real extremes of the line
+  let lo = dLo, hi = dHi;
+  const pad = Math.max(5, (hi - lo) * 0.12);
+  lo -= pad; hi += pad;
+  const sx = x => PO.L + (x - PO.xMin) / (PO.xMax - PO.xMin) * (PO.W - PO.L - PO.R);
+  const sy = y => PO.T + (hi - y) / (hi - lo) * (PO.H - PO.T - PO.B);
+  return { pts, lo, hi, dLo, dHi, sx, sy };
+}
+
+function payoffHTML(n, m) {
+  const g = payoffGeometry(m), info = basisInfo(n), f1 = v => v.toFixed(1);
+  const xLabel = info.worst ? "Worst-performing asset at maturity" : info.key === "weighted" ? "Basket at maturity" : "Reference asset at maturity";
+  const d = g.pts.map((p, i) => `${i ? "L" : "M"}${f1(g.sx(p[0]))} ${f1(g.sy(p[1]))}`).join(" ");
+  const y0 = g.sy(0), xBot = PO.H - PO.B;
+  const thresh = m.kind === "full" ? "" : `<line x1="${f1(g.sx(-m.b * 100))}" y1="${PO.T}" x2="${f1(g.sx(-m.b * 100))}" y2="${xBot}" stroke="#9aa3af" stroke-dasharray="3 3"/><text x="${f1(g.sx(-m.b * 100))}" y="${PO.T - 5}" font-size="10" font-weight="700" text-anchor="middle" fill="#4a5360">${poX(-Math.round(m.b * 100))} ${m.kind === "hard" ? "buffer" : "barrier"}</text>`;
+  const capLine = m.cap === Infinity || m.cap * 100 > g.hi ? "" : `<line x1="${PO.L}" y1="${f1(g.sy(m.cap * 100))}" x2="${PO.W - PO.R}" y2="${f1(g.sy(m.cap * 100))}" stroke="#9aa3af" stroke-dasharray="3 3"/><text x="${PO.L + 6}" y="${(g.sy(m.cap * 100) - 5).toFixed(1)}" font-size="10" font-weight="700" text-anchor="start" fill="#4a5360">Cap ${poPct(m.cap * 100)}</text>`;
+  const ticks = [PO.xMin, 0, PO.xMax].map(x => `<text x="${f1(g.sx(x))}" y="${PO.H - 12}" font-size="10" font-weight="700" text-anchor="middle" fill="#4a5360">${poX(x)}</text>`).join("");
+  const yTick = (y, label) => `<text x="${PO.L - 8}" y="${(g.sy(y) + 3.5).toFixed(1)}" font-size="10" font-weight="700" text-anchor="end" fill="#4a5360">${label}</text>`;
+  const yLabels = yTick(0, "0%") + (g.dHi > 10 ? yTick(g.dHi, poX(Math.round(g.dHi))) : "") + (g.dLo < -10 ? yTick(g.dLo, poX(Math.round(g.dLo))) : "");
+  const quick = [-40, -20, 0, 20, 40].map(x => `<button type="button" class="po-btn" data-x="${x}">${poX(x)}</button>`).join("");
+  return `<div class="po" data-fp="${n.fp}">
+    <svg viewBox="0 0 ${PO.W} ${PO.H}" role="img" aria-label="Return at maturity compared with the performance of the reference asset">
+      <line x1="${PO.L}" y1="${f1(y0)}" x2="${PO.W - PO.R}" y2="${f1(y0)}" stroke="#c9c2ae"/>
+      <line x1="${f1(g.sx(0))}" y1="${PO.T}" x2="${f1(g.sx(0))}" y2="${xBot}" stroke="#e2ddd3"/>
+      ${thresh}${capLine}${yLabels}${ticks}
+      <path d="${d}" fill="none" stroke="#091930" stroke-width="2.6" stroke-linejoin="round"/>
+      <line class="po-drop" x1="0" y1="0" x2="0" y2="0" stroke="#b09060" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <circle class="po-dot" r="6.5" cx="0" cy="0" fill="#d0b689" stroke="#091930" stroke-width="2.2"/>
+    </svg>
+    <div class="po-read" aria-live="polite">
+      <div><div class="v po-x"></div><div class="k">${xLabel}</div></div>
+      <div><div class="v po-ret"></div><div class="k">Return at maturity</div></div>
+    </div>
+    <input class="po-slider" type="range" min="${PO.xMin}" max="${PO.xMax}" step="1" value="0" aria-label="${xLabel}">
+    <div class="po-btns">${quick}</div>
+    <div class="po-note"></div>
+    <div class="po-fine">Hypothetical illustration of the payoff at maturity, not a prediction. It assumes the note is held to maturity and not called early, that the issuer pays, and it excludes fees and taxes.${info.worst ? " The result follows the lowest-performing asset." : ""} The prospectus controls.</div>
+  </div>`;
+}
+
+function payoffNote(m, x) {
+  const f = x / 100, pct = v => `${+(v * 100).toFixed(2)}%`;
+  if (f > 0) return m.P * f >= m.cap ? `Capped at the ${pct(m.cap)} maximum return.` : `You earn ${pct(m.P)} of the gain.`;
+  if (f === 0) return "The asset finishes flat: no gain and no loss.";
+  if (m.kind === "full") return "Principal is returned in full, subject to the issuer’s credit.";
+  if (f >= -m.b) return m.kind === "hard" ? `Inside the ${pct(m.b)} buffer, so no loss.` : `Above the ${pct(m.b)} barrier, so principal is returned.`;
+  return m.kind === "hard" ? `Beyond the buffer: you lose only the amount past ${pct(m.b)}.` : "Barrier breached: you bear the full decline.";
+}
+
+function initPayoff(root, n) {
+  const box = root.querySelector(".po"), m = payoffModel(n);
+  if (!box || !m) return;
+  const g = payoffGeometry(m), slider = box.querySelector(".po-slider");
+  const dot = box.querySelector(".po-dot"), drop = box.querySelector(".po-drop");
+  const set = x => {
+    const r = m.ret(x / 100) * 100, cx = g.sx(x), cy = g.sy(r);
+    dot.setAttribute("cx", cx.toFixed(1)); dot.setAttribute("cy", cy.toFixed(1));
+    drop.setAttribute("x1", cx.toFixed(1)); drop.setAttribute("x2", cx.toFixed(1));
+    drop.setAttribute("y1", cy.toFixed(1)); drop.setAttribute("y2", (PO.H - PO.B).toFixed(1));
+    box.querySelector(".po-x").textContent = poX(x);
+    box.querySelector(".po-ret").textContent = poPct(r);
+    box.querySelector(".po-note").textContent = `${payoffNote(m, x)} You would receive $${(100 * (1 + r / 100)).toFixed(2)} per $100 note.`;
+  };
+  slider.addEventListener("input", () => set(+slider.value));
+  box.querySelectorAll(".po-btn").forEach(b => b.addEventListener("click", () => { slider.value = b.dataset.x; set(+b.dataset.x); }));
+  set(+slider.value);
+}
+
+
 
 // ─────────────────────────────────────────────────────────────
 // VIEW STATE
@@ -1653,7 +1842,7 @@ function render() {
   if (!list.length) { out.innerHTML=`<div class="empty">${currentFilter==="favorites" ? "No favorites to show here yet — tap the heart on any note to save it." : "No notes match your current filters."}</div>`; updateStats([]); document.getElementById("count-badge").textContent=""; return; }
 
   if (currentView==="grid") {
-    out.innerHTML=`<div class="card-grid">${list.map(renderGridCard).join("")}</div>`;
+    out.innerHTML=`<div class="card-grid ${HERO_IMAGE ? "hero-image" : "hero-" + HERO_THEME}"${HERO_IMAGE ? ` style="--hero-img:url('${HERO_IMAGE}')"` : ""}>${list.map(renderGridCard).join("")}</div>`;
   } else {
     out.innerHTML=`<div class="card-list-wrap">${list.map(renderListCard).join("")}</div>`;
   }
@@ -1714,7 +1903,7 @@ document.getElementById("issuer-filters").addEventListener("click",e=>{
   currentIssuer=e.target.dataset.issuer; render();
 });
 document.getElementById("sort-select").addEventListener("change",e=>{currentSort=e.target.value; render();});
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.getElementById("snapshot-overlay").classList.remove("open"); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeDetails(); });
 
 document.getElementById("term-filters").addEventListener("click",e=>{
   const b = e.target.closest(".term-pill"); if(!b) return;
